@@ -149,14 +149,15 @@ public class ArbolBin {
         //La altura de un arbol no vacio es 1 + la altura mayor entre sus subarboles izquierdo y derecho
         if (n != null){
             int altDer, altIz;
-            altIz = 1 + alturaAux(n.getHI());
-            altDer = 1 + alturaAux(n.getHD());
+            altIz = alturaAux(n.getHI());
+            altDer =alturaAux(n.getHD());
             if (altDer > altIz){
                 res = altDer;
             }
             else{
                 res = altIz;
             }
+            res++;
         }
         return res;
     }
