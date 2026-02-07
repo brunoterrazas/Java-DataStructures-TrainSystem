@@ -7,7 +7,6 @@ package jerarquicas;
 
 import lineales.dinamicas.Cola;
 import lineales.dinamicas.Lista;
-import lineales.dinamicas.Nodo;
 
 /**
  *
