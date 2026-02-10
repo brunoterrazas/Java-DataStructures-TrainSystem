@@ -292,6 +292,36 @@ public String toString() {
         }
         return cadena;
     }
+    public Lista listarRango(Comparable min, Comparable max) {
+        Lista lis = new Lista();
+        listarRangoAux(this.raiz, lis, min, max);
+        return lis;
+    }
+
+   private void listarRangoAux(NodoABB n, Lista lis, Comparable min, Comparable max) {
+        if (n != null) {
+            
+            // Avanzamos subarbol de la izquierda 
+            // si el nodo actual es MAYOR que el minimo. 
+            // (Si n es menor o igual al minimo, todo lo que esté a su izquierda no se agrega a la lista).
+            if (n.getElem().compareTo(min) > 0) {
+                listarRangoAux(n.getHI(), lis, min, max);
+            }
+
+            // Visitar nodo actual
+            // Si está dentro del rango inclusivo [min, max], lo guardamos.
+            if (n.getElem().compareTo(min) >= 0 && n.getElem().compareTo(max) <= 0) {
+                lis.insertar(n.getElem(), lis.longitud() + 1);
+            }
+
+            // Avanzamos subarbol de la DERECHA
+            // Solo bajamos si el nodo actual es MENOR que el maximo.
+            // (Si n es mayor o igual al maximo, todo lo que esté a su derecha no se agrega a la lista).
+            if (n.getElem().compareTo(max) < 0) {
+                listarRangoAux(n.getHD(), lis, min, max);
+            }
+        }
+    }
     public boolean esVacio() {
         return this.raiz == null;
     }
