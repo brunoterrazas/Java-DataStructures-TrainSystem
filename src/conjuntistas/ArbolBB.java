@@ -322,6 +322,49 @@ public String toString() {
             }
         }
     }
+    public Comparable minimoElem()
+    {
+     Comparable elem=null;   
+     if(!esVacio())
+        elem=minimoElemAux(this.raiz); 
+     
+     return elem;
+    }
+    private Comparable minimoElemAux(NodoABB n)
+    {
+     Comparable elem;
+                //si no tiene hijo izquierdo es el minimo 
+		if(n.getHI()==null)
+		{
+			elem=n.getElem();
+		}
+                else   //bajamos por el subarbol izquierdo
+			elem=minimoElemAux(n.getHI());
+
+		return elem;
+
+	}
+	public Comparable maximoElem()
+	{
+		Comparable elem=null;
+		if(!this.esVacio())
+		elem=maximoAux(this.raiz); 
+
+		return elem;
+	}
+	private Comparable maximoAux(NodoABB n)
+	{
+		Comparable elem;
+                 //si no tiene hijo derecho es el maximo 
+		if(n.getHD()==null)
+		{
+			elem=n.getElem();
+		}
+                else  //bajamos por el subarbol derecho
+			elem=maximoAux(n.getHD());
+
+		return elem;
+	}
     public boolean esVacio() {
         return this.raiz == null;
     }
