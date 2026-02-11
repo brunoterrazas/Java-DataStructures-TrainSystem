@@ -303,7 +303,7 @@ public String toString() {
             
             // Avanzamos subarbol de la izquierda 
             // si el nodo actual es MAYOR que el minimo. 
-            // (Si n es menor o igual al minimo, todo lo que esté a su izquierda no se agrega a la lista).
+            // (Si n es menor o igual al minimo, todo lo que esté a su izquierda no se considera).
             if (n.getElem().compareTo(min) > 0) {
                 listarRangoAux(n.getHI(), lis, min, max);
             }
@@ -316,7 +316,7 @@ public String toString() {
 
             // Avanzamos subarbol de la DERECHA
             // Solo bajamos si el nodo actual es MENOR que el maximo.
-            // (Si n es mayor o igual al maximo, todo lo que esté a su derecha no se agrega a la lista).
+            // (Si n es mayor o igual al maximo, todo lo que esté a su derecha no se considera).
             if (n.getElem().compareTo(max) < 0) {
                 listarRangoAux(n.getHD(), lis, min, max);
             }
@@ -348,7 +348,7 @@ public String toString() {
 	{
 		Comparable elem=null;
 		if(!this.esVacio())
-		elem=maximoAux(this.raiz); 
+		   elem=maximoAux(this.raiz); 
 
 		return elem;
 	}
