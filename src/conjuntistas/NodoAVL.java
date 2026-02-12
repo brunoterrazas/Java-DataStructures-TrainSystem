@@ -23,31 +23,30 @@ public class NodoAVL {
         HD = null;
     }
 
-    public NodoAVL(Comparable elemento, NodoAVL izq, NodoAVL der) {
-        elem = elemento;
-        HI = izq;
+    public void recalcularAltura() {
         altura = alturaAux(this);
-        HD = der;
     }
-    private int alturaAux(NodoAVL n)
-    {
-        int altura=-1;
-        if(n!=null)
-        {
-        int altDer,altIzq;
-          altIzq=alturaAux(n.getHI());
-        altDer =alturaAux(n.getHD());
-            if (altDer > altIzq){
-                altura = altDer;
+
+    public int getAltura() {
+        return altura;
+    }
+
+    private int alturaAux(NodoAVL n) {
+        int altMaxima = -1;
+        if (n != null) {
+            int altDer, altIzq;
+            altIzq = alturaAux(n.getHI());
+            altDer = alturaAux(n.getHD());
+            if (altDer > altIzq) {
+                altMaxima = altDer + 1;
+            } else {
+                altMaxima = altIzq + 1;
             }
-            else{
-                altura = altIzq;
-            }
-            altura++;
         }
-        
-     return altura;
+
+        return altMaxima;
     }
+
     public Comparable getElem() {
         return elem;
     }
