@@ -49,6 +49,26 @@ public class ArbolAVL {
         return h;
     }
 
+    private NodoAVL rotarDerechaIzquierda(NodoAVL r) {
+        NodoAVL h = r.getHD();
+
+        // Rotar al hijo (Derecha)
+        r.setHD(rotacionDerecha(h));
+
+        //Rotar al padre (Izquierda)
+        return rotacionIzquierda(r);
+    }
+
+    private NodoAVL rotarIzquierdaDerecha(NodoAVL r) {
+        NodoAVL h = r.getHI();
+
+        // Rotar al hijo (Izquierda)
+        r.setHI(rotacionIzquierda(h));
+
+        // Rotar al padre (Derecha)
+        return rotacionDerecha(r);
+    }
+
     public boolean insertar(Comparable elemento) {
         boolean exito = true;
         if (esVacio()) {//agrega el elemento nuevo
