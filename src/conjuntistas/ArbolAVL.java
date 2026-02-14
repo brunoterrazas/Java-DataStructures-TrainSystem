@@ -68,7 +68,43 @@ public class ArbolAVL {
         // Rotar al padre (Derecha)
         return rotacionDerecha(r);
     }
-
+    public int bal(NodoAVL n)
+    { //metodo para calcular el balance de un nodo
+      int altIzq,altDer;
+      altIzq=-1;
+      altDer=-1;
+      if(n.getHI()!=null)
+        altIzq=n.getHI().getAltura();
+      if(n.getHD()!=null)        
+         altDer=n.getHD().getAltura();
+      
+      return altIzq-altDer;
+    }
+    private NodoAVL balancear(NodoAVL n) {
+    int balance = bal(n);
+    NodoAVL nodo;
+    nodo=n;//si balance=(-1, 0, 1) correctamente balanceado 
+     //Caso 1: caido a la derecha
+    if (balance < -1) {
+         // Si el hijo derecho tiene balance positivo
+        if (bal(n.getHD()) > 0) {
+            nodo= rotarDerechaIzquierda(n);
+        } else {
+            nodo= rotacionIzquierda(n);     
+        }
+    }
+    //Caso 2: caido a la izquierda
+    if (balance > 1) {
+           // Si el hijo izquierdo tiene balance negativo
+        if (bal(n.getHI()) < 0) {
+            nodo= rotarIzquierdaDerecha(n); 
+        } else {
+            nodo= rotacionDerecha(n);       
+        }
+    }  
+    
+    return nodo;
+}
     public boolean insertar(Comparable elemento) {
         boolean exito = true;
         if (esVacio()) {//agrega el elemento nuevo
@@ -100,7 +136,7 @@ public class ArbolAVL {
         }
         return exito;
     }
-
+    
     public boolean pertenece(Comparable elem) {//Devuelve verdadero si el elemento recibido por parametro esta en el arbol el elemento
         boolean exito = false;
         if (!esVacio()) {
