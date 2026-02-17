@@ -68,75 +68,76 @@ public class ArbolAVL {
         // Rotar al padre (Derecha)
         return rotacionDerecha(r);
     }
-    public int bal(NodoAVL n)
-    { //metodo para calcular el balance de un nodo
-      int altIzq,altDer;
-      altIzq=-1;
-      altDer=-1;
-      if(n.getHI()!=null)
-        altIzq=n.getHI().getAltura();
-      if(n.getHD()!=null)        
-         altDer=n.getHD().getAltura();
-      
-      return altIzq-altDer;
+
+    public int bal(NodoAVL n) { //metodo para calcular el balance de un nodo
+        int altIzq, altDer;
+        altIzq = -1;
+        altDer = -1;
+        if (n.getHI() != null) {
+            altIzq = n.getHI().getAltura();
+        }
+        if (n.getHD() != null) {
+            altDer = n.getHD().getAltura();
+        }
+
+        return altIzq - altDer;
     }
+
     private NodoAVL balancear(NodoAVL n) {
-    int balance = bal(n);
-    NodoAVL nodo;
-    nodo=n;//si balance=(-1, 0, 1) correctamente balanceado 
-     //Caso 1: caido a la derecha
-    if (balance < -1) {
-         // Si el hijo derecho tiene balance positivo
-        if (bal(n.getHD()) > 0) {
-            nodo= rotarDerechaIzquierda(n);
-        } else {
-            nodo= rotacionIzquierda(n);     
+        int balance = bal(n);
+        NodoAVL nodo;
+        nodo = n;//si balance=(-1, 0, 1) correctamente balanceado 
+        //Caso 1: caido a la derecha
+        if (balance < -1) {
+            // Si el hijo derecho tiene balance positivo
+            if (bal(n.getHD()) > 0) {
+                nodo = rotarDerechaIzquierda(n);
+            } else {
+                nodo = rotacionIzquierda(n);
+            }
         }
+        //Caso 2: caido a la izquierda
+        if (balance > 1) {
+            // Si el hijo izquierdo tiene balance negativo
+            if (bal(n.getHI()) < 0) {
+                nodo = rotarIzquierdaDerecha(n);
+            } else {
+                nodo = rotacionDerecha(n);
+            }
+        }
+
+        return nodo;
     }
-    //Caso 2: caido a la izquierda
-    if (balance > 1) {
-           // Si el hijo izquierdo tiene balance negativo
-        if (bal(n.getHI()) < 0) {
-            nodo= rotarIzquierdaDerecha(n); 
-        } else {
-            nodo= rotacionDerecha(n);       
-        }
-    }  
-    
-    return nodo;
-}
+
     public boolean insertar(Comparable elemento) {
-        boolean exito = true;
-        if (esVacio()) {//agrega el elemento nuevo
-            this.raiz = new NodoAVL(elemento);
-        } else {
-            exito = insertarAux(this.raiz, elemento);
+        boolean exito = !pertenece(elemento);//si no pertenece al arbol
+        if (exito) {//agrega el elemento nuevo
+            this.raiz = insertarAux(this.raiz, elemento);
         }
         return exito;
     }
 
-    private boolean insertarAux(NodoAVL n, Comparable elemento) {
-        boolean exito = true;
-        if (elemento.compareTo(n.getElem()) == 0) {
-            exito = false;//Error elemento repetido
-        } else if (elemento.compareTo(n.getElem()) < 0) {
-            //si el elemento es menor avanza al subarbol izquierdo
-            if (n.getHI() != null) {//si tiene HI
-                exito = insertarAux(n.getHI(), elemento);
-            } else {
-                //sino lo agrega como hijo izquierdo
-                n.setHI(new NodoAVL(elemento));
-            }
-        } else if (n.getHD() != null) {//si el elemento es mayor avanza al subarbol derecho
-            //si tiene HD
-            exito = insertarAux(n.getHD(), elemento);
+    private NodoAVL insertarAux(NodoAVL n, Comparable elemento) {
+        NodoAVL salida = n;
+        if (n == null) {
+            salida = new NodoAVL(elemento);//agregamos el elemento como raiz
         } else {
-            n.setHD(new NodoAVL(elemento));
-            //sino lo agrega como hijo derecho
+            if (elemento.compareTo(n.getElem()) < 0) {
+                // bajamos y enlazamos el hijo izquierdo
+                n.setHI(insertarAux(n.getHI(), elemento));
+            } else {
+                // bajamos y enlazamos el hijo derecho
+                n.setHD(insertarAux(n.getHD(), elemento));
+            }
+
+            // cada nodo en el camino de regreso se recalcula y balancea
+            n.recalcularAltura();
+            salida = balancear(n);
         }
-        return exito;
+
+        return salida;
     }
-    
+
     public boolean pertenece(Comparable elem) {//Devuelve verdadero si el elemento recibido por parametro esta en el arbol el elemento
         boolean exito = false;
         if (!esVacio()) {
@@ -169,53 +170,55 @@ public class ArbolAVL {
     }
 
     public boolean eliminar(Comparable elem) {
-        boolean exito;
-        if (!this.esVacio()) {
+        boolean exito = pertenece(elem);
+        if (exito) {
             // Si el arbol no esta vacio
-            exito = eliminarAux(elem, this.raiz, null);
-        } else {
-            exito = false;
+            this.raiz = eliminarAux(elem, this.raiz, null);
         }
         return exito;
     }
 
-    private boolean eliminarAux(Comparable elem, NodoAVL n, NodoAVL padre) {
-        boolean exito = false;
-        NodoAVL hijoIzq, hijoDer;
+    private NodoAVL eliminarAux(Comparable elem, NodoAVL n, NodoAVL padre) {
+        NodoAVL salida = n;
 
-        if (n != null) {
-            hijoIzq = n.getHI();
-            hijoDer = n.getHD();
-
-            // Si el elemento es igual que n (nodo actual)
+        if (n != null) { // si encontramos al elemento
             if (elem.compareTo(n.getElem()) == 0) {
-                if (hijoIzq == null && hijoDer == null) {
-                    // Caso 1: El nodo n no tiene hijos (es hoja)
-                    exito = eliminarCaso1(n, padre);
 
+                if (n.getHI() == null && n.getHD() == null) {
+                    // Caso 1: Hoja
+                    eliminarCaso1(n, padre);
+                    salida = null;
+                } else if (n.getHI() != null && n.getHD() != null) {
+                    // Caso 3: Dos hijos
+                    eliminarCaso3Min(n);
+                    salida = n;
                 } else {
-                    if ((hijoIzq == null && hijoDer != null) || (hijoIzq != null && hijoDer == null)) {
-                        // Caso 2: El nodo n tiene un solo hijo
-                        exito = eliminarCaso2(n, padre);
-
+                    // Caso 2: Un solo hijo
+                    eliminarCaso2(n, padre);
+                    // Forma tradicional sin usar "?"
+                    if (n.getHI() != null) {
+                        salida = n.getHI();
                     } else {
-                        // Caso 3: El nodo n tiene los dos hijos
-                        exito = eliminarCaso3Min(n);
+                        salida = n.getHD();
                     }
                 }
-
             } else {
-                // Sino, si es elemento es menor que n (nodo actual)
-                if (elem.compareTo(n.getElem()) < 0) {
-                    // Recorro el subarbol izquierdo
-                    exito = eliminarAux(elem, n.getHI(), n);
-                } else {
-                    // Recorro el subarbol derecho
-                    exito = eliminarAux(elem, n.getHD(), n);
+
+                if (elem.compareTo(n.getElem()) < 0) {//avanzamos por subarbol izquierdo
+                    n.setHI(eliminarAux(elem, n.getHI(), n));
+                } else {//avanzamos por subarbol derecho
+                    n.setHD(eliminarAux(elem, n.getHD(), n));
                 }
+                salida = n;
+            }
+
+            // recalculamos y balanceamos si es necesario al volver de la recursion
+            if (salida != null) {
+                salida.recalcularAltura();
+                salida = balancear(salida);
             }
         }
-        return exito;
+        return salida;
     }
 
     private boolean eliminarCaso1(NodoAVL n, NodoAVL padre) {
