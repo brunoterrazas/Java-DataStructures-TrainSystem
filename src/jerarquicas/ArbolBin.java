@@ -218,7 +218,7 @@ public class ArbolBin {
         while (!Q.esVacia()) {
             nodoActual = new NodoArbol(Q.obtenerFrente());
             Q.sacar();
-            lis.insertar(nodoActual, lis.getLongitud() + 1);
+            lis.insertar(nodoActual.getElem(), lis.getLongitud() + 1);
             if (nodoActual.getHI() != null) {
                 Q.poner(nodoActual.getHI());
             }
