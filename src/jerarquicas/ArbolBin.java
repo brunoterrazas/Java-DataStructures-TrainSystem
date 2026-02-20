@@ -116,14 +116,16 @@ public class ArbolBin {
             res = 0;
         } else {
             // buscamos por la izquierda
-            res = nivelAux(n.getHI(), elemento);
+            if(n.getHI()!=null)
+               res = nivelAux(n.getHI(), elemento);
             
             // Si lo encontré a la izquierda (res > -1), le sumo 1 
             if (res > -1) {
                 res++; 
             } else {
                 //Si no estaba a la izquierda, busco a la DERECHA
-                res = nivelAux(n.getHD(), elemento);
+                if(n.getHD()!=null)
+                   res = nivelAux(n.getHD(), elemento);
                 
                 // Si lo encontré a la derecha, le sumo 1
                 if (res > -1) {

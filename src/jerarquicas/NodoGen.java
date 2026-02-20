@@ -20,6 +20,12 @@ public class NodoGen {
     HEI=izq;
     HD=der;
   }
+  public NodoGen(Object elemento)
+  {
+    elem=elemento;
+    HEI=null;
+    HD=null;
+  }
 
     public NodoGen getHEI() {
         return HEI;

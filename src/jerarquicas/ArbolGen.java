@@ -124,61 +124,178 @@ public class ArbolGen {
         }
         return lis;
     }
+
     private NodoGen obtenerNodo(NodoGen n, Object buscado) {
         NodoGen resultado = null;
         if (n != null) {
             if (n.getElem().equals(buscado)) {
                 resultado = n;
             } else {
-                NodoGen hijoIzq;
-                hijoIzq = n.getHEI();
-                if (hijoIzq != null) {
-                    resultado = obtenerNodo(n.getHEI(), buscado);
+                NodoGen hijo = n.getHEI();
 
-                    if (resultado == null) {
-                        NodoGen hermanoDer = hijoIzq.getHD();
-                        while (hermanoDer != null) {
-                            resultado = obtenerNodo(hermanoDer, buscado);
-                            hermanoDer = hermanoDer.getHD();
+                while (hijo != null && resultado == null) {
+                    resultado = obtenerNodo(hijo, buscado);
+                    hijo = hijo.getHD();
 
-                        }
-
-                    }
                 }
+
             }
+
         }
 
         return resultado;
 
     }
-     public boolean insertar(Object elem, Object padre) {
-        boolean exito;
-        exito = false;
-        NodoGen nodoPadre = obtenerNodo(this.raiz, padre);
-        if (nodoPadre != null) {
-            NodoGen hijoIzq = nodoPadre.getHEI();
+
+    public boolean insertar(Object elem, Object padre) {
+        boolean exito = false;
+
+        if (this.esVacio()) {
+            // si arbol vacío
+            this.raiz = new NodoGen(elem);
             exito = true;
-            if (hijoIzq == null) {
-                nodoPadre.setHEI(new NodoGen(elem,null,null));
-            } else {
-                NodoGen hermanoAnt = hijoIzq;
-
-                while (hermanoAnt.getHD() != null) {
-
-                    hermanoAnt = hermanoAnt.getHD();
-
-                }
-
-                hermanoAnt.setHD(new NodoGen(elem,null,null));
-
-            }
         } else {
-            this.raiz = new NodoGen(elem,null,null);
-            exito = true;
+            // buscamos al padre
+            NodoGen nodoPadre = obtenerNodo(this.raiz, padre);
+
+            if (nodoPadre != null) {
+                //si no tiene hijo extremo izquierdo
+                if (nodoPadre.getHEI() == null) {
+                    // Es el primer hijo
+                    nodoPadre.setHEI(new NodoGen(elem));
+                } else {
+                    // sino ya tiene hijos, lo enlazamos al final de los hermanos
+                    NodoGen auxHermano = nodoPadre.getHEI();
+                    while (auxHermano.getHD() != null) {
+                        auxHermano = auxHermano.getHD();
+                    }
+                    auxHermano.setHD(new NodoGen(elem));
+                }
+                exito = true;
+            }
+
         }
         return exito;
     }
 
+    public boolean pertenece(Object elem) {
+        boolean exito = false;
+        if (!esVacio()) {
+            exito = perteneceAux(this.raiz, elem);
+        }
+
+        return exito;
+
+    }
+
+    private boolean perteneceAux(NodoGen n, Object buscado) {
+        boolean exito = false;
+        if (n != null) {
+            if (n.getElem().equals(buscado)) {
+                exito = true;
+            } else {
+
+                NodoGen hijo = n.getHEI();
+                while (hijo != null && !exito) {
+                    exito = perteneceAux(hijo, buscado);
+                    hijo = hijo.getHD();
+                }
+
+            }
+
+        }
+        return exito;
+    }
+
+    public Object padre(Object elem) {
+        Object padreBuscado = null;
+        if (!esVacio() && !this.raiz.getElem().equals(elem)) {
+            padreBuscado = padreAux(this.raiz, elem);
+        }
+        return padreBuscado;
+    }  
+    public Object padreAux(NodoGen n, Object elem) {
+        Object padreBuscado = null;
+        if (n != null) {
+            if (n.getHEI() != null) {
+                NodoGen hijo = n.getHEI();
+                //verificamos si es un de sus hijos
+                while (hijo != null && padreBuscado == null) {
+                    if (hijo.getElem().equals(elem)) {
+                        padreBuscado = n.getElem();
+                    } else {
+                        padreBuscado = padreAux(hijo, elem);
+                    }
+                    hijo = hijo.getHD();
+                }
+            }
+        }
+        return padreBuscado;
+    }
+     public int altura()
+     {
+         int alt=-1;
+         if(!esVacio())
+         {
+           alt=alturaAux(this.raiz);
+         }
+     return alt;
+     }
+     private int alturaAux(NodoGen n)
+     {
+         int aux=-1;
+         int altMax=-1;
+         if(n!=null)
+         {
+           NodoGen h=n.getHEI();
+           while(h!=null)
+           {
+            aux=alturaAux(h);
+            if(aux>altMax)
+            {
+             altMax=aux;
+            }
+            h=h.getHD();
+           }
+           
+          altMax=altMax+1;   
+         }
+       return altMax;
+     }
+      public int nivel(Object elem)
+     {
+         int niv=-1;
+         if(!esVacio())
+         {
+           niv=nivelAux(this.raiz,elem);
+         }
+     return niv;
+     }
+    private int nivelAux(NodoGen n, Object elemento) {
+    int res = -1;
+
+    if (n != null) {
+            if (n.getElem().equals(elemento)) {
+            res = 0;
+        } else {
+            // Si no,buscamos en sus hijos recursivamente
+            NodoGen hijo = n.getHEI();
+            
+            // Recorremos los hermanos hasta encontrarlo  o agotar hijos
+            while (hijo != null && res == -1) {
+                res = nivelAux(hijo, elemento);
+                hijo = hijo.getHD();
+            }
+
+            // si se encontró en algún subárbol, sumamos 1 al nivel
+            if (res > -1) {
+                res++;
+            }
+        }
+    }
+    return res;
+}
+    @Override
     public String toString() {
         return toStringAux(this.raiz);
     }
