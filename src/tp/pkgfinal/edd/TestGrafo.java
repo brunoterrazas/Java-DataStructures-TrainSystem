@@ -28,14 +28,16 @@ public class TestGrafo {
         trenDelValle.insertarArco("Neuquen", "Cipolletti");
         trenDelValle.insertarArco("Neuquen", "Plottier");
         
-        // Conectamos Plottier con Senillosa
-        trenDelValle.insertarArco("Plottier", "Senillosa");
+        //trenDelValle.eliminarArco("Plottier", "Senillosa");
 
+        
+         //trenDelValle.eliminarArco("Neuquen", "Cipolletti");
         System.out.println("\n--- Estado del Grafo ---");
         System.out.println(trenDelValle.toString());
 
         System.out.println("\n--- Prueba de Recorrido en Profundidad (DFS) ---");
         // Debería listar todas las estaciones conectadas
         System.out.println("DFS: " + trenDelValle.listarEnProfundidad().toString());
-    }
+         
+   }
 }

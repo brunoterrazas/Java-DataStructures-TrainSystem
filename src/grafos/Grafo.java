@@ -64,6 +64,72 @@ public class Grafo {
         return exito;
     }
 
+    public boolean eliminarArco(Object origen, Object destino) {
+        boolean exitoOrigen = false;
+        boolean exitoDestino = false;
+        // localizamos ambos nodos vertices 
+        //recorremos la lista de vertices
+        NodoVert auxOri = ubicarVertice(origen);
+        NodoVert auxDes = ubicarVertice(destino);
+        if (auxOri != null && auxDes != null) {
+
+            // buscamos en la lista de adyacentes del origen
+            NodoAdy auxOriAdy = auxOri.getPrimerAdy();
+            if (auxOriAdy != null) {
+                //caso 1, eliminar en 1er posicion
+                if (auxOriAdy.getVertice().equals(auxDes)) {
+                    //enganchamos como primer adyacente del vertice
+                    auxOri.setPrimerAdy(auxOriAdy.getSigAdyacente());
+                    exitoOrigen = true;
+                } else {
+                    NodoAdy anterior = auxOriAdy;
+                    auxOriAdy = auxOriAdy.getSigAdyacente();
+
+                    while (auxOriAdy != null && !exitoOrigen) {
+                        // si el nodo origen tiene como adyacente el destino
+                        if (auxOriAdy.getVertice().equals(auxDes)) {
+                            exitoOrigen = true;
+                            anterior.setSigAdyacente(auxOriAdy.getSigAdyacente());
+                        } else {
+
+                            auxOriAdy = auxOriAdy.getSigAdyacente();
+                            anterior = anterior.getSigAdyacente();
+                        }
+
+                    }
+                }
+                // buscamos en la lista de adyacentes del destino
+                NodoAdy auxDesAdy = auxDes.getPrimerAdy();
+                if (auxDesAdy != null) {
+                    //caso 1, eliminar en 1er posicion
+                    if (auxDesAdy.getVertice().equals(auxOri)) {
+                        //enganchamos como primer adyacente del vertice
+                        auxDes.setPrimerAdy(auxDesAdy.getSigAdyacente());
+                        exitoDestino = true;
+
+                    } else {
+                        NodoAdy anteriorD = auxDesAdy;
+                        auxDesAdy = auxDesAdy.getSigAdyacente();
+
+                        while (auxDesAdy != null && !exitoDestino) {
+                            // si el nodo destino tiene como adyacente el origen
+                            if (auxDesAdy.getVertice().equals(auxOri)) {
+                                anteriorD.setSigAdyacente(auxDesAdy.getSigAdyacente());
+                                exitoDestino = true;
+                            } else {
+
+                                auxDesAdy = auxDesAdy.getSigAdyacente();
+                                anteriorD = anteriorD.getSigAdyacente();
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+        return exitoOrigen && exitoDestino;
+    }
+
     public boolean existeArco(Object origen, Object destino) {
         boolean exito = false;
         // ubicamos las referencias de ambos nodos
