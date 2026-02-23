@@ -32,6 +32,10 @@ public class Grafo {
 
     }
 
+    public boolean existeVertice(Object elem) {
+        return ubicarVertice(elem) != null;
+    }
+
     private NodoVert ubicarVertice(Object buscado) {
         NodoVert aux = this.inicio;
         while (aux != null && !aux.getElem().equals(buscado)) {
@@ -56,6 +60,28 @@ public class Grafo {
             auxDes.setPrimerAdy(new NodoAdy(auxOri, auxDes.getPrimerAdy()));
 
             exito = true;
+        }
+        return exito;
+    }
+
+    public boolean existeArco(Object origen, Object destino) {
+        boolean exito = false;
+        // ubicamos las referencias de ambos nodos
+        NodoVert auxO = ubicarVertice(origen);
+        NodoVert auxD = ubicarVertice(destino);
+
+        // si existen buscamos si estan conectados
+        if (auxO != null && auxD != null) {
+            // buscamos en la lista de adyacentes del origen
+            NodoAdy auxAdy = auxO.getPrimerAdy();
+
+            while (auxAdy != null && !exito) {
+                // si el nodo origen tiene como adyacente el destino, como es grafo tiene el arco invertido tambien
+                if (auxAdy.getVertice().equals(auxD)) {
+                    exito = true;
+                }
+                auxAdy = auxAdy.getSigAdyacente();
+            }
         }
         return exito;
     }
@@ -90,7 +116,7 @@ public class Grafo {
     }
 
     public Lista listarEnAnchura() {
-      Lista visitados = new Lista();
+        Lista visitados = new Lista();
         //define un vertice donde comenzar a recorrer
         NodoVert aux = this.inicio;
         while (aux != null) {
@@ -107,23 +133,23 @@ public class Grafo {
         Cola Q = new Cola();
         visitados.insertar(verticeInicial.getElem(), visitados.getLongitud() + 1);
         Q.poner(verticeInicial);
-        
-        while (!Q.esVacia()) {  
-        NodoVert u = (NodoVert) Q.obtenerFrente();
-        Q.sacar();
 
-        // Para cada adyacente v de u
-        NodoAdy ady = u.getPrimerAdy();
-        while (ady != null) {
-            NodoVert v = ady.getVertice();
-            // Si v no está en visitados
-            if (visitados.localizar(v.getElem()) < 0) {
-                visitados.insertar(v.getElem(), visitados.getLongitud() + 1);
-                Q.poner(v); // ponemos el vecino en la cola para explorarlo luego
+        while (!Q.esVacia()) {
+            NodoVert u = (NodoVert) Q.obtenerFrente();
+            Q.sacar();
+
+            // Para cada adyacente v de u
+            NodoAdy ady = u.getPrimerAdy();
+            while (ady != null) {
+                NodoVert v = ady.getVertice();
+                // Si v no está en visitados
+                if (visitados.localizar(v.getElem()) < 0) {
+                    visitados.insertar(v.getElem(), visitados.getLongitud() + 1);
+                    Q.poner(v); // ponemos el vecino en la cola para explorarlo luego
+                }
+                ady = ady.getSigAdyacente();
             }
-            ady = ady.getSigAdyacente();
         }
-    }
     }
 
     public boolean esVacio() {
@@ -153,30 +179,26 @@ public class Grafo {
 
         return exito;
     }
-    private boolean existeCaminoAux(NodoVert n,Object dest,Lista vis)
-    {
-      boolean exito=false;
-      if(n!=null)
-      {
-          if(n.getElem().equals(dest))
-          {//si encontramos destino existe camino
-            exito=true;
-          }
-          else{//si no es el destino verifica si hay un camino entre n y destino
-             vis.insertar(n.getElem(), vis.getLongitud()+1);
-             NodoAdy ady=n.getPrimerAdy();
-             while(!exito&&ady!=null)
-             {
-                if(vis.localizar(ady.getVertice().getElem())<0)
-                {
-                  exito=existeCaminoAux(ady.getVertice(),dest,vis);
+
+    private boolean existeCaminoAux(NodoVert n, Object dest, Lista vis) {
+        boolean exito = false;
+        if (n != null) {
+            if (n.getElem().equals(dest)) {//si encontramos destino existe camino
+                exito = true;
+            } else {//si no es el destino verifica si hay un camino entre n y destino
+                vis.insertar(n.getElem(), vis.getLongitud() + 1);
+                NodoAdy ady = n.getPrimerAdy();
+                while (!exito && ady != null) {
+                    if (vis.localizar(ady.getVertice().getElem()) < 0) {
+                        exito = existeCaminoAux(ady.getVertice(), dest, vis);
+                    }
+                    ady = ady.getSigAdyacente();
                 }
-                ady=ady.getSigAdyacente();
-             }
-          }
-      }
-     return exito;
+            }
+        }
+        return exito;
     }
+
     @Override
     public String toString() {
         String cad = "Grafo:\n";
