@@ -73,61 +73,84 @@ public class Grafo {
         NodoVert auxDes = ubicarVertice(destino);
         if (auxOri != null && auxDes != null) {
 
-            // buscamos en la lista de adyacentes del origen
-            NodoAdy auxOriAdy = auxOri.getPrimerAdy();
-            if (auxOriAdy != null) {
-                //caso 1, eliminar en 1er posicion
-                if (auxOriAdy.getVertice().equals(auxDes)) {
-                    //enganchamos como primer adyacente del vertice
-                    auxOri.setPrimerAdy(auxOriAdy.getSigAdyacente());
-                    exitoOrigen = true;
-                } else {
-                    NodoAdy anterior = auxOriAdy;
-                    auxOriAdy = auxOriAdy.getSigAdyacente();
+            exitoOrigen=eliminarAdyacente(auxOri,auxDes);
+            
+            exitoDestino=eliminarAdyacente(auxDes,auxOri);
+            
+        }
+        return exitoOrigen && exitoDestino;
+    }
 
-                    while (auxOriAdy != null && !exitoOrigen) {
-                        // si el nodo origen tiene como adyacente el destino
-                        if (auxOriAdy.getVertice().equals(auxDes)) {
-                            exitoOrigen = true;
-                            anterior.setSigAdyacente(auxOriAdy.getSigAdyacente());
-                        } else {
+    private boolean eliminarAdyacente(NodoVert vertice, NodoVert nodoBuscado) {
+        boolean exito = false;
+        // buscamos en la lista de adyacentes del vertice
+        NodoAdy auxNodoAdy = vertice.getPrimerAdy();
+        if (auxNodoAdy != null) {
+            //caso 1, eliminar en 1er posicion
+            if (auxNodoAdy.getVertice().equals(nodoBuscado)) {
+                //enganchamos como primer adyacente del vertice al siguiente adyacente
+                vertice.setPrimerAdy(auxNodoAdy.getSigAdyacente());
+                exito = true;
 
-                            auxOriAdy = auxOriAdy.getSigAdyacente();
-                            anterior = anterior.getSigAdyacente();
-                        }
+            } else {
+                NodoAdy anteriorD = auxNodoAdy;
+                auxNodoAdy = auxNodoAdy.getSigAdyacente();
 
-                    }
-                }
-                // buscamos en la lista de adyacentes del destino
-                NodoAdy auxDesAdy = auxDes.getPrimerAdy();
-                if (auxDesAdy != null) {
-                    //caso 1, eliminar en 1er posicion
-                    if (auxDesAdy.getVertice().equals(auxOri)) {
-                        //enganchamos como primer adyacente del vertice
-                        auxDes.setPrimerAdy(auxDesAdy.getSigAdyacente());
-                        exitoDestino = true;
-
+                while (auxNodoAdy != null && !exito) {
+                    // si el nodo adyacente tiene como adyacente el nodo buscado
+                    if (auxNodoAdy.getVertice().equals(nodoBuscado)) {
+                        //enganchamos el nodo anterior con el siguiente adyacente del nodo buscado
+                        anteriorD.setSigAdyacente(auxNodoAdy.getSigAdyacente());
+                        exito = true;
                     } else {
-                        NodoAdy anteriorD = auxDesAdy;
-                        auxDesAdy = auxDesAdy.getSigAdyacente();
 
-                        while (auxDesAdy != null && !exitoDestino) {
-                            // si el nodo destino tiene como adyacente el origen
-                            if (auxDesAdy.getVertice().equals(auxOri)) {
-                                anteriorD.setSigAdyacente(auxDesAdy.getSigAdyacente());
-                                exitoDestino = true;
-                            } else {
-
-                                auxDesAdy = auxDesAdy.getSigAdyacente();
-                                anteriorD = anteriorD.getSigAdyacente();
-                            }
-
-                        }
+                        auxNodoAdy = auxNodoAdy.getSigAdyacente();
+                        anteriorD = anteriorD.getSigAdyacente();
                     }
+
                 }
             }
         }
-        return exitoOrigen && exitoDestino;
+        return exito;
+    }
+
+    public boolean eliminarVertice(Object buscado) {
+        boolean exito = false;
+        NodoVert vertBuscado = ubicarVertice(buscado);
+        NodoVert vertice = this.inicio;
+        //Eliminamos el vertice buscado de la lista de adyacentes de cada vertice
+        while (vertice != null) {
+            if (vertice != vertBuscado) {
+                eliminarAdyacente(vertice, vertBuscado);
+            }
+            vertice = vertice.getSigVertice();
+        }
+        //Eliminamos de la lista de vertices
+        NodoVert anterior, aux;
+        anterior = null;
+        aux = this.inicio;
+        while (aux != null &!exito) {
+            if (aux.equals(vertBuscado)) {
+                //caso 1 primer nodo Buscado
+                if (aux == this.inicio) {
+                    this.inicio = this.inicio.getSigVertice();
+                    
+                } else {
+                    
+                    //engancho el nodo anterior con el siguiente del nodo buscado
+                   if(anterior!=null)         
+                    anterior.setSigVertice(aux.getSigVertice());
+
+                }
+                exito = true;
+            } else {
+                anterior = aux;   
+                aux = aux.getSigVertice();
+                             
+           }
+        }
+
+        return exito;
     }
 
     public boolean existeArco(Object origen, Object destino) {
