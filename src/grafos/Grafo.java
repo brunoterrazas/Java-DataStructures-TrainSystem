@@ -44,7 +44,7 @@ public class Grafo {
         return aux;
     }
 
-    public boolean insertarArco(Object origen, Object destino) {
+    public boolean insertarArco(Object origen, Object destino, double km) {
         boolean exito = false;
         //recorremos la lista de vertices
         // localizamos ambos nodos vertices 
@@ -54,10 +54,10 @@ public class Grafo {
         if (auxOri != null && auxDes != null) {
             //insertamos en la lista de adyacentes de Urigen
             // Se inserta al principio de la lista de adyacencia del nodo origen
-            auxOri.setPrimerAdy(new NodoAdy(auxDes, auxOri.getPrimerAdy()));
+           auxOri.setPrimerAdy(new NodoAdy(auxDes, km, auxOri.getPrimerAdy()));
 
-            //como es grafo insertamos tambien en destino
-            auxDes.setPrimerAdy(new NodoAdy(auxOri, auxDes.getPrimerAdy()));
+            //Como es grafo, insertamos también en destino
+            auxDes.setPrimerAdy(new NodoAdy(auxOri, km, auxDes.getPrimerAdy()));
 
             exito = true;
         }

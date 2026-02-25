@@ -25,13 +25,17 @@ public class TestGrafo {
 
         System.out.println("--- Conectando Vías (Arcos) ---");
         // Conectamos Neuquen con cipolleti y plottier
-        trenDelValle.insertarArco("Neuquen", "Cipolletti");
-        trenDelValle.insertarArco("Neuquen", "Plottier");
-        
+        trenDelValle.insertarArco("Neuquen", "Cipolletti",12);
+        trenDelValle.insertarArco("Neuquen", "Plottier",10);
+        trenDelValle.insertarArco("Senillosa", "Plottier",14);
+              System.out.println("\n--- Estado del Grafo ---");
+        System.out.println(trenDelValle.toString());
         //trenDelValle.eliminarArco("Plottier", "Senillosa");
 
         
-         //trenDelValle.eliminarArco("Neuquen", "Cipolletti");
+        // trenDelValle.eliminarArco("Neuquen", "Cipolletti");
+        trenDelValle.eliminarVertice("Senillosa");
+        System.out.println("Eliminar vertice (Senillosa)");
         System.out.println("\n--- Estado del Grafo ---");
         System.out.println(trenDelValle.toString());
 

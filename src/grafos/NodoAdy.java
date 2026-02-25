@@ -13,10 +13,12 @@ package grafos;
 public class NodoAdy {
   
      private NodoVert vertice;
+     private double distancia;
      private NodoAdy sigAdyacente;
-     public NodoAdy(NodoVert vert,NodoAdy sigAdy)
+     public NodoAdy(NodoVert vert,double km,NodoAdy sigAdy)
      {
          vertice=vert;
+         distancia=km;
          sigAdyacente=sigAdy;
      }
 
@@ -36,5 +38,13 @@ public class NodoAdy {
 
     public void setSigAdyacente(NodoAdy sigAdy) {
         this.sigAdyacente = sigAdy;
+    }
+
+    public double getDistancia() {
+        return distancia;
+    }
+
+    public void setDistancia(double distancia) {
+        this.distancia = distancia;
     }
 }
