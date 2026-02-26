@@ -213,7 +213,8 @@ public class ArbolGen {
             padreBuscado = padreAux(this.raiz, elem);
         }
         return padreBuscado;
-    }  
+    }
+
     public Object padreAux(NodoGen n, Object elem) {
         Object padreBuscado = null;
         if (n != null) {
@@ -232,69 +233,96 @@ public class ArbolGen {
         }
         return padreBuscado;
     }
-     public int altura()
-     {
-         int alt=-1;
-         if(!esVacio())
-         {
-           alt=alturaAux(this.raiz);
-         }
-     return alt;
-     }
-     private int alturaAux(NodoGen n)
-     {
-         int aux=-1;
-         int altMax=-1;
-         if(n!=null)
-         {
-           NodoGen h=n.getHEI();
-           while(h!=null)
-           {
-            aux=alturaAux(h);
-            if(aux>altMax)
-            {
-             altMax=aux;
+
+    public int altura() {
+        int alt = -1;
+        if (!esVacio()) {
+            alt = alturaAux(this.raiz);
+        }
+        return alt;
+    }
+
+    private int alturaAux(NodoGen n) {
+        int aux = -1;
+        int altMax = -1;
+        if (n != null) {
+            NodoGen h = n.getHEI();
+            while (h != null) {
+                aux = alturaAux(h);
+                if (aux > altMax) {
+                    altMax = aux;
+                }
+                h = h.getHD();
             }
-            h=h.getHD();
-           }
-           
-          altMax=altMax+1;   
-         }
-       return altMax;
-     }
-      public int nivel(Object elem)
-     {
-         int niv=-1;
-         if(!esVacio())
-         {
-           niv=nivelAux(this.raiz,elem);
-         }
-     return niv;
-     }
+
+            altMax = altMax + 1;
+        }
+        return altMax;
+    }
+
+    public int nivel(Object elem) {
+        int niv = -1;
+        if (!esVacio()) {
+            niv = nivelAux(this.raiz, elem);
+        }
+        return niv;
+    }
+
     private int nivelAux(NodoGen n, Object elemento) {
-    int res = -1;
+        int res = -1;
+
+        if (n != null) {
+            if (n.getElem().equals(elemento)) {
+                res = 0;
+            } else {
+                // Si no,buscamos en sus hijos recursivamente
+                NodoGen hijo = n.getHEI();
+
+                // Recorremos los hermanos hasta encontrarlo  o agotar hijos
+                while (hijo != null && res == -1) {
+                    res = nivelAux(hijo, elemento);
+                    hijo = hijo.getHD();
+                }
+
+                // si se encontró en algún subárbol, sumamos 1 al nivel
+                if (res > -1) {
+                    res++;
+                }
+            }
+        }
+        return res;
+    }
+
+    public Lista ancestros(Object elem) {
+        Lista lis = new Lista();
+        if (!esVacio()) {
+            ancestrosAux(this.raiz, elem, lis);
+        }
+        return lis;
+    }
+
+   private boolean ancestrosAux(NodoGen n, Object buscado, Lista ls) {
+    boolean encontrado = false;
 
     if (n != null) {
-            if (n.getElem().equals(elemento)) {
-            res = 0;
+           if (n.getElem().equals(buscado)) {
+            encontrado = true;
         } else {
-            // Si no,buscamos en sus hijos recursivamente
-            NodoGen hijo = n.getHEI();
             
-            // Recorremos los hermanos hasta encontrarlo  o agotar hijos
-            while (hijo != null && res == -1) {
-                res = nivelAux(hijo, elemento);
-                hijo = hijo.getHD();
+            NodoGen hijo = n.getHEI();
+            while (hijo != null && !encontrado) {
+                encontrado = ancestrosAux(hijo, buscado, ls);
+                hijo = hijo.getHD(); // Paso al siguiente hermano
             }
 
-            // si se encontró en algún subárbol, sumamos 1 al nivel
-            if (res > -1) {
-                res++;
+            if (encontrado) {
+                ls.insertar(n.getElem(), ls.getLongitud() + 1);
             }
         }
     }
-    return res;
+    return encontrado;
 }
+
     @Override
     public String toString() {
         return toStringAux(this.raiz);
