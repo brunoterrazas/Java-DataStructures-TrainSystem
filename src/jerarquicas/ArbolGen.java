@@ -39,7 +39,7 @@ public class ArbolGen {
             if (n.getHEI() != null) {
                 NodoGen hijo = n.getHEI().getHD();
                 while (hijo != null) {
-                    listarPreOrdenAux(n.getHEI(), ls);
+                    listarPreOrdenAux(hijo, ls);
                     hijo = hijo.getHD();
                 }
             }
@@ -66,7 +66,7 @@ public class ArbolGen {
             if (n.getHEI() != null) {
                 NodoGen hijo = n.getHEI().getHD();
                 while (hijo != null) {
-                    listarInOrdenAux(n.getHEI(), ls);
+                    listarInOrdenAux(hijo, ls);
                     hijo = hijo.getHD();
                 }
             }
@@ -92,7 +92,7 @@ public class ArbolGen {
             if (n.getHEI() != null) {
                 NodoGen hijo = n.getHEI().getHD();
                 while (hijo != null) {
-                    listarPosOrdenAux(n.getHEI(), ls);
+                    listarPosOrdenAux(hijo, ls);
                     hijo = hijo.getHD();
                 }
             }
@@ -301,27 +301,61 @@ public class ArbolGen {
         return lis;
     }
 
-   private boolean ancestrosAux(NodoGen n, Object buscado, Lista ls) {
-    boolean encontrado = false;
+    private boolean ancestrosAux(NodoGen n, Object buscado, Lista ls) {
+        boolean encontrado = false;
 
-    if (n != null) {
-           if (n.getElem().equals(buscado)) {
-            encontrado = true;
-        } else {
-            
-            NodoGen hijo = n.getHEI();
-            while (hijo != null && !encontrado) {
-                encontrado = ancestrosAux(hijo, buscado, ls);
-                hijo = hijo.getHD(); // Paso al siguiente hermano
-            }
+        if (n != null) {
+            if (n.getElem().equals(buscado)) {
+                encontrado = true;
+            } else {
 
-            if (encontrado) {
-                ls.insertar(n.getElem(), ls.getLongitud() + 1);
+                NodoGen hijo = n.getHEI();
+                while (hijo != null && !encontrado) {
+                    encontrado = ancestrosAux(hijo, buscado, ls);
+                    hijo = hijo.getHD(); // Paso al siguiente hermano
+                }
+
+                if (encontrado) {
+                    ls.insertar(n.getElem(), ls.getLongitud() + 1);
+                }
             }
         }
+        return encontrado;
     }
-    return encontrado;
-}
+
+    public Lista listaQueJusticaAltura() {
+        Lista lis = new Lista();
+        Lista lisActual = new Lista();
+        Lista lisRes = new Lista();
+        if (!esVacio()) {
+            lis = listaJustificaAlturaAux(this.raiz, lisActual, lisRes);
+        }
+        return lis;
+    }
+
+    public Lista listaJustificaAlturaAux(NodoGen n, Lista actual, Lista res) {
+         //metodo que retotna la lista o camino que justifica  la altura
+        if (n != null) {
+           actual.insertar(n.getElem(), actual.getLongitud()+1);
+            //si es hoja      
+            if (n.getHEI() == null) {
+                if (actual.getLongitud() > res.getLongitud()) {
+                    //comparamos para ver si lista actual es el camino más largo
+                    res = actual.clone();//asignamos una copia de la lista actual
+                }
+            } else {
+                NodoGen hijo = n.getHEI();//Primero llamos con el hijo extremo izquierdo
+                while (hijo != null) {
+                    res=listaJustificaAlturaAux(hijo, actual, res);//verificamos si el resto de hijos tiene mejor camino
+                    hijo = hijo.getHD();
+                }
+            }//a la vuelta de la recursion, quitamos el ultimo nodo de la lista actual 
+             actual.eliminar(actual.getLongitud());
+
+        }
+
+        return res;
+    }
 
     @Override
     public String toString() {
