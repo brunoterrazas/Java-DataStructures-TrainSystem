@@ -289,27 +289,26 @@ public class Grafo {
     }
 
     @Override
-    public String toString() {
-        String cad = "Grafo:\n";
-        NodoVert auxVert = this.inicio;
+   public String toString() {
+    String s = "=== RED DE VÍAS (CONEXIONES Y DISTANCIAS) ===\n";
+    NodoVert auxVert = this.inicio;
 
-        while (auxVert != null) {
-            cad += "Estacion [" + auxVert.getElem() + "]: ";
-            NodoAdy auxAdy = auxVert.getPrimerAdy();
-
-            if (auxAdy == null) {
-                cad += "-> sin conexiones";
-            } else {
-                while (auxAdy != null) {
-
-                    cad += " -> " + auxAdy.getVertice().getElem();
-
-                    auxAdy = auxAdy.getSigAdyacente();
-                }
+    while (auxVert != null) {
+        s += "[" + auxVert.getElem() + "]";
+        NodoAdy auxAdy = auxVert.getPrimerAdy();
+        
+        if (auxAdy == null) {
+            s += " <--- (Sin conexiones) --->";
+        } else {
+            while (auxAdy != null) {
+                // Formato sugerido: [Origen] <--- 80.0 km ---> [Destino]
+                s += "\n   <--- " + auxAdy.getDistancia() + " km ---> [" + auxAdy.getVertice().getElem() + "]";
+                auxAdy = auxAdy.getSigAdyacente();
             }
-            cad += "\n";
-            auxVert = auxVert.getSigVertice();
         }
-        return cad;
+        s += "\n--------------------------------------------\n";
+        auxVert = auxVert.getSigVertice();
     }
+    return s;
+}
 }

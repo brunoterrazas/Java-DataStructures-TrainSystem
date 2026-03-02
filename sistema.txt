@@ -1,0 +1,8 @@
+E;Retiro;Av. Ramos Mejia;1430;CABA;C1104;9;6
+E;Campana;Rivadavia;100;Campana;2804;2;2
+E;Zarate;General Paz;200;Zarate;2800;2;2
+R;Retiro;Campana;80
+R;Zarate;Campana;10
+L;Mitre;Retiro;Campana;Zarate
+T;234;diesel;5;6;Mitre
+T;893;gasolina;0;11;no-asignado
