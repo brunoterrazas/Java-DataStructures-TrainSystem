@@ -26,104 +26,92 @@ public class TrenesSA {
     private Grafo mapaVias;
     private HashMap<String, Lista> lineas;
 
-    // Constructor e inicialización...
     public TrenesSA() {
-        // Inicializar las estructuras
+
         this.estaciones = new Diccionario();
         this.trenes = new Diccionario();
         this.mapaVias = new Grafo();
         this.lineas = new HashMap<>();
     }
 
-    // Tu método de carga que ya definimos...
     public void cargarDatos(String rutaArchivo) {
 
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(rutaArchivo));
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                // Usamos split para separar por punto y coma
-                String[] campos = linea.split(";");
-                if (campos.length == 0) {
-                    continue; // Saltea líneas vacías
+        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
+            String registro;
+            while ((registro = br.readLine()) != null) {
+                if (registro.trim().isEmpty()) {
+                    continue;
                 }
-                String tipo = campos[0];
 
-                switch (tipo) {
-                    case "E":
-                        // El split genera un arreglo. Vamos a ser cuidadosos con los índices:
-                        // campos[0] = E
-                        // campos[1] = Nombre
-                        // campos[2] = Calle
-                        // campos[3] = Numero
-                        // campos[4] = Ciudad
-                        // campos[5] = CP
-                        // campos[6] = Vias
-                        // campos[7] = Plataformas
-
-                        if (campos.length >= 8) {
-                            // Unimos los datos de dirección en un solo String "domicilio"
-                            String domicilio = campos[2] + " " + campos[3] + ", " + campos[4] + " (" + campos[5] + ")";
-
-                            // Parseamos los últimos dos campos que son los numéricos
-                            int vias = Integer.parseInt(campos[6].trim());
-                            int plat = Integer.parseInt(campos[7].trim());
-
-                            Estacion est = new Estacion(campos[1], domicilio, vias, plat);
-
-                            // Guardamos en las estructuras
-                            estaciones.insertar(est.getNombre(), est);
-                            mapaVias.insertarVertice(est.getNombre());
-                        } else {
-                            System.out.println("⚠️ Saltando línea mal formada: " + linea);
-                        }
-                        break;
-
-                    case "L":
-                        // Formato: L;NombreLinea;Estacion1;Estacion2;...
-                        String nombreLinea = campos[1];
-                        Lista listaEstaciones = new Lista();
-                        // Recorremos desde el índice 2 hasta el final del arreglo campos
-                        for (int i = 2; i < campos.length; i++) {
-                            listaEstaciones.insertar(campos[i], listaEstaciones.longitud() + 1);
-                        }
-                        // Guardamos en el HashMap de Java
-                        lineas.put(nombreLinea, listaEstaciones);
-                        break;
-
-                    case "R":
-                        // Formato: R;Origen;Destino;Kilometros
-                        String origen = campos[1];
-                        String destino = campos[2];
-                        double kms = Double.parseDouble(campos[3]);
-                        // Se inserta como arco en el Grafo Etiquetado
-                        mapaVias.insertarArco(origen, destino, kms);
-                        break;
-
-                    case "T":
-                        // Formato: T;Codigo;Propulsion;Pasajeros;Carga;Linea
-                        int cod = Integer.parseInt(campos[1]);
-                        String prop = campos[2];
-                        int pas = Integer.parseInt(campos[3]);
-                        int car = Integer.parseInt(campos[4]);
-                        String lin = campos[5];
-
-                        Tren tren = new Tren(cod, prop, pas, car, lin);
-                        // Se guarda en el segundo Diccionario (AVL)
-                        trenes.insertar(cod, tren);
-                        break;
-                }
+                String[] campos = registro.split(";");
+                procesarEntrada(campos);
             }
-            br.close();
-            System.out.println("Carga de datos finalizada con éxito.");
+            System.out.println("Carga de estructuras finalizada exitosamente.");
         } catch (Exception e) {
-            System.out.println("Error al leer archivo: " + e.getMessage());
-            e.printStackTrace(); // Esto te ayuda a ver en qué línea falló el parseo
+            System.err.println("Error en la carga de datos: " + e.getMessage());
         }
     }
 
+    private void procesarEntrada(String[] campos) {
+        String tipo = campos[0];
+        switch (tipo) {
+            case "E":
+                registrarEstacion(campos);
+                break;
+            case "L":
+                registrarLinea(campos);
+                break;
+            case "R":
+                registrarRiel(campos);
+                break;
+            case "T":
+                registrarTren(campos);
+                break;
+        }
+    }
+
+    private void registrarEstacion(String[] c) {
+        if (c.length >= 8) {
+            // Concatenamos el domicilio: Calle Nro, Ciudad (CP)
+            String dom = c[2] + " " + c[3] + ", " + c[4] + " (" + c[5] + ")";
+            int vias = Integer.parseInt(c[6].trim());
+            int plat = Integer.parseInt(c[7].trim());
+
+            Estacion est = new Estacion(c[1], dom, vias, plat);
+
+            // Inserción doble: Diccionario para búsquedas y Grafo como vértice
+            estaciones.insertar(est.getNombre(), est);
+            mapaVias.insertarVertice(est.getNombre());
+        }
+    }
+
+    private void registrarLinea(String[] c) {
+        // Usamos Lista para almacenar el recorrido
+        String nombreL = c[1];
+        Lista listaEst = new Lista();
+
+        // Recorremos las estaciones de la línea (desde el índice 2 en adelante)
+        for (int i = 2; i < c.length; i++) {
+            listaEst.insertar(c[i], listaEst.longitud() + 1);
+        }
+        lineas.put(nombreL, listaEst);
+    }
+
+    private void registrarRiel(String[] c) {
+        // Insertamos el arco en el grafo con su etiqueta de distancia
+        double kms = Double.parseDouble(c[3].trim());
+        mapaVias.insertarArco(c[1], c[2], kms);
+    }
+
+    private void registrarTren(String[] c) {
+        // Creamos el objeto Tren y lo guardamos en el AVL de trenes
+        int id = Integer.parseInt(c[1].trim());
+        Tren t = new Tren(id, c[2], Integer.parseInt(c[3]), Integer.parseInt(c[4]), c[5]);
+        trenes.insertar(id, t);
+    }
+
     public String debugEstaciones() {
-        // Retorna el toString de tu árbol AVL
+        // Retorna el toString de tu arbol AVL
         return this.estaciones.toString();
     }
 
@@ -134,8 +122,7 @@ public class TrenesSA {
 
     public String obtenerInfoEstacion(String nombre) {
         String resultado = "La estación no existe en el sistema.";
-        // Usamos el obtenerDato del Diccionario (AVL)
-        Estacion est = (Estacion) estaciones.obtenerDato(nombre);
+           Estacion est = (Estacion) estaciones.obtenerDato(nombre);
         if (est != null) {
             resultado = est.toString();
         }
