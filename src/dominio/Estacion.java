@@ -14,20 +14,44 @@ package dominio;
 public class Estacion {
     private String nombre; // Clave
     private String domicilio; // Agrupamos calle, nro, ciudad y CP
-    private int vias;
-    private int plataformas;
+    private int cantVias;
+    private int cantPlataformas;
 
-    public Estacion(String nombre, String domicilio, int vias, int plat) {
+    public Estacion(String nombre, String domicilio, int cantVias, int plat) {
         this.nombre = nombre;
         this.domicilio = domicilio;
-        this.vias = vias;
-        this.plataformas = plat;
+        this.cantVias = cantVias;
+        this.cantPlataformas = plat;
+    }
+
+    public String getDomicilio() {
+        return domicilio;
+    }
+
+    public void setDomicilio(String domicilio) {
+        this.domicilio = domicilio;
+    }
+
+    public int getCantVias() {
+        return cantVias;
+    }
+
+    public void setCantVias(int cantVias) {
+        this.cantVias = cantVias;
+    }
+
+    public int getCantPlataformas() {
+        return cantPlataformas;
+    }
+
+    public void setCantPlataformas(int cantPlataformas) {
+        this.cantPlataformas = cantPlataformas;
     }
 
     public String getNombre() { return nombre; }
 
     @Override
     public String toString() {
-        return nombre + " (" + domicilio + ") V:" + vias + " P:" + plataformas;
+        return nombre + " (" + domicilio + ") V:" + cantVias + " P:" + cantPlataformas;
     }
 }

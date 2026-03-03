@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package dominio;
 
 /**
@@ -11,6 +10,7 @@ package dominio;
  * @author Brunot
  */
 public class Tren {
+
     private int codigo; // Clave
     private String propulsion;
     private int vagPasajeros;
@@ -23,6 +23,10 @@ public class Tren {
         this.vagPasajeros = pas;
         this.vagCarga = carga;
         this.linea = lin;
+    }
+
+    public int getCodigo() {
+        return codigo;
     }
 
     @Override

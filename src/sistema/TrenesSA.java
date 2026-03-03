@@ -35,7 +35,7 @@ public class TrenesSA {
     }
 
     public void cargarDatos(String rutaArchivo) {
-
+//Precargamos datos del sistema
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
             String registro;
             while ((registro = br.readLine()) != null) {
@@ -70,22 +70,7 @@ public class TrenesSA {
         }
     }
 
-    private void registrarEstacion(String[] c) {
-        if (c.length >= 8) {
-            // Concatenamos el domicilio: Calle Nro, Ciudad (CP)
-            String dom = c[2] + " " + c[3] + ", " + c[4] + " (" + c[5] + ")";
-            int vias = Integer.parseInt(c[6].trim());
-            int plat = Integer.parseInt(c[7].trim());
-
-            Estacion est = new Estacion(c[1], dom, vias, plat);
-
-            // Inserción doble: Diccionario para búsquedas y Grafo como vértice
-            estaciones.insertar(est.getNombre(), est);
-            mapaVias.insertarVertice(est.getNombre());
-        }
-    }
-
-    private void registrarLinea(String[] c) {
+    public void registrarLinea(String[] c) {
         // Usamos Lista para almacenar el recorrido
         String nombreL = c[1];
         Lista listaEst = new Lista();
@@ -122,20 +107,70 @@ public class TrenesSA {
 
     public String obtenerInfoEstacion(String nombre) {
         String resultado = "La estación no existe en el sistema.";
-           Estacion est = (Estacion) estaciones.obtenerDato(nombre);
+        Estacion est = (Estacion) estaciones.obtenerDato(nombre);
         if (est != null) {
             resultado = est.toString();
         }
         return resultado;
     }
 
-    public String obtenerInfoTren(int id) {
-        String resultado = "El tren con ID " + id + " no existe.";
-        Tren t = (Tren) trenes.obtenerDato(id);
+    public String obtenerInfoTren(int cod) {
+        String resultado = "El tren con ID " + cod + " no existe.";
+        Tren t = (Tren) trenes.obtenerDato(cod);
         if (t != null) {
             resultado = t.toString();
         }
         return resultado;
+    }
+
+    //ABM ESTACIÓN
+    public boolean registrarEstacion(String[] c) {
+        boolean exito = false;//Da de alta la estación
+        if (c.length >= 8) {
+            // Concatenamos el domicilio: Calle Nro, Ciudad (CP)
+            String dom = c[2] + " " + c[3] + ", " + c[4] + " (" + c[5] + ")";
+            int vias = Integer.parseInt(c[6].trim());
+            int plat = Integer.parseInt(c[7].trim());
+
+            Estacion est = new Estacion(c[1], dom, vias, plat);
+
+            // Insertamos en el Diccionario para búsquedas y Grafo como vértice
+            estaciones.insertar(est.getNombre(), est);
+            mapaVias.insertarVertice(est.getNombre());
+            exito = true;
+        }
+        return exito;
+    }
+
+    public boolean modificarEstacion(String nombre, String nuevoDom, int nuevasVias, int nuevasPlat) {
+        boolean exito = false;
+
+        //Buscamos si existe
+        Object dato = estaciones.obtenerDato(nombre);
+
+        if (dato != null) {
+            Estacion est = (Estacion) dato;
+
+            // Validamos cantidades
+            if (nuevasVias >= 0 && nuevasPlat >= 0) {
+                est.setDomicilio(nuevoDom);
+                est.setCantVias(nuevasVias);
+                est.setCantPlataformas(nuevasPlat);
+                exito = true;
+            }
+        }
+        return exito;
+    }
+
+    public boolean darBajaEstacion(String nombre) {
+        boolean exito;
+        // Eliminamos del Diccionario
+        exito = estaciones.eliminar(nombre);
+        if (exito) {
+            // Eliminamos del Grafo (esto borra el vértice y sus arcos/rieles)
+            mapaVias.eliminarVertice(nombre);
+        }
+        return exito;
     }
 
 }
