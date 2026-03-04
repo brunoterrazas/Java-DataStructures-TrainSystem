@@ -82,6 +82,22 @@ public class TrenesSA {
         lineas.put(nombreL, listaEst);
     }
 
+    public boolean agregarEstacionALinea(String nombreL, String nombreEst, int pos) {
+        boolean exito = false;
+
+        // Buscamos la lista de esa línea en el hashmap
+        Lista recorrido = (Lista) lineas.get(nombreL);
+
+        if (recorrido != null) {
+            // Si la estación existe en el diccionario de estaciones (AVL)
+            if (estaciones.obtenerDato(nombreEst) != null) {
+                // Insertamos en la lista (se actualiza en el hashmap por referencia)
+                exito = recorrido.insertar(nombreEst, pos);
+            }
+        }
+        return exito;
+    }
+
     private void registrarRiel(String[] c) {
         // Insertamos el arco en el grafo con su etiqueta de distancia
         double kms = Double.parseDouble(c[3].trim());

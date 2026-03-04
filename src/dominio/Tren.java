@@ -29,6 +29,14 @@ public class Tren {
         return codigo;
     }
 
+    public String getLinea() {
+        return linea;
+    }
+
+    public void setLinea(String linea) {
+        this.linea = linea;
+    }
+    
     @Override
     public String toString() {
         return "ID:" + codigo + " [" + propulsion + "] L:" + linea;
