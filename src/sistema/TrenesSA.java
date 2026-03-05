@@ -181,11 +181,44 @@ public class TrenesSA {
         String resultado = "El tren con ID " + cod + " no existe.";
         Tren t = (Tren) trenes.obtenerDato(cod);
         if (t != null) {
-            resultado = t.toString();
+            resultado = "=== INFO TREN " + cod + " ===\n" + t.toString();
+        
+        if (t.getLinea().equals("No-asignado")) {
+            resultado = resultado + "\nEstado: Disponible (Sin línea asignada).";
+        } else {
+            // Llamamos al método modularizado
+            resultado = resultado + "\n\n" + obtenerCiudadesVisitadas(t.getLinea());
+        }
         }
         return resultado;
     }
-    
+    private String obtenerCiudadesVisitadas(String nombreLinea) {
+    String itinerario = "";
+    Lista recorrido = lineas.get(nombreLinea);
+
+    if (recorrido == null || recorrido.esVacia()) {
+        itinerario = "No hay paradas registradas para la línea " + nombreLinea;
+    } else {
+        itinerario = "Ciudades que visitara:";
+        itinerario = itinerario + "\n--------------------------------------------";
+        
+        for (int i = 1; i <= recorrido.longitud(); i++) {
+            String nombreEst = (String) recorrido.recuperar(i);
+            // Buscamos el objeto Estacion en el AVL para extraer la ciudad
+            Estacion estObj = (Estacion) estaciones.obtenerDato(nombreEst);
+            
+            itinerario = itinerario + "\n [" + i + "] " + nombreEst;
+            
+            if (estObj != null) {
+                itinerario = itinerario + " - Ciudad: " + estObj.getCiudad();
+            } else {
+                itinerario = itinerario + " - (Sin datos de ciudad)";
+            }
+        }
+        itinerario = itinerario + "\n--------------------------------------------";
+    }
+    return itinerario;
+}
     //ABM ESTACIÓN
     public boolean registrarEstacion(String[] valor) {
         boolean exito = false;//Da de alta la estación
