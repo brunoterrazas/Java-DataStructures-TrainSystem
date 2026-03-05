@@ -13,7 +13,7 @@ package dominio;
 
 public class Estacion {
     private String nombre; // Clave
-    private String domicilio; // Agrupamos calle, nro, ciudad y CP
+    private String domicilio; // Agrupamos calle y nro
     private String ciudad;
     private String cp;
     private int cantVias;
@@ -72,6 +72,6 @@ public class Estacion {
 
     @Override
     public String toString() {
-        return nombre + " (" + domicilio + ") V:" + cantVias + " P:" + cantPlataformas;
+        return nombre + " Calle: " + domicilio + "," + ciudad+"("+cp+"), Vias:" + cantVias + ", Plataformas:" + cantPlataformas;
     }
 }

@@ -190,7 +190,7 @@ public class TrenesSA {
     public boolean registrarEstacion(String[] valor) {
         boolean exito = false;//Da de alta la estación
         if (valor.length >= 8) {
-            // Concatenamos el domicilio: Calle Nro, Ciudad (CP)
+            // Concatenamos el domicilio: Calle, Nro
             String ciudad= valor[4];
             String cp= valor[5];
             String dom = valor[2] + " " + valor[3] + ", " + ciudad + " (" + cp + ")";
