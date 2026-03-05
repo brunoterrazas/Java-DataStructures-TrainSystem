@@ -39,6 +39,6 @@ public class Tren {
     
     @Override
     public String toString() {
-        return "ID:" + codigo + " [" + propulsion + "] L:" + linea;
+        return "ID:" + codigo + " propulsion[" + propulsion+ "], pasajeros: " + vagPasajeros + ", carga: " + vagCarga + ", Linea: " + linea;
     }
 }

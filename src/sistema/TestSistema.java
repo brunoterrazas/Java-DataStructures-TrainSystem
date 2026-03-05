@@ -26,21 +26,26 @@ public class TestSistema {
             System.out.println("       SISTEMA TrenesSA - Menu");
             System.out.println("========================================");
             System.out.println("1. ABM Estaciones");
-            System.out.println("2. Consultar Información");
-            System.out.println("3. Ver Estado del Sistema (Debug)");
+            System.out.println("2. ABM Trenes");
+
+            System.out.println("3. Consultar Información");
+            System.out.println("4. Ver Estado del Sistema (Debug)");
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
             opcion = sc.nextInt();
-            sc.nextLine(); 
+            sc.nextLine();
 
             switch (opcion) {
                 case 1:
                     menuABMEstaciones(sistema, sc);
                     break;
                 case 2:
-                    menuConsultas(sistema, sc);
+                    menuABMTrenes(sistema, sc);
                     break;
                 case 3:
+                    menuConsultas(sistema, sc);
+                    break;
+                case 4:
                     System.out.println(sistema.debugEstaciones());
                     System.out.println(sistema.debugGrafo());
                     break;
@@ -102,7 +107,7 @@ public class TestSistema {
             case 3: // MODIFICACIÓN
                 System.out.print("Nombre de la estación a modificar: ");
                 String nombreMod = sc.nextLine();
-                  System.out.print("Calle: ");
+                System.out.print("Calle: ");
                 String calle = sc.nextLine();
                 System.out.print("Número: ");
                 String numero = sc.nextLine();
@@ -114,8 +119,8 @@ public class TestSistema {
                 int nVias = sc.nextInt();
                 System.out.print("Nueva cantidad de Plataformas: ");
                 int nPlat = sc.nextInt();
-                String nuevoDomicilio= calle + " " + numero + ", " + ciudad + " (" + cp + ")";
-                if (sistema.modificarEstacion(nombreMod,nuevoDomicilio, nVias, nPlat)) {
+                String nuevoDomicilio = calle + " " + numero + ", " + ciudad + " (" + cp + ")";
+                if (sistema.modificarEstacion(nombreMod, nuevoDomicilio, nVias, nPlat)) {
                     System.out.println("Datos actualizados correctamente.");
                 } else {
                     System.out.println("Error: Estación no encontrada.");
@@ -138,6 +143,54 @@ public class TestSistema {
         } else if (op == 2) {
             System.out.print("Codigo de tren: ");
             System.out.println(sistema.obtenerInfoTren(sc.nextInt()));
+        }
+    }
+
+    private static void menuABMTrenes(TrenesSA sistema, Scanner sc) {
+        System.out.println("\n--- ABM TRENES ---");
+        System.out.println("1. Alta de Tren");
+        System.out.println("2. Baja de Tren (Solo si no está asignado)");
+        System.out.println("3. Asignar/Cambiar Línea a Tren");
+        System.out.print("Opción: ");
+        int subOp = sc.nextInt();
+        sc.nextLine();
+
+        switch (subOp) {
+            case 1:
+                String[] valor = new String[6];
+                System.out.print("ID: ");
+                valor[1] = sc.nextLine();
+                System.out.print("Propulsión: ");
+                valor[2] = sc.nextLine();
+                System.out.print("Capacidad Pasajeros: ");
+                valor[3] = sc.nextLine();
+                System.out.print("Capacidad Carga: ");
+                valor[4] = sc.nextLine();
+                System.out.print("Línea (o 'No-asignado'): ");
+                valor[5] = sc.nextLine();
+                if (sistema.registrarTren(valor)) {
+                    System.out.println("Tren registrado correctamente.");
+                } else {
+                    System.out.println("Error: ID duplicado o línea inexistente.");
+                }
+                break;
+            case 2:
+                System.out.print("ID del tren a eliminar: ");
+                int idBaja = sc.nextInt();
+                System.out.println(sistema.eliminarTren(idBaja));
+                break;
+            case 3:
+                System.out.print("ID del tren: ");
+                int idMod = sc.nextInt();
+                sc.nextLine();
+                System.out.print("Nombre de nueva Línea (o dejar como 'No-asignado'): ");
+                String nL = sc.nextLine();
+                if (sistema.asignarLineaTren(idMod, nL)) {
+                    System.out.println("Línea actualizada con éxito.");
+                } else {
+                    System.out.println("Error: No se pudo actualizar (verifique ID y nombre de línea).");
+                }
+                break;
         }
     }
 }

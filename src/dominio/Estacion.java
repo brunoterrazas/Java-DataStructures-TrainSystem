@@ -14,12 +14,16 @@ package dominio;
 public class Estacion {
     private String nombre; // Clave
     private String domicilio; // Agrupamos calle, nro, ciudad y CP
+    private String ciudad;
+    private String cp;
     private int cantVias;
     private int cantPlataformas;
 
-    public Estacion(String nombre, String domicilio, int cantVias, int plat) {
+    public Estacion(String nombre, String domicilio,String ciudad,String codpostal, int cantVias, int plat) {
         this.nombre = nombre;
         this.domicilio = domicilio;
+        this.ciudad=ciudad;
+        this.cp=codpostal;
         this.cantVias = cantVias;
         this.cantPlataformas = plat;
     }
@@ -30,6 +34,22 @@ public class Estacion {
 
     public void setDomicilio(String domicilio) {
         this.domicilio = domicilio;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public String getCp() {
+        return cp;
+    }
+
+    public void setCp(String cp) {
+        this.cp = cp;
     }
 
     public int getCantVias() {

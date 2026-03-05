@@ -98,17 +98,64 @@ public class TrenesSA {
         return exito;
     }
 
-    private void registrarRiel(String[] c) {
+    private void registrarRiel(String[] valor) {
         // Insertamos el arco en el grafo con su etiqueta de distancia
-        double kms = Double.parseDouble(c[3].trim());
-        mapaVias.insertarArco(c[1], c[2], kms);
+        double kms = Double.parseDouble(valor[3].trim());
+        mapaVias.insertarArco(valor[1], valor[2], kms);
     }
 
-    private void registrarTren(String[] c) {
+    public boolean registrarTren(String[] valor) {
         // Creamos el objeto Tren y lo guardamos en el AVL de trenes
-        int id = Integer.parseInt(c[1].trim());
-        Tren t = new Tren(id, c[2], Integer.parseInt(c[3]), Integer.parseInt(c[4]), c[5]);
-        trenes.insertar(id, t);
+       boolean exito=false;
+        int id = Integer.parseInt(valor[1].trim());
+        //si el hashmap de lineas incluye la linea o esta como linea No-asignado 
+         if(lineas.containsKey(valor[5])||valor[5].equals("No-asignado"))
+        {
+        Tren t = new Tren(id, valor[2], Integer.parseInt(valor[3]), Integer.parseInt(valor[4]), valor[5]);
+        exito=trenes.insertar(id, t);
+        }
+        
+        return exito;
+    }
+    public boolean asignarLineaTren(int idTren, String nomLinea)
+    {//Este metodo asigna una linea al Tren
+     boolean exito=false;
+     //Buscamos si esta en el diccionario de trenes
+     Tren tren=(Tren)trenes.obtenerDato(idTren);
+     //Si el tren esta en el diccionario
+      if(tren!=null)
+      { //si el hashmap de lineas incluye la linea o esta como No-asigando 
+        if(lineas.containsKey(nomLinea)||nomLinea.equals("No-asignado"))
+        {
+           tren.setLinea(nomLinea);
+           exito=true;
+        }
+      }
+     
+     return exito;
+    }
+        public String eliminarTren(int id)
+    {
+        String msg;
+        Tren tren = (Tren) trenes.obtenerDato(id);
+
+    if (tren != null) {
+        // Si el tren no tiene asignada a una linea
+        if (tren.getLinea().equals("No-asignado")) {
+            if (trenes.eliminar(id)) {
+                msg = "Tren " + id + " eliminado correctamente.";
+            } else {
+                msg = "Error inesperado al eliminar el tren con id: "+id;
+            }
+        } else {
+            msg = "No se puede eliminar: El tren está asignado a la línea '" + tren.getLinea() + "'.";
+        }
+    }
+    else{
+       msg="El tren con ID " + id + " no existe!";
+       
+    }
+        return msg;
     }
 
     public String debugEstaciones() {
@@ -138,17 +185,19 @@ public class TrenesSA {
         }
         return resultado;
     }
-
+    
     //ABM ESTACIÓN
-    public boolean registrarEstacion(String[] c) {
+    public boolean registrarEstacion(String[] valor) {
         boolean exito = false;//Da de alta la estación
-        if (c.length >= 8) {
+        if (valor.length >= 8) {
             // Concatenamos el domicilio: Calle Nro, Ciudad (CP)
-            String dom = c[2] + " " + c[3] + ", " + c[4] + " (" + c[5] + ")";
-            int vias = Integer.parseInt(c[6].trim());
-            int plat = Integer.parseInt(c[7].trim());
+            String ciudad= valor[4];
+            String cp= valor[5];
+            String dom = valor[2] + " " + valor[3] + ", " + ciudad + " (" + cp + ")";
+            int vias = Integer.parseInt(valor[6].trim());
+            int plat = Integer.parseInt(valor[7].trim());
 
-            Estacion est = new Estacion(c[1], dom, vias, plat);
+            Estacion est = new Estacion(valor[1], dom,ciudad,cp, vias, plat);
 
             // Insertamos en el Diccionario para búsquedas y Grafo como vértice
             estaciones.insertar(est.getNombre(), est);
@@ -183,6 +232,15 @@ public class TrenesSA {
         // Eliminamos del Diccionario
         exito = estaciones.eliminar(nombre);
         if (exito) {
+            
+            // Recorremos todas las líneas y si la estación estaba, la quitamos
+        for (Lista recorrido : lineas.values()) {
+            int pos = recorrido.localizar(nombre);
+            while (pos != -1) { // Por si está repetida en la lista
+                recorrido.eliminar(pos);
+                pos = recorrido.localizar(nombre);
+            }
+        }
             // Eliminamos del Grafo (esto borra el vértice y sus arcos/rieles)
             mapaVias.eliminarVertice(nombre);
         }
