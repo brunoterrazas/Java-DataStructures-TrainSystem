@@ -279,5 +279,13 @@ public class TrenesSA {
         }
         return exito;
     }
+    public Lista obtenerEstacionesPorPrefijo(String prefijo) {
+    // Definimos el rango: desde el prefijo hasta el prefijo + "ZZZZ"
+    String inicio = prefijo;//subcadena
+    String fin = prefijo + "ZZZZ";
+    
+    // Llamamos al método listarRango del AVL de estaciones
+    return estaciones.listarRango(inicio, fin);
+}
 
 }

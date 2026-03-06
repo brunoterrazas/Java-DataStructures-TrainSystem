@@ -6,6 +6,7 @@
 package sistema;
 
 import java.util.Scanner;
+import lineales.dinamicas.Lista;
 
 /**
  *
@@ -133,16 +134,39 @@ public class TestSistema {
         System.out.println("\n--- CONSULTAS ---");
         System.out.println("1. Ver info de Estación");
         System.out.println("2. Ver info de Tren");
+        System.out.println("3. Buscar estaciones por prefijo (Ej: Villa, Gral)");
         System.out.print("Opción: ");
         int op = sc.nextInt();
-        sc.nextLine();
+        sc.nextLine(); 
 
-        if (op == 1) {
-            System.out.print("Nombre de estación: ");
-            System.out.println(sistema.obtenerInfoEstacion(sc.nextLine()));
-        } else if (op == 2) {
-            System.out.print("Codigo de tren: ");
-            System.out.println(sistema.obtenerInfoTren(sc.nextInt()));
+        switch (op) {
+            case 1:
+                System.out.print("Nombre de la estación: ");
+                String nombre = sc.nextLine();
+                System.out.println(sistema.obtenerInfoEstacion(nombre));
+                break;
+
+            case 2:
+                System.out.print("Código del tren: ");
+                int cod = sc.nextInt();
+                System.out.println(sistema.obtenerInfoTren(cod));
+                break;
+
+            case 3:
+                System.out.print("Ingrese la primer palabra o prefijo del nombre de  la estación: ");
+                String prefijo = sc.nextLine();
+                Lista encontradas = sistema.obtenerEstacionesPorPrefijo(prefijo);
+
+                if (encontradas.esVacia()) {
+                    System.out.println("No se encontraron estaciones que comiencen con '" + prefijo + "'.");
+                } else {
+                    System.out.println("Estaciones encontradas en el sistema:");
+                    System.out.println(encontradas.toString());
+                }
+                break;
+
+            default:
+                System.out.println("Opción no válida.");
         }
     }
 

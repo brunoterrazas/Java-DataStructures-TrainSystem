@@ -1,6 +1,15 @@
 E;Retiro;Av. Ramos Mejia;1430;CABA;C1104;9;6
 E;Campana;Rivadavia;100;Campana;2804;2;2
 E;Zarate;General Paz;200;Zarate;2800;2;2
+E;Villa Regina;Calle 1;100;Villa Regina;8336;2;2
+E;Gral Roca;Av. Roca;500;Roca;8332;3;4
+E;Villa del Parque;Cuenca;3000;CABA;1417;2;2
+E;Cipolletti;Fernandez Oro;450;Cipolletti;8324;2;3
+E;Villa Rosa;Ruta 25;10;Pilar;1631;2;1
+E;Gral Pico;Calle 19;200;Pico;6360;2;2
+E;Villalonga;Calle 5;20;Villalonga;8142;1;1
+E;Neuquen;Vias;0;Neuquen;8300;4;3
+E;Villa Maria;Entre Rios;100;Villa Maria;5900;3;2
 R;Retiro;Campana;80
 R;Zarate;Campana;10
 L;Mitre;Retiro;Campana;Zarate

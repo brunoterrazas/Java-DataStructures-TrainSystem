@@ -286,8 +286,13 @@ public class Grafo {
             }
         }
         return exito;
+    } 
+    public Lista mostrarEstacionesRango(String nombreEstacion)
+    {
+      Lista lis=new Lista();
+      
+      return lis;
     }
-
     @Override
    public String toString() {
     String s = "=== RED DE VÍAS (CONEXIONES Y DISTANCIAS) ===\n";
