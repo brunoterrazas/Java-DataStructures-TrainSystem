@@ -19,7 +19,6 @@ public class TestGrafo {
 Grafo tren = new Grafo();
 
         System.out.println("--- Cargando Estaciones (Nodos) ---");
-        // Escenario: N (Neuquén), C (Cipolletti), P (Plottier), S (Senillosa), D (Dina Huapi)
         tren.insertarVertice("A");
         tren.insertarVertice("B");
         tren.insertarVertice("C");
@@ -42,6 +41,10 @@ Grafo tren = new Grafo();
         System.out.println("\n--- Camino con menos estaciones (A -> D) ---");
         Lista rutaEstaciones = tren.caminoMasCorto("A", "D");
         System.out.println("Ruta mas corta (estaciones): " + rutaEstaciones.toString());
-        System.out.println("Cantidad de estaciones: " + rutaEstaciones.getLongitud());        
+        System.out.println("Cantidad de estaciones: " + rutaEstaciones.getLongitud()); 
+        System.out.println("\n--- 5. Camino con menos KM (A -> D) ---");
+        // [A, B, C, D] (15 km)
+                Lista resKM = tren.caminoMasCortoKm("A", "D");
+        System.out.println("Ruta elegida: " + resKM.toString());
    }
 }

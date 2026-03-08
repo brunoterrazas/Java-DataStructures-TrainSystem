@@ -189,7 +189,7 @@ public class Grafo {
 
         return visitados;
     }
- 
+
     private void listarEnProfundidadAux(NodoVert n, Lista vis) {
         if (n != null) {//marca al vertice n como visitado
             vis.insertar(n.getElem(), vis.getLongitud() + 1);
@@ -293,7 +293,7 @@ public class Grafo {
         Lista resCamino = new Lista();
         NodoVert vertOrigen = ubicarVertice(origen);
         NodoVert vertDestino = ubicarVertice(destino);
-        //Verificamos si existen las dos estaciones
+        //Verificamos si existen los dos vertices (estaciones)
         if (vertOrigen != null && vertDestino != null) {
             Lista caminoActual = new Lista();
             resCamino = caminoMasCortoAux(vertOrigen, vertDestino, caminoActual, resCamino);
@@ -305,7 +305,6 @@ public class Grafo {
         if (n != null) {
             actual.insertar(n.getElem(), actual.getLongitud() + 1);
 
-            
             if (n.equals(destino)) {
                 //  Si llegamos a destino, verificamos si hay un camino O si el camino actual es menor al camino guardado
                 if (res.esVacia() || actual.getLongitud() < res.getLongitud()) {
@@ -317,24 +316,63 @@ public class Grafo {
                     //seguimos buscando un mejor camino
                     NodoAdy ady = n.getPrimerAdy();
                     while (ady != null) {
-                        //Verificamos si ya pasamos por esa estacion
-                        if (actual.localizar(ady.getVertice().getElem())<0) {
+                        //Verificamos si ya pasamos por ese vertice (estacion)
+                        if (actual.localizar(ady.getVertice().getElem()) < 0) {
                             res = caminoMasCortoAux(ady.getVertice(), destino, actual, res);
                         }
                         ady = ady.getSigAdyacente();
                     }
                 }
             }
-
+//A la vuelta de la recursión, quitamos el vertice (estacion) actual agregado
             actual.eliminar(actual.getLongitud());
         }
         return res;
     }
 
-    public Lista mostrarEstacionesRango(String nombreEstacion) {
-        Lista lis = new Lista();
+    public Lista caminoMasCortoKm(Object origen, Object destino) {
+        Lista res = new Lista();
+        Lista actual = new Lista();
+        double[] min = new double[1];
+        min[0] = 999999999.0;
+        NodoVert vertOrigen, vertDestino;
+        vertOrigen = ubicarVertice(origen);
+        vertDestino = ubicarVertice(destino);
+         //Verificamos si existen los dos vertices (estaciones)
+       if (vertOrigen != null && vertDestino != null) {
+            res = caminoMasCortoKmAux(vertOrigen, vertDestino, min, 0, actual, res);
+        }
+        return res;
+    }
 
-        return lis;
+    private Lista caminoMasCortoKmAux(NodoVert n, NodoVert destino, double[] kmMin, double acum, Lista actual, Lista res) {
+        if (n != null) {
+
+            actual.insertar(n.getElem(), actual.getLongitud() + 1);
+            if (n.equals(destino)) {
+                //Si llegamos a destino, verificamos si el km acumulado es el menor al kmMin guardado
+                if (acum < kmMin[0]) {
+                    kmMin[0] = acum;//Asignamos el km acumulado del camino actual como km min 
+                    res = actual.clone();//Guardamos una copia del camino actual encontrado
+                }
+            } else {
+                if (acum < kmMin[0]) {
+                    NodoAdy ady = n.getPrimerAdy();
+                    while (ady != null) {
+                        //Verificamos si ya pasamos por ese vertice (estación)
+                        if (actual.localizar(ady.getVertice().getElem()) < 0) {//Sumamos la distancia acumulada: acum+distancia (km) 
+                            res = caminoMasCortoKmAux(ady.getVertice(), destino, kmMin, (acum + ady.getDistancia()), actual, res);
+                        }
+                        ady = ady.getSigAdyacente();
+                    }
+
+                }
+
+            }//A la vuelta de la recursión, quitamos el vertice (estacion) actual agregado 
+            actual.eliminar(actual.getLongitud());
+        }
+
+        return res;
     }
 
     @Override
@@ -350,8 +388,7 @@ public class Grafo {
                 s += " <--- (Sin conexiones) --->";
             } else {
                 while (auxAdy != null) {
-                    // Formato sugerido: [Origen] <--- 80.0 km ---> [Destino]
-                    s += "\n   <--- " + auxAdy.getDistancia() + " km ---> [" + auxAdy.getVertice().getElem() + "]";
+                                s += "\n   --- " + auxAdy.getDistancia() + " km ---> [" + auxAdy.getVertice().getElem() + "]";
                     auxAdy = auxAdy.getSigAdyacente();
                 }
             }
