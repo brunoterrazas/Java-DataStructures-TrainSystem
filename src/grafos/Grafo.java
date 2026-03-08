@@ -54,7 +54,7 @@ public class Grafo {
         if (auxOri != null && auxDes != null) {
             //insertamos en la lista de adyacentes de Urigen
             // Se inserta al principio de la lista de adyacencia del nodo origen
-           auxOri.setPrimerAdy(new NodoAdy(auxDes, km, auxOri.getPrimerAdy()));
+            auxOri.setPrimerAdy(new NodoAdy(auxDes, km, auxOri.getPrimerAdy()));
 
             //Como es grafo, insertamos también en destino
             auxDes.setPrimerAdy(new NodoAdy(auxOri, km, auxDes.getPrimerAdy()));
@@ -73,10 +73,10 @@ public class Grafo {
         NodoVert auxDes = ubicarVertice(destino);
         if (auxOri != null && auxDes != null) {
 
-            exitoOrigen=eliminarAdyacente(auxOri,auxDes);
-            
-            exitoDestino=eliminarAdyacente(auxDes,auxOri);
-            
+            exitoOrigen = eliminarAdyacente(auxOri, auxDes);
+
+            exitoDestino = eliminarAdyacente(auxDes, auxOri);
+
         }
         return exitoOrigen && exitoDestino;
     }
@@ -129,25 +129,26 @@ public class Grafo {
         NodoVert anterior, aux;
         anterior = null;
         aux = this.inicio;
-        while (aux != null &!exito) {
+        while (aux != null & !exito) {
             if (aux.equals(vertBuscado)) {
                 //caso 1 primer nodo Buscado
                 if (aux == this.inicio) {
                     this.inicio = this.inicio.getSigVertice();
-                    
+
                 } else {
-                    
+
                     //engancho el nodo anterior con el siguiente del nodo buscado
-                   if(anterior!=null)         
-                    anterior.setSigVertice(aux.getSigVertice());
+                    if (anterior != null) {
+                        anterior.setSigVertice(aux.getSigVertice());
+                    }
 
                 }
                 exito = true;
             } else {
-                anterior = aux;   
+                anterior = aux;
                 aux = aux.getSigVertice();
-                             
-           }
+
+            }
         }
 
         return exito;
@@ -188,7 +189,7 @@ public class Grafo {
 
         return visitados;
     }
-
+ 
     private void listarEnProfundidadAux(NodoVert n, Lista vis) {
         if (n != null) {//marca al vertice n como visitado
             vis.insertar(n.getElem(), vis.getLongitud() + 1);
@@ -286,34 +287,77 @@ public class Grafo {
             }
         }
         return exito;
-    } 
-    public Lista mostrarEstacionesRango(String nombreEstacion)
-    {
-      Lista lis=new Lista();
-      
-      return lis;
     }
-    @Override
-   public String toString() {
-    String s = "=== RED DE VÍAS (CONEXIONES Y DISTANCIAS) ===\n";
-    NodoVert auxVert = this.inicio;
 
-    while (auxVert != null) {
-        s += "[" + auxVert.getElem() + "]";
-        NodoAdy auxAdy = auxVert.getPrimerAdy();
-        
-        if (auxAdy == null) {
-            s += " <--- (Sin conexiones) --->";
-        } else {
-            while (auxAdy != null) {
-                // Formato sugerido: [Origen] <--- 80.0 km ---> [Destino]
-                s += "\n   <--- " + auxAdy.getDistancia() + " km ---> [" + auxAdy.getVertice().getElem() + "]";
-                auxAdy = auxAdy.getSigAdyacente();
-            }
+    public Lista caminoMasCorto(Object origen, Object destino) {
+        Lista resCamino = new Lista();
+        NodoVert vertOrigen = ubicarVertice(origen);
+        NodoVert vertDestino = ubicarVertice(destino);
+        //Verificamos si existen las dos estaciones
+        if (vertOrigen != null && vertDestino != null) {
+            Lista caminoActual = new Lista();
+            resCamino = caminoMasCortoAux(vertOrigen, vertDestino, caminoActual, resCamino);
         }
-        s += "\n--------------------------------------------\n";
-        auxVert = auxVert.getSigVertice();
+        return resCamino;
     }
-    return s;
-}
+
+    private Lista caminoMasCortoAux(NodoVert n, NodoVert destino, Lista actual, Lista res) {
+        if (n != null) {
+            actual.insertar(n.getElem(), actual.getLongitud() + 1);
+
+            
+            if (n.equals(destino)) {
+                //  Si llegamos a destino, verificamos si hay un camino O si el camino actual es menor al camino guardado
+                if (res.esVacia() || actual.getLongitud() < res.getLongitud()) {
+                    res = actual.clone();//Guardamos una copia del camino actual
+                }
+            } else {
+                //  Seguimos buscando si no hay un camino O si el camino actual es menor al camino guardado
+                if (res.esVacia() || actual.getLongitud() < res.getLongitud()) {
+                    //seguimos buscando un mejor camino
+                    NodoAdy ady = n.getPrimerAdy();
+                    while (ady != null) {
+                        //Verificamos si ya pasamos por esa estacion
+                        if (actual.localizar(ady.getVertice().getElem())<0) {
+                            res = caminoMasCortoAux(ady.getVertice(), destino, actual, res);
+                        }
+                        ady = ady.getSigAdyacente();
+                    }
+                }
+            }
+
+            actual.eliminar(actual.getLongitud());
+        }
+        return res;
+    }
+
+    public Lista mostrarEstacionesRango(String nombreEstacion) {
+        Lista lis = new Lista();
+
+        return lis;
+    }
+
+    @Override
+    public String toString() {
+        String s = "=== RED DE VÍAS (CONEXIONES Y DISTANCIAS) ===\n";
+        NodoVert auxVert = this.inicio;
+
+        while (auxVert != null) {
+            s += "[" + auxVert.getElem() + "]";
+            NodoAdy auxAdy = auxVert.getPrimerAdy();
+
+            if (auxAdy == null) {
+                s += " <--- (Sin conexiones) --->";
+            } else {
+                while (auxAdy != null) {
+                    // Formato sugerido: [Origen] <--- 80.0 km ---> [Destino]
+                    s += "\n   <--- " + auxAdy.getDistancia() + " km ---> [" + auxAdy.getVertice().getElem() + "]";
+                    auxAdy = auxAdy.getSigAdyacente();
+                }
+            }
+            s += "\n--------------------------------------------\n";
+            auxVert = auxVert.getSigVertice();
+        }
+        return s;
+    }
 }

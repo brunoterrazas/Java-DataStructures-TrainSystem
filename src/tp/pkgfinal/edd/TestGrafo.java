@@ -12,36 +12,36 @@ package tp.pkgfinal.edd;
  */
 
 import grafos.Grafo;
+import lineales.dinamicas.Lista;
 
 public class TestGrafo {
     public static void main(String[] args) {
-        Grafo trenDelValle = new Grafo();
+Grafo tren = new Grafo();
 
-        System.out.println("--- Cargando Estaciones ---");
-        trenDelValle.insertarVertice("Neuquen");
-        trenDelValle.insertarVertice("Cipolletti");
-        trenDelValle.insertarVertice("Plottier");
-        trenDelValle.insertarVertice("Senillosa");
+        System.out.println("--- Cargando Estaciones (Nodos) ---");
+        // Escenario: N (Neuquén), C (Cipolletti), P (Plottier), S (Senillosa), D (Dina Huapi)
+        tren.insertarVertice("A");
+        tren.insertarVertice("B");
+        tren.insertarVertice("C");
+        tren.insertarVertice("D");
+        tren.insertarVertice("E");
 
-        System.out.println("--- Conectando Vías (Arcos) ---");
-        // Conectamos Neuquen con cipolleti y plottier
-        trenDelValle.insertarArco("Neuquen", "Cipolletti",12);
-        trenDelValle.insertarArco("Neuquen", "Plottier",10);
-        trenDelValle.insertarArco("Senillosa", "Plottier",14);
-              System.out.println("\n--- Estado del Grafo ---");
-        System.out.println(trenDelValle.toString());
-        //trenDelValle.eliminarArco("Plottier", "Senillosa");
-
+        System.out.println("--- Conectando Vías (Arcos con KM) ---");
+        // Ruta 1 (Larga en estaciones): A -> B -> C -> D 
+        tren.insertarArco("A", "B", 5);
+        tren.insertarArco("B", "C", 5);
+        tren.insertarArco("C", "D", 5);
         
-        // trenDelValle.eliminarArco("Neuquen", "Cipolletti");
-        trenDelValle.eliminarVertice("Senillosa");
-        System.out.println("Eliminar vertice (Senillosa)");
-        System.out.println("\n--- Estado del Grafo ---");
-        System.out.println(trenDelValle.toString());
+        // Ruta 2 (Corta en estaciones): A -> E -> D 
+        tren.insertarArco("A", "E", 50);
+        tren.insertarArco("E", "D", 50);
 
-        System.out.println("\n--- Prueba de Recorrido en Profundidad (DFS) ---");
-        // Debería listar todas las estaciones conectadas
-        System.out.println("DFS: " + trenDelValle.listarEnProfundidad().toString());
-         
+        System.out.println("\n--- Estado del Grafo ---");
+        System.out.println(tren.toString());
+
+        System.out.println("\n--- Camino con menos estaciones (A -> D) ---");
+        Lista rutaEstaciones = tren.caminoMasCorto("A", "D");
+        System.out.println("Ruta mas corta (estaciones): " + rutaEstaciones.toString());
+        System.out.println("Cantidad de estaciones: " + rutaEstaciones.getLongitud());        
    }
 }
