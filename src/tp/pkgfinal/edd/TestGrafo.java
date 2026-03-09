@@ -3,20 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package tp.pkgfinal.edd;
 
 /**
  *
  * @author Brunot
  */
-
 import grafos.Grafo;
 import lineales.dinamicas.Lista;
 
 public class TestGrafo {
+
     public static void main(String[] args) {
-Grafo tren = new Grafo();
+        Grafo tren = new Grafo();
 
         System.out.println("--- Cargando Estaciones (Nodos) ---");
         tren.insertarVertice("A");
@@ -30,7 +29,7 @@ Grafo tren = new Grafo();
         tren.insertarArco("A", "B", 5);
         tren.insertarArco("B", "C", 5);
         tren.insertarArco("C", "D", 5);
-        
+
         // Ruta 2 (Corta en estaciones): A -> E -> D 
         tren.insertarArco("A", "E", 50);
         tren.insertarArco("E", "D", 50);
@@ -41,10 +40,19 @@ Grafo tren = new Grafo();
         System.out.println("\n--- Camino con menos estaciones (A -> D) ---");
         Lista rutaEstaciones = tren.caminoMasCorto("A", "D");
         System.out.println("Ruta mas corta (estaciones): " + rutaEstaciones.toString());
-        System.out.println("Cantidad de estaciones: " + rutaEstaciones.getLongitud()); 
-        System.out.println("\n--- 5. Camino con menos KM (A -> D) ---");
+        System.out.println("Cantidad de estaciones: " + rutaEstaciones.getLongitud());
+        System.out.println("\n--- Camino con menos KM (A -> D) ---");
         // [A, B, C, D] (15 km)
-                Lista resKM = tren.caminoMasCortoKm("A", "D");
+        Lista resKM = tren.caminoMasCortoKm("A", "D");
         System.out.println("Ruta elegida: " + resKM.toString());
-   }
+        System.out.println("> De 'A' a 'C' con Max 10km.");
+        System.out.println("  Esperado: true  : " + tren.existeCaminoConDistanciaMaxima("A", "C", 10));
+
+        System.out.println("\n> De 'A' a 'D' con Max 10km.");
+        System.out.println("  Esperado: false : " + tren.existeCaminoConDistanciaMaxima("A", "D", 10));
+
+        System.out.println("\n> De 'A' a 'D' con Max 20km.");
+        System.out.println("  Esperado: true  : " + tren.existeCaminoConDistanciaMaxima("A", "D", 20));
+
+    }
 }

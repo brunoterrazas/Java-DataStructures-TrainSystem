@@ -338,8 +338,8 @@ public class Grafo {
         NodoVert vertOrigen, vertDestino;
         vertOrigen = ubicarVertice(origen);
         vertDestino = ubicarVertice(destino);
-         //Verificamos si existen los dos vertices (estaciones)
-       if (vertOrigen != null && vertDestino != null) {
+        //Verificamos si existen los dos vertices (estaciones)
+        if (vertOrigen != null && vertDestino != null) {
             res = caminoMasCortoKmAux(vertOrigen, vertDestino, min, 0, actual, res);
         }
         return res;
@@ -375,6 +375,47 @@ public class Grafo {
         return res;
     }
 
+    public boolean existeCaminoConDistanciaMaxima(Object origen, Object destino, int max) {
+        boolean exito = false;
+        Lista actual = new Lista();
+        NodoVert vertOrigen, vertDestino;
+        vertOrigen = ubicarVertice(origen);
+        vertDestino = ubicarVertice(destino);
+        //verificamos que existan ambos vertices (estaciones)
+        if (vertOrigen != null && vertDestino != null) {
+            exito = existeCaminoConDistanciaMaximaAux(vertOrigen, vertDestino, 0, max, actual);
+        }
+        return exito;
+    }
+
+    public boolean existeCaminoConDistanciaMaximaAux(NodoVert n, NodoVert destino, double acum, int max, Lista actual) {
+        boolean exito = false;
+        if (n != null) {
+            actual.insertar(n.getElem(), actual.getLongitud() + 1);
+            if (n.equals(destino)) {//Si llegamos a destino
+
+                exito = true;
+
+            } else {
+                NodoAdy ady = n.getPrimerAdy();
+                while (ady != null && !exito) {
+                    //verificamos que si ya pasamos por ese vertice (estacion) 
+                    if (actual.localizar(ady.getVertice().getElem())<0) {
+                        if (acum + ady.getDistancia() <= max) {//Verificamos si el valor acumulado se pasa del maximo antes de seguir avanzando 
+                            exito = existeCaminoConDistanciaMaximaAux(ady.getVertice(), destino, acum + ady.getDistancia(), max, actual);
+                        }
+                    }
+                    ady = ady.getSigAdyacente();
+                }
+
+            }
+            //A la vuelta de la recursión, quitamos el vertice (estacion) actual agregado 
+            actual.eliminar(actual.getLongitud());
+
+        }
+        return exito;
+    }
+
     @Override
     public String toString() {
         String s = "=== RED DE VÍAS (CONEXIONES Y DISTANCIAS) ===\n";
@@ -388,7 +429,7 @@ public class Grafo {
                 s += " <--- (Sin conexiones) --->";
             } else {
                 while (auxAdy != null) {
-                                s += "\n   --- " + auxAdy.getDistancia() + " km ---> [" + auxAdy.getVertice().getElem() + "]";
+                    s += "\n   --- " + auxAdy.getDistancia() + " km ---> [" + auxAdy.getVertice().getElem() + "]";
                     auxAdy = auxAdy.getSigAdyacente();
                 }
             }
