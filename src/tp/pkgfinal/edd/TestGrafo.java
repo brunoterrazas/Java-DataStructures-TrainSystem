@@ -53,6 +53,29 @@ public class TestGrafo {
 
         System.out.println("\n> De 'A' a 'D' con Max 20km.");
         System.out.println("  Esperado: true  : " + tren.existeCaminoConDistanciaMaxima("A", "D", 20));
+        
+        
+        System.out.println("\n--- Todos los caminos de A a D sin pasar por una estación especifica ---");
+        
+        // Agregamos un arco de B a D para que existan múltiples caminos sin pasar por C
+        tren.insertarArco("B", "D", 15); 
+        System.out.println("Se agregó vía B");
+
+        Lista caminosSinC = tren.listarCaminosQueNoPasanPorUnaEstacion("A", "D", "C");
+        
+        System.out.println("> Esperado: Al menos dos caminos, ej: [A, B, D] y [A, E, D]");
+        
+        if (caminosSinC.esVacia()) {
+            System.out.println("Obtenido: No se encontraron caminos.");
+        } else {
+            // Como es una Lista de Listas, el toString() va a imprimir los corchetes anidados automáticamente
+            System.out.println("Obtenido: " + caminosSinC.toString());
+        }
+        
+        //Si la estación prohibida es la de origen
+        System.out.println("\n> De 'A' a 'D' sin pasar por 'A' (Debería dar lista vacía)");
+        Lista caminoInvalido = tren.listarCaminosQueNoPasanPorUnaEstacion("A", "D", "A");
+        System.out.println("Obtenido: " + caminoInvalido.toString());
 
     }
 }

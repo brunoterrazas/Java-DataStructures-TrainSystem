@@ -388,7 +388,7 @@ public class Grafo {
         return exito;
     }
 
-    public boolean existeCaminoConDistanciaMaximaAux(NodoVert n, NodoVert destino, double acum, int max, Lista actual) {
+    private boolean existeCaminoConDistanciaMaximaAux(NodoVert n, NodoVert destino, double acum, int max, Lista actual) {
         boolean exito = false;
         if (n != null) {
             actual.insertar(n.getElem(), actual.getLongitud() + 1);
@@ -400,7 +400,7 @@ public class Grafo {
                 NodoAdy ady = n.getPrimerAdy();
                 while (ady != null && !exito) {
                     //verificamos que si ya pasamos por ese vertice (estacion) 
-                    if (actual.localizar(ady.getVertice().getElem())<0) {
+                    if (actual.localizar(ady.getVertice().getElem()) < 0) {
                         if (acum + ady.getDistancia() <= max) {//Verificamos si el valor acumulado se pasa del maximo antes de seguir avanzando 
                             exito = existeCaminoConDistanciaMaximaAux(ady.getVertice(), destino, acum + ady.getDistancia(), max, actual);
                         }
@@ -414,6 +414,44 @@ public class Grafo {
 
         }
         return exito;
+    }
+
+    public Lista listarCaminosQueNoPasanPorUnaEstacion(Object origen, Object destino, Object estacionC) {
+        Lista caminos = new Lista();
+        Lista actual = new Lista();
+        NodoVert vertOrigen, vertDestino;
+        vertOrigen = ubicarVertice(origen);
+        vertDestino = ubicarVertice(destino);
+        //Verificamos que existan los vertices (estaciones) y que no sean iguales a la estacion C por donde no tienen que pasar
+        if (vertOrigen != null && vertDestino != null && !origen.equals(estacionC) && !destino.equals(estacionC)) {
+            listarCaminosQueNoPasanPorUnaEstacionAux(vertOrigen, vertDestino, estacionC, caminos, actual);
+        }
+        return caminos;
+    }
+
+    private void listarCaminosQueNoPasanPorUnaEstacionAux(NodoVert n, NodoVert destino, Object estacionC, Lista caminos, Lista actual) {
+
+        if (n != null) {
+            actual.insertar(n.getElem(), actual.getLongitud() + 1);
+            if (n.equals(destino)) {
+                //Si llegamos a destino, hacemos una copia del camino actual y lo agregamos a la lista caminos
+                Lista copiaCamino = actual.clone();
+                caminos.insertar(copiaCamino, caminos.getLongitud() + 1);
+
+            } else {
+                NodoAdy ady = n.getPrimerAdy();
+                while (ady != null) { 
+                    //Verificamos si ya pasamos por ese vertice (estacion) y que no sea igual a la estacion C, por donde no deben pasar 
+                    if (actual.localizar(ady.getVertice().getElem()) < 0 && !ady.getVertice().getElem().equals(estacionC)) {
+                        listarCaminosQueNoPasanPorUnaEstacionAux(ady.getVertice(), destino, estacionC, caminos, actual);
+                    }
+                    ady = ady.getSigAdyacente();
+                }
+            }
+            //A la vuelta de la recursión, quitamos el vertice (estacion) actual agregado 
+            actual.eliminar(actual.getLongitud());
+        }
+
     }
 
     @Override
