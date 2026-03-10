@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package tp.pkgfinal.edd;
+package tests;
 
 /**
  *

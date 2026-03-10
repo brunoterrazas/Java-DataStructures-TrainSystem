@@ -1,4 +1,4 @@
-package tp.pkgfinal.edd;
+package tests;
 
 //import lineales.estaticas.Cola;
 import lineales.dinamicas.Cola;

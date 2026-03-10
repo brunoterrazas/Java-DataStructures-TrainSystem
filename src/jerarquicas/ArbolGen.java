@@ -344,7 +344,7 @@ public class ArbolGen {
                     res = actual.clone();//asignamos una copia de la lista actual
                 }
             } else {
-                NodoGen hijo = n.getHEI();//Primero llamos con el hijo extremo izquierdo
+                NodoGen hijo = n.getHEI();//Primero llamamos con el hijo extremo izquierdo
                 while (hijo != null) {
                     res=listaJustificaAlturaAux(hijo, actual, res);//verificamos si el resto de hijos tiene mejor camino
                     hijo = hijo.getHD();
