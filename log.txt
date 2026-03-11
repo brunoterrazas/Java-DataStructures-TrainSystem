@@ -1,0 +1,330 @@
+
+=======================================================
+ESTADO DEL SISTEMA - POST-CARGA INICIAL (2026-03-10 13:44:57)
+=======================================================
+=== ESTACIONES ===
+Retiro (Alt: 3) | HI: Cipolletti | HD: Villa del Parque
+Cipolletti (Alt: 2) | HI: Campana | HD: Gral Roca
+Campana (Alt: 0) | HI: - | HD: -
+Gral Roca (Alt: 1) | HI: Gral Pico | HD: Neuquen
+Gral Pico (Alt: 0) | HI: - | HD: -
+Neuquen (Alt: 0) | HI: - | HD: -
+Villa del Parque (Alt: 2) | HI: Villa Regina | HD: Zarate
+Villa Regina (Alt: 1) | HI: Villa Maria | HD: Villa Rosa
+Villa Maria (Alt: 0) | HI: - | HD: -
+Villa Rosa (Alt: 0) | HI: - | HD: -
+Zarate (Alt: 1) | HI: Villalonga | HD: -
+Villalonga (Alt: 0) | HI: - | HD: -
+
+=== LÍNEAS DEL SISTEMA ===
+Línea: Mitre
+Recorrido: [Retiro,Campana,Zarate]
+----------------------------------------
+
+=== Mapa DE VÍAS (CONEXIONES Y DISTANCIAS) ===
+[Villa Maria] <--- (Sin conexiones) --->
+--------------------------------------------
+[Neuquen] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villalonga] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Pico] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Rosa] <--- (Sin conexiones) --->
+--------------------------------------------
+[Cipolletti] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa del Parque] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Roca] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Regina] <--- (Sin conexiones) --->
+--------------------------------------------
+[Zarate]
+   --- 10.0 km ---> [Campana]
+--------------------------------------------
+[Campana]
+   --- 10.0 km ---> [Zarate]
+   --- 80.0 km ---> [Retiro]
+--------------------------------------------
+[Retiro]
+   --- 80.0 km ---> [Campana]
+--------------------------------------------
+
+=======================================================
+
+
+=======================================================
+ESTADO DEL SISTEMA - POST-CARGA INICIAL (2026-03-10 19:37:24)
+=======================================================
+=== ESTACIONES ===
+Retiro (Alt: 3) | HI: Cipolletti | HD: Villa del Parque
+Cipolletti (Alt: 2) | HI: Campana | HD: Gral Roca
+Campana (Alt: 0) | HI: - | HD: -
+Gral Roca (Alt: 1) | HI: Gral Pico | HD: Neuquen
+Gral Pico (Alt: 0) | HI: - | HD: -
+Neuquen (Alt: 0) | HI: - | HD: -
+Villa del Parque (Alt: 2) | HI: Villa Regina | HD: Zarate
+Villa Regina (Alt: 1) | HI: Villa Maria | HD: Villa Rosa
+Villa Maria (Alt: 0) | HI: - | HD: -
+Villa Rosa (Alt: 0) | HI: - | HD: -
+Zarate (Alt: 1) | HI: Villalonga | HD: -
+Villalonga (Alt: 0) | HI: - | HD: -
+
+=== LÍNEAS DEL SISTEMA ===
+Línea: Mitre
+Recorrido: [Retiro,Campana,Zarate]
+----------------------------------------
+
+=== Mapa DE VÍAS (CONEXIONES Y DISTANCIAS) ===
+[Villa Maria] <--- (Sin conexiones) --->
+--------------------------------------------
+[Neuquen] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villalonga] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Pico] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Rosa] <--- (Sin conexiones) --->
+--------------------------------------------
+[Cipolletti] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa del Parque] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Roca] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Regina] <--- (Sin conexiones) --->
+--------------------------------------------
+[Zarate]
+   --- 10.0 km ---> [Campana]
+--------------------------------------------
+[Campana]
+   --- 10.0 km ---> [Zarate]
+   --- 80.0 km ---> [Retiro]
+--------------------------------------------
+[Retiro]
+   --- 80.0 km ---> [Campana]
+--------------------------------------------
+
+=======================================================
+
+
+=======================================================
+ESTADO DEL SISTEMA - POST-CARGA INICIAL (2026-03-10 19:50:28)
+=======================================================
+=== ESTACIONES ===
+Retiro (Alt: 3) | HI: Cipolletti | HD: Villa del Parque
+Cipolletti (Alt: 2) | HI: Campana | HD: Gral Roca
+Campana (Alt: 0) | HI: - | HD: -
+Gral Roca (Alt: 1) | HI: Gral Pico | HD: Neuquen
+Gral Pico (Alt: 0) | HI: - | HD: -
+Neuquen (Alt: 0) | HI: - | HD: -
+Villa del Parque (Alt: 2) | HI: Villa Regina | HD: Zarate
+Villa Regina (Alt: 1) | HI: Villa Maria | HD: Villa Rosa
+Villa Maria (Alt: 0) | HI: - | HD: -
+Villa Rosa (Alt: 0) | HI: - | HD: -
+Zarate (Alt: 1) | HI: Villalonga | HD: -
+Villalonga (Alt: 0) | HI: - | HD: -
+
+=== LÍNEAS DEL SISTEMA ===
+Línea: Mitre
+Recorrido: [Retiro,Campana,Zarate]
+----------------------------------------
+
+=== Mapa DE VÍAS (CONEXIONES Y DISTANCIAS) ===
+[Villa Maria] <--- (Sin conexiones) --->
+--------------------------------------------
+[Neuquen] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villalonga] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Pico] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Rosa] <--- (Sin conexiones) --->
+--------------------------------------------
+[Cipolletti] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa del Parque] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Roca] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Regina] <--- (Sin conexiones) --->
+--------------------------------------------
+[Zarate]
+   --- 10.0 km ---> [Campana]
+--------------------------------------------
+[Campana]
+   --- 10.0 km ---> [Zarate]
+   --- 80.0 km ---> [Retiro]
+--------------------------------------------
+[Retiro]
+   --- 80.0 km ---> [Campana]
+--------------------------------------------
+
+=======================================================
+
+
+=======================================================
+ESTADO DEL SISTEMA - POST-CARGA INICIAL (2026-03-10 20:01:54)
+=======================================================
+=== ESTACIONES ===
+Retiro (Alt: 3) | HI: Cipolletti | HD: Villa del Parque
+Cipolletti (Alt: 2) | HI: Campana | HD: Gral Roca
+Campana (Alt: 0) | HI: - | HD: -
+Gral Roca (Alt: 1) | HI: Gral Pico | HD: Neuquen
+Gral Pico (Alt: 0) | HI: - | HD: -
+Neuquen (Alt: 0) | HI: - | HD: -
+Villa del Parque (Alt: 2) | HI: Villa Regina | HD: Zarate
+Villa Regina (Alt: 1) | HI: Villa Maria | HD: Villa Rosa
+Villa Maria (Alt: 0) | HI: - | HD: -
+Villa Rosa (Alt: 0) | HI: - | HD: -
+Zarate (Alt: 1) | HI: Villalonga | HD: -
+Villalonga (Alt: 0) | HI: - | HD: -
+
+=== LÍNEAS DEL SISTEMA ===
+Línea: Mitre
+Recorrido: [Retiro,Campana,Zarate]
+----------------------------------------
+
+=== Mapa DE VÍAS (CONEXIONES Y DISTANCIAS) ===
+[Villa Maria] <--- (Sin conexiones) --->
+--------------------------------------------
+[Neuquen] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villalonga] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Pico] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Rosa] <--- (Sin conexiones) --->
+--------------------------------------------
+[Cipolletti] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa del Parque] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Roca] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Regina] <--- (Sin conexiones) --->
+--------------------------------------------
+[Zarate]
+   --- 10.0 km ---> [Campana]
+--------------------------------------------
+[Campana]
+   --- 10.0 km ---> [Zarate]
+   --- 80.0 km ---> [Retiro]
+--------------------------------------------
+[Retiro]
+   --- 80.0 km ---> [Campana]
+--------------------------------------------
+
+=======================================================
+
+
+=======================================================
+ESTADO DEL SISTEMA - POST-CARGA INICIAL (2026-03-10 20:28:33)
+=======================================================
+=== ESTACIONES ===
+Retiro (Alt: 3) | HI: Cipolletti | HD: Villa del Parque
+Cipolletti (Alt: 2) | HI: Campana | HD: Gral Roca
+Campana (Alt: 0) | HI: - | HD: -
+Gral Roca (Alt: 1) | HI: Gral Pico | HD: Neuquen
+Gral Pico (Alt: 0) | HI: - | HD: -
+Neuquen (Alt: 0) | HI: - | HD: -
+Villa del Parque (Alt: 2) | HI: Villa Regina | HD: Zarate
+Villa Regina (Alt: 1) | HI: Villa Maria | HD: Villa Rosa
+Villa Maria (Alt: 0) | HI: - | HD: -
+Villa Rosa (Alt: 0) | HI: - | HD: -
+Zarate (Alt: 1) | HI: Villalonga | HD: -
+Villalonga (Alt: 0) | HI: - | HD: -
+
+=== LÍNEAS DEL SISTEMA ===
+Línea: Mitre
+Recorrido: [Retiro,Campana,Zarate]
+----------------------------------------
+
+=== Mapa DE VÍAS (CONEXIONES Y DISTANCIAS) ===
+[Villa Maria] <--- (Sin conexiones) --->
+--------------------------------------------
+[Neuquen] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villalonga] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Pico] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Rosa] <--- (Sin conexiones) --->
+--------------------------------------------
+[Cipolletti] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa del Parque] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Roca] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Regina] <--- (Sin conexiones) --->
+--------------------------------------------
+[Zarate]
+   --- 10.0 km ---> [Campana]
+--------------------------------------------
+[Campana]
+   --- 10.0 km ---> [Zarate]
+   --- 80.0 km ---> [Retiro]
+--------------------------------------------
+[Retiro]
+   --- 80.0 km ---> [Campana]
+--------------------------------------------
+
+=======================================================
+
+
+=======================================================
+ESTADO DEL SISTEMA - POST-CARGA INICIAL (2026-03-10 20:35:40)
+=======================================================
+=== ESTACIONES ===
+Retiro (Alt: 3) | HI: Cipolletti | HD: Villa del Parque
+Cipolletti (Alt: 2) | HI: Campana | HD: Gral Roca
+Campana (Alt: 0) | HI: - | HD: -
+Gral Roca (Alt: 1) | HI: Gral Pico | HD: Neuquen
+Gral Pico (Alt: 0) | HI: - | HD: -
+Neuquen (Alt: 0) | HI: - | HD: -
+Villa del Parque (Alt: 2) | HI: Villa Regina | HD: Zarate
+Villa Regina (Alt: 1) | HI: Villa Maria | HD: Villa Rosa
+Villa Maria (Alt: 0) | HI: - | HD: -
+Villa Rosa (Alt: 0) | HI: - | HD: -
+Zarate (Alt: 1) | HI: Villalonga | HD: -
+Villalonga (Alt: 0) | HI: - | HD: -
+
+=== LÍNEAS DEL SISTEMA ===
+Línea: Mitre
+Recorrido: [Retiro,Campana,Zarate]
+----------------------------------------
+
+=== Mapa DE VÍAS (CONEXIONES Y DISTANCIAS) ===
+[Villa Maria] <--- (Sin conexiones) --->
+--------------------------------------------
+[Neuquen] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villalonga] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Pico] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Rosa] <--- (Sin conexiones) --->
+--------------------------------------------
+[Cipolletti] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa del Parque] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Roca] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Regina] <--- (Sin conexiones) --->
+--------------------------------------------
+[Zarate]
+   --- 10.0 km ---> [Campana]
+--------------------------------------------
+[Campana]
+   --- 10.0 km ---> [Zarate]
+   --- 80.0 km ---> [Retiro]
+--------------------------------------------
+[Retiro]
+   --- 80.0 km ---> [Campana]
+--------------------------------------------
+
+=======================================================
+

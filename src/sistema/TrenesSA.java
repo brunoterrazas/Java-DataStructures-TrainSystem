@@ -89,8 +89,8 @@ public class TrenesSA {
 
         // Buscamos la lista de esa línea en el hashmap
         Lista recorrido = (Lista) lineas.get(nombreL);
-        
-        if (recorrido != null) { 
+
+        if (recorrido != null) {
             int maxPosValida = recorrido.getLongitud() + 1;
             //Validamos que sea un posicion valida
             if (pos >= 1 && pos <= maxPosValida) {
@@ -98,7 +98,7 @@ public class TrenesSA {
                 if (estaciones.obtenerDato(nombreEst) != null) {
                     // Insertamos en la lista (se actualiza en el hashmap por referencia)
                     exito = recorrido.insertar(nombreEst, pos);
-                } 
+                }
             }
         }
         return exito;
@@ -136,8 +136,8 @@ public class TrenesSA {
 
                 // Si el tren estaba asignado a la línea que vamos a eliminar
                 if (tren != null && tren.getLinea().equals(nombreLinea)) {
-                    // Lo dejamos como No asignado
-                    tren.setLinea("No-asignado");
+                    // Lo dejamos como Libre No asignado
+                    tren.setLinea("libre");
                 }
                 i++;
             }
@@ -182,8 +182,8 @@ public class TrenesSA {
         // Creamos el objeto Tren y lo guardamos en el AVL de trenes
         boolean exito = false;
         int id = Integer.parseInt(valor[1].trim());
-        //si el hashmap de lineas incluye la linea o esta como linea No-asignado 
-        if (lineas.containsKey(valor[5]) || valor[5].equals("No-asignado")) {
+        //si el hashmap de lineas incluye la linea o esta como linea Libre No-asignado 
+        if (lineas.containsKey(valor[5]) || valor[5].equalsIgnoreCase("libre")) {
             Tren tren = new Tren(id, valor[2], Integer.parseInt(valor[3]), Integer.parseInt(valor[4]), valor[5]);
             exito = trenes.insertar(id, tren);
         }
@@ -191,38 +191,42 @@ public class TrenesSA {
         return exito;
     }
 
-    public boolean asignarLineaTren(int idTren, String nomLinea) {//Este metodo asigna una linea al Tren
-        boolean exito = false;
+    public String asignarLineaTren(int codTren, String nomLinea) {//Este metodo asigna una linea al Tren
+        String msg;
         //Buscamos si esta en el diccionario de trenes
-        Tren tren = (Tren) trenes.obtenerDato(idTren);
+        Tren tren = (Tren) trenes.obtenerDato(codTren);
         //Si el tren esta en el diccionario
-        if (tren != null) { //si el hashmap de lineas incluye la linea o esta como No-asigando 
-            if (lineas.containsKey(nomLinea) || nomLinea.equals("No-asignado")) {
+        if (tren != null) { //si el hashmap de lineas incluye la linea o esta como Libre No-asigando 
+            if (lineas.containsKey(nomLinea) || nomLinea.equalsIgnoreCase("libre")) {
                 tren.setLinea(nomLinea);
-                exito = true;
+                msg = "Tren actualizado, con codigo: " + codTren + ", se asigno la linea " + nomLinea + "correctamente";
+            } else {
+                msg = "No se se pudo actualizar el Tren con codigo " + codTren + ", porque  la linea no es correcta";
             }
+        } else {
+            msg = "No se encuentra un tren con codigo: " + codTren;
         }
 
-        return exito;
+        return msg;
     }
 
-    public String eliminarTren(int id) {
+    public String eliminarTren(int cod) {
         String msg;
-        Tren tren = (Tren) trenes.obtenerDato(id);
+        Tren tren = (Tren) trenes.obtenerDato(cod);
 
         if (tren != null) {
             // Si el tren no tiene asignada a una linea
-            if (tren.getLinea().equals("No-asignado")) {
-                if (trenes.eliminar(id)) {
-                    msg = "Tren " + id + " eliminado correctamente.";
+            if (tren.getLinea().equalsIgnoreCase(("libre"))) {
+                if (trenes.eliminar(cod)) {
+                    msg = "Tren " + cod + " eliminado correctamente.";
                 } else {
-                    msg = "Error inesperado al eliminar el tren con id: " + id;
+                    msg = "Error inesperado al eliminar el tren con codigo: " + cod;
                 }
             } else {
                 msg = "No se puede eliminar: El tren está asignado a la línea '" + tren.getLinea() + "'.";
             }
         } else {
-            msg = "El tren con ID " + id + " no existe!";
+            msg = "El tren con codigo " + cod + " no existe!";
 
         }
         return msg;
@@ -230,12 +234,63 @@ public class TrenesSA {
 
     public String debugEstaciones() {
         // Retorna el toString de tu arbol AVL
-        return this.estaciones.toString();
+        String str = "=== ESTACIONES ===\n";
+        return str + this.estaciones.toString();
     }
 
     public String debugGrafo() {
         // Retorna el toString de tu Grafo
+
         return this.mapaVias.toString();
+    }
+    public String debugTrenes() {
+        // Retorna el toString de tu arbol AVL
+        String str = "=== TRENES ===\n";
+        return str + this.trenes.toString();
+    }
+    public String debugLineas() {
+        String resultado = "=== LÍNEAS DEL SISTEMA ===\n";
+
+        if (lineas.isEmpty()) {
+            resultado += "No hay líneas registradas en el sistema.\n";
+        } else {
+            // Recorremos todas las claves (nombres de líneas) del HashMap
+            for (String nombreLinea : lineas.keySet()) {
+                // Obtenemos la lista de estaciones de esa línea
+                Lista recorrido = lineas.get(nombreLinea);
+
+                resultado += "Línea: " + nombreLinea + "\n";
+                resultado += "Recorrido: " + recorrido.toString() + "\n";
+                resultado += "----------------------------------------\n";
+            }
+        }
+
+        return resultado;
+    }
+
+    public String mostrarLinea(String nombreLinea) {
+        String resultado = "";
+
+        // Buscamos la lista de la línea en el HashMap
+        Lista recorrido = lineas.get(nombreLinea);
+
+        // Verificamos si realmente existe
+        if (recorrido != null) {
+            resultado += "=== INFORMACIÓN DE LA LÍNEA: " + nombreLinea + " ===\n";
+
+            // Verificamos si la lista está vacía
+            if (recorrido.esVacia()) {
+                resultado += "Recorrido: sin estaciones \n";
+            } else {
+                resultado += "Recorrido: " + recorrido.toString() + "\n";
+            }
+            resultado += "-------------------------------\n";
+        } else {
+            // No existe esa clave en el HashMap
+            resultado = "Error";
+        }
+
+        return resultado;
     }
 
     public String obtenerInfoEstacion(String nombre) {
@@ -248,16 +303,16 @@ public class TrenesSA {
     }
 
     public String obtenerInfoTren(int cod) {
-        String resultado = "El tren con ID " + cod + " no existe.";
-        Tren t = (Tren) trenes.obtenerDato(cod);
-        if (t != null) {
-            resultado = "=== INFO TREN " + cod + " ===\n" + t.toString();
+        String resultado = "El tren con codigo " + cod + " no existe.";
+        Tren tren = (Tren) trenes.obtenerDato(cod);
+        if (tren != null) {
+            resultado = "=== INFO TREN con codigo: " + cod + " ===\n" + tren.toString();
 
-            if (t.getLinea().equals("No-asignado")) {
+            if (tren.getLinea().equals("libre")) {
                 resultado = resultado + "\nEstado: Disponible (Sin línea asignada).";
             } else {
-                // Llamamos al método modularizado
-                resultado = resultado + "\n\n" + obtenerCiudadesVisitadas(t.getLinea());
+                // Llamamos al método obtener cidudades
+                resultado = resultado + "\n\n" + obtenerCiudadesVisitadas(tren.getLinea());
             }
         }
         return resultado;
@@ -289,6 +344,27 @@ public class TrenesSA {
             itinerario = itinerario + "\n--------------------------------------------";
         }
         return itinerario;
+    }
+
+    public String mostrarTodosLosTrenes() {
+        String resultado = "=== TODOS LOS TRENES REGISTRADOS ===\n\n";
+
+        // 1. Obtenemos todos los trenes almacenados en el AVL
+        Lista listaTrenes = trenes.listarDatos();
+
+        if (listaTrenes.esVacia()) {
+            resultado += "No hay trenes registrados en el sistema.\n";
+        } else {
+            for (int i = 1; i <= listaTrenes.longitud(); i++) {
+                // Recuperamos el objeto Tren de la posición actual
+                Tren tren = (Tren) listaTrenes.recuperar(i);
+
+                resultado += obtenerInfoTren(tren.getCodigo()) + "\n";
+                resultado += "............................................\n\n";
+            }
+        }
+
+        return resultado;
     }
 
     //ABM ESTACIÓN

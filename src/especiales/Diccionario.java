@@ -388,7 +388,7 @@ public class Diccionario {
 private String toStringAux(NodoAVLDicc n) {
     String cadena = "";
     if (n != null) {
-        cadena += "Nodo: " + n.getClave() + " (Alt: " + n.getAltura() + ")";
+        cadena +=  n.getClave() + " (Alt: " + n.getAltura() + ")";
         
         // USAR VARIABLES TEMPORALES PARA EVITAR NPE
         NodoAVLDicc hi = n.getHI();

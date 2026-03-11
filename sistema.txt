@@ -14,4 +14,4 @@ R;Retiro;Campana;80
 R;Zarate;Campana;10
 L;Mitre;Retiro;Campana;Zarate
 T;234;diesel;5;6;Mitre
-T;893;gasolina;0;11;no-asignado
+T;893;gasolina;1;11;libre

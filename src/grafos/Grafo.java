@@ -456,7 +456,7 @@ public class Grafo {
 
     @Override
     public String toString() {
-        String s = "=== RED DE VÍAS (CONEXIONES Y DISTANCIAS) ===\n";
+        String s = "=== Mapa DE VÍAS (CONEXIONES Y DISTANCIAS) ===\n";
         NodoVert auxVert = this.inicio;
 
         while (auxVert != null) {
