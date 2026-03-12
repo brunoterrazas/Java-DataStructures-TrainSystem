@@ -71,7 +71,7 @@ public class TrenesSA {
     }
 
     public boolean registrarLinea(String[] c) {
-        // Usamos Lista para almacenar el recorrido
+        // Metodo para registrar linea desde archivo
         String nombreL = c[1];
         Lista listaEst = new Lista();
         boolean exito;
@@ -84,40 +84,70 @@ public class TrenesSA {
         return exito;
     }
 
-    public boolean agregarEstacionALinea(String nombreL, String nombreEst, int pos) {
-        boolean exito = false;
-
-        // Buscamos la lista de esa línea en el hashmap
-        Lista recorrido = (Lista) lineas.get(nombreL);
-
-        if (recorrido != null) {
-            int maxPosValida = recorrido.getLongitud() + 1;
-            //Validamos que sea un posicion valida
-            if (pos >= 1 && pos <= maxPosValida) {
-                // Si la estación existe en el diccionario de estaciones (AVL)
-                if (estaciones.obtenerDato(nombreEst) != null) {
-                    // Insertamos en la lista (se actualiza en el hashmap por referencia)
-                    exito = recorrido.insertar(nombreEst, pos);
-                }
+    public String agregarLineaDesdeCamino(String[] datos) {
+        //metodo que nos permite agregar un camino a la linea
+        String nombreLinea = datos[0];
+        String origenLinea = datos[1];
+        String destinoLinea = datos[2];
+        Lista listaEst;
+        String msg;
+        if (lineas.containsKey(nombreLinea)) {
+            msg = "Error: La línea '" + nombreLinea + "' ya existe.";
+        } else {
+            listaEst = mapaVias.caminoMasCorto(origenLinea, destinoLinea);
+            if (!listaEst.esVacia()) {
+                lineas.put(nombreLinea, listaEst);
+                msg = "Se creó la línea '" + nombreLinea + "' con el recorrido:" + listaEst.toString();
+            } else {
+                msg = "Error: No existe un camino de rieles posible entre " + origenLinea + " y " + destinoLinea + ".";
             }
         }
-        return exito;
+
+        return msg;
     }
-
-    public boolean quitarEstacionDeLinea(String nombreLinea, String nombreEst) {
-        boolean exito = false;
-        // Buscamos la lista de esa línea en el hashmap
-        Lista recorrido = (Lista) lineas.get(nombreLinea);
-
-        if (recorrido != null) {
-            // Buscamos en qué posición de la lista está esa estación
-            int pos = recorrido.localizar(nombreEst);
-            if (pos > 0) {
-                // Si la encontramos, la eliminamos de la lista de la línea
-                exito = recorrido.eliminar(pos);
+       public String modificarLinea(String[] datos) {
+        //metodo que nos permite modificar el camino de la linea 
+        String nombreLinea = datos[0];
+        String origenLinea = datos[1];
+        String destinoLinea = datos[2];
+        Lista listaEst;
+        String msg;
+        if (!lineas.containsKey(nombreLinea)) {
+            msg = "Error: La línea '" + nombreLinea + "' no esta registrada";
+        } else {
+            listaEst = mapaVias.caminoMasCorto(origenLinea, destinoLinea);
+            if (!listaEst.esVacia()) {
+                lineas.put(nombreLinea, listaEst);
+                msg = "Se actualizó la línea '" + nombreLinea + "' con el recorrido:" + listaEst.toString();
+            } else {
+                msg = "Error: No existe un camino de rieles posible entre " + origenLinea + " y " + destinoLinea + ".";
             }
         }
-        return exito;
+
+        return msg;
+    }
+    public String refrescarRecorridoLinea(String nombreLinea) {
+        String msg;
+        Lista recorridoActual = lineas.get(nombreLinea);
+
+        if (recorridoActual == null || recorridoActual.esVacia()) {
+            msg = "Error: La línea '" + nombreLinea + "' no está registrada o no tiene recorrido.";
+        } else {
+            // Obtenemos el origen y destino actuales de la línea
+            String origen = (String) recorridoActual.recuperar(1);
+            String destino = (String) recorridoActual.recuperar(recorridoActual.longitud());
+
+            // Recalculamos el camino con el estado actual de las vías
+            Lista nuevoRecorrido = mapaVias.caminoMasCorto(origen, destino);
+
+            if (!nuevoRecorrido.esVacia()) {
+                lineas.put(nombreLinea, nuevoRecorrido); // Pisamos la lista vieja
+                msg = "Recorrido de la línea '" + nombreLinea + "' actualizado: " + nuevoRecorrido.toString();
+            } else {
+                msg = "Alerta: Ya no existe conexión posible entre " + origen + " y " + destino + ".";
+            }
+        }
+        return msg;
     }
 
     public boolean eliminarLinea(String nombreLinea) {
@@ -199,7 +229,7 @@ public class TrenesSA {
         if (tren != null) { //si el hashmap de lineas incluye la linea o esta como Libre No-asigando 
             if (lineas.containsKey(nomLinea) || nomLinea.equalsIgnoreCase("libre")) {
                 tren.setLinea(nomLinea);
-                msg = "Tren actualizado, con codigo: " + codTren + ", se asigno la linea " + nomLinea + "correctamente";
+                msg = "Tren actualizado, con codigo: " + codTren + ", se asigno la linea " + nomLinea + " correctamente";
             } else {
                 msg = "No se se pudo actualizar el Tren con codigo " + codTren + ", porque  la linea no es correcta";
             }
@@ -243,11 +273,13 @@ public class TrenesSA {
 
         return this.mapaVias.toString();
     }
+
     public String debugTrenes() {
         // Retorna el toString de tu arbol AVL
         String str = "=== TRENES ===\n";
         return str + this.trenes.toString();
     }
+
     public String debugLineas() {
         String resultado = "=== LÍNEAS DEL SISTEMA ===\n";
 
@@ -309,7 +341,7 @@ public class TrenesSA {
             resultado = "=== INFO TREN con codigo: " + cod + " ===\n" + tren.toString();
 
             if (tren.getLinea().equals("libre")) {
-                resultado = resultado + "\nEstado: Disponible (Sin línea asignada).";
+                resultado = resultado + "\n (Sin línea asignada).";
             } else {
                 // Llamamos al método obtener cidudades
                 resultado = resultado + "\n\n" + obtenerCiudadesVisitadas(tren.getLinea());

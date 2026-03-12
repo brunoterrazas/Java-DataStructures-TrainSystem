@@ -275,10 +275,10 @@ public class TestSistema {
                     msgAlta = "Tren con codigo: " + valor[1] + " registrado correctamente.";
                     System.out.println(msgAlta);
                 } else {
-                    msgAlta = "Error Tren: codigo " + valor[1] + "duplicado o línea inexistente.";
-                    System.out.println(msgAlta);                   
+                    msgAlta = "Error Tren: codigo " + valor[1] + " duplicado o línea inexistente.";
+                    System.out.println(msgAlta);
                 }
-                 utiles.GestorLog.registrarOperacion(msgAlta);
+                utiles.GestorLog.registrarOperacion(msgAlta);
                 break;
             case 2:
                 String msgBaja;
@@ -292,7 +292,7 @@ public class TestSistema {
                 System.out.print("Codigo del tren: ");
                 int idMod = sc.nextInt();
                 sc.nextLine();
-                System.out.print("Nombre de nueva Línea (o dejar como 'No-asignado'): ");
+                System.out.print("Nombre de nueva Línea (o dejar como 'Libre'): ");
                 String nL = sc.nextLine();
                 String msgModificacion = sistema.asignarLineaTren(idMod, nL);
                 System.out.println(msgModificacion);
@@ -312,23 +312,19 @@ public class TestSistema {
 
         switch (subOp) {
             case 1: // ALTA
-                String[] campos = new String[4];
-                campos[0] = "L"; // Tipo de registro
+            String[] campos = new String[3]; // Tamaño 3, como bien hiciste
                 System.out.print("Nombre de la Línea: ");
+                campos[0] = sc.nextLine();
+                System.out.print("Estacion Origen: ");
                 campos[1] = sc.nextLine();
-                System.out.print("Ciudad Origen: ");
+                System.out.print("Estacion Destino: ");
                 campos[2] = sc.nextLine();
-                System.out.print("Ciudad Destino: ");
-                campos[3] = sc.nextLine();
-                String msgAlta;
-                if (sistema.registrarLinea(campos)) {
-                    msgAlta = "Línea registrada " + campos[1] + "con éxito.";
-                    utiles.GestorLog.registrarOperacion(msgAlta);
-                    System.out.println(msgAlta);
-                } else {
-                    msgAlta = "Error: La línea " + campos[1] + " ya existe o faltan datos.";
-                    System.out.println(msgAlta);
-                }
+                
+                // Llamamos a tu método de Alta
+                String msgAlta = sistema.agregarLineaDesdeCamino(campos);
+                System.out.println(msgAlta);
+                utiles.GestorLog.registrarOperacion(msgAlta);
+
                 break;
 
             case 2: // BAJA
@@ -339,54 +335,40 @@ public class TestSistema {
                     msgBaja = "Línea " + nombreEliminar + " eliminada correctamente.";
                     System.out.println(msgBaja);
                 } else {
-                    msgBaja ="Error: Línea no encontrada";
+                    msgBaja = "Error: Línea "+nombreEliminar+" no encontrada";
                     System.out.println(msgBaja);
                 }
-                    utiles.GestorLog.registrarOperacion(msgBaja);
+                utiles.GestorLog.registrarOperacion(msgBaja);
                 break;
 
             case 3: // MODIFICACIÓN
+                String[] valor = new String[3];
                 System.out.print("Nombre de la línea a modificar: ");
-                String nombreLineaMod = sc.nextLine();
-                String str = sistema.mostrarLinea(nombreLineaMod);
-                if (!str.equals("Error")) {//Si no hubo error mostrar la linea y podremos agregar o quitar la estacion
-                    System.out.println(sistema.debugGrafo());
-                    System.out.println(str);
+                valor[0] = sc.nextLine();
+                
+                System.out.println("¿Qué tipo de modificación desea realizar?");
+                System.out.println("1. Cambiar recorrido de la linea");
+                System.out.println("2. Refrescar recorrido"); //Si hubo cambios en las vías
+                System.out.print("Opción: ");
+                int accionMod = sc.nextInt();
+                sc.nextLine();
 
-                    System.out.println("¿Qué desea hacer?");
-                    System.out.println("1. Agregar una estación al recorrido");
-                    System.out.println("2. Quitar una estación del recorrido");
-                    System.out.print("Opción: ");
-                    int accionMod = sc.nextInt();
-                    if (accionMod == 1) {
-                        System.out.print("Nombre de la estación a agregar: ");
-                        String estAgregar = sc.nextLine();
-
-                        System.out.print("Posición en el recorrido (ej: 1 para inicio): ");
-                        int pos = sc.nextInt();
-                        sc.nextLine();
-
-                        if (sistema.agregarEstacionALinea(nombreLineaMod, estAgregar, pos)) {
-                            System.out.println("Estación agregada a la línea con éxito.");
-                        } else {
-                            System.out.println("Error: No se pudo agregar (verifique estación exista, y la posición sea válida).");
-                        }
-
-                    } else if (accionMod == 2) {
-                        System.out.print("Nombre de la estación a quitar: ");
-                        String estQuitar = sc.nextLine();
-
-                        if (sistema.quitarEstacionDeLinea(nombreLineaMod, estQuitar)) {
-                            System.out.println("Estación removida de la línea con éxito.");
-                        } else {
-                            System.out.println("Error: La estación no pertenece a la línea o la línea no existe.");
-                        }
-
-                    } else {
-                        System.out.println("Opción no válida.");
-                    }
+                if (accionMod == 1) {
+                    System.out.print("Nueva Estacion Origen: ");
+                    valor[1] = sc.nextLine();
+                    System.out.print("Nueva Estacion Destino: ");
+                    valor[2] = sc.nextLine();
+                    String msgModificacion = sistema.modificarLinea(valor);
+                    System.out.println(msgModificacion);
+                    utiles.GestorLog.registrarOperacion(msgModificacion);
+                    
+                } else if (accionMod == 2) {                         
+                    String msgRefresco = sistema.refrescarRecorridoLinea(valor[0]);
+                    System.out.println(msgRefresco);
+                    utiles.GestorLog.registrarOperacion(msgRefresco);
+                    
                 } else {
-                    System.out.println("Error: La línea '" + nombreLineaMod + "' no existe en el sistema.\n");
+                    System.out.println("Opción no válida.");
                 }
                 break;
             default:
@@ -422,7 +404,7 @@ public class TestSistema {
                     System.out.println(msgAlta);
 
                 } else {
-                    msgAlta="Error tramo " + origenAlta + " <--" + kmAlta + " km--> " + destinoAlta + " : No se pudo agregar.";
+                    msgAlta = "Error tramo " + origenAlta + " <--" + kmAlta + " km--> " + destinoAlta + " : No se pudo agregar.";
                     System.out.println(msgAlta);
                 }
                 utiles.GestorLog.registrarOperacion(msgAlta);
@@ -435,14 +417,14 @@ public class TestSistema {
                 String destinoBaja = sc.nextLine();
                 String msgBaja;
                 if (sistema.eliminarRiel(origenBaja, destinoBaja)) {
-                    msgBaja="Tramo eliminado " + origenBaja + " <----> " + destinoBaja + " de la red.";
+                    msgBaja = "Tramo eliminado " + origenBaja + " <----> " + destinoBaja + " de la red.";
                     System.out.println(msgBaja);
                     System.out.println(sistema.debugGrafo());
                 } else {
-                    msgBaja="Error: No existe conexión directa entre " + origenBaja + " <----> " + destinoBaja + " .";
+                    msgBaja = "Error: No existe conexión directa entre " + origenBaja + " <----> " + destinoBaja + " .";
                     System.out.println(msgBaja);
                 }
-                 utiles.GestorLog.registrarOperacion(msgBaja);
+                utiles.GestorLog.registrarOperacion(msgBaja);
                 break;
 
             case 3: // MODIFICACIÓN (Actualizar Etiqueta del Arco)
@@ -455,10 +437,10 @@ public class TestSistema {
                 sc.nextLine();
                 String msgModificacion;
                 if (sistema.modificarDistanciaTramo(origenMod, destinoMod, kmMod)) {
-                    msgModificacion="Distancia entre " + origenMod + " <----> " + destinoMod + " actualizada con éxito.";
+                    msgModificacion = "Distancia entre " + origenMod + " <----> " + destinoMod + " actualizada con éxito.";
                     System.out.println(msgModificacion);
                 } else {
-                    msgModificacion="Error: No se encontró el tramo entre " + origenMod + " <----> " + destinoMod + "";
+                    msgModificacion = "Error: No se encontró el tramo entre " + origenMod + " <----> " + destinoMod + "";
                     System.out.println(msgModificacion);
                 }
                 utiles.GestorLog.registrarOperacion(msgModificacion);

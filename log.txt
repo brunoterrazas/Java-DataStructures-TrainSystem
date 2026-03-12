@@ -328,3 +328,357 @@ Recorrido: [Retiro,Campana,Zarate]
 
 =======================================================
 
+
+=======================================================
+ESTADO DEL SISTEMA - POST-CARGA INICIAL (2026-03-11 20:38:59)
+=======================================================
+=== ESTACIONES ===
+Retiro (Alt: 3) | HI: Cipolletti | HD: Villa del Parque
+Cipolletti (Alt: 2) | HI: Campana | HD: Gral Roca
+Campana (Alt: 0) | HI: - | HD: -
+Gral Roca (Alt: 1) | HI: Gral Pico | HD: Neuquen
+Gral Pico (Alt: 0) | HI: - | HD: -
+Neuquen (Alt: 0) | HI: - | HD: -
+Villa del Parque (Alt: 2) | HI: Villa Regina | HD: Zarate
+Villa Regina (Alt: 1) | HI: Villa Maria | HD: Villa Rosa
+Villa Maria (Alt: 0) | HI: - | HD: -
+Villa Rosa (Alt: 0) | HI: - | HD: -
+Zarate (Alt: 1) | HI: Villalonga | HD: -
+Villalonga (Alt: 0) | HI: - | HD: -
+
+=== LÍNEAS DEL SISTEMA ===
+Línea: Mitre
+Recorrido: [Retiro,Campana,Zarate]
+----------------------------------------
+
+=== Mapa DE VÍAS (CONEXIONES Y DISTANCIAS) ===
+[Villa Maria] <--- (Sin conexiones) --->
+--------------------------------------------
+[Neuquen] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villalonga] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Pico] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Rosa] <--- (Sin conexiones) --->
+--------------------------------------------
+[Cipolletti] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa del Parque] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Roca] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Regina] <--- (Sin conexiones) --->
+--------------------------------------------
+[Zarate]
+   --- 10.0 km ---> [Campana]
+--------------------------------------------
+[Campana]
+   --- 10.0 km ---> [Zarate]
+   --- 80.0 km ---> [Retiro]
+--------------------------------------------
+[Retiro]
+   --- 80.0 km ---> [Campana]
+--------------------------------------------
+
+=======================================================
+
+[2026-03-11 20:39:48] OPERACIÓN: Estación Docena fue dada de alta con éxito.
+[2026-03-11 20:41:06] OPERACIÓN: Estación Docena eliminada del sistema y del mapa.
+[2026-03-11 20:43:45] OPERACIÓN: Datos actualizados: Se modificó la estación Campana
+
+=======================================================
+ESTADO DEL SISTEMA - FIN DE EJECUCIÓN (2026-03-11 20:44:10)
+=======================================================
+=== ESTACIONES ===
+Retiro (Alt: 3) | HI: Gral Pico | HD: Villa del Parque
+Gral Pico (Alt: 2) | HI: Cipolletti | HD: Gral Roca
+Cipolletti (Alt: 1) | HI: Campana | HD: -
+Campana (Alt: 0) | HI: - | HD: -
+Gral Roca (Alt: 1) | HI: - | HD: Neuquen
+Neuquen (Alt: 0) | HI: - | HD: -
+Villa del Parque (Alt: 2) | HI: Villa Regina | HD: Zarate
+Villa Regina (Alt: 1) | HI: Villa Maria | HD: Villa Rosa
+Villa Maria (Alt: 0) | HI: - | HD: -
+Villa Rosa (Alt: 0) | HI: - | HD: -
+Zarate (Alt: 1) | HI: Villalonga | HD: -
+Villalonga (Alt: 0) | HI: - | HD: -
+
+=== LÍNEAS DEL SISTEMA ===
+Línea: Mitre
+Recorrido: [Retiro,Campana,Zarate]
+----------------------------------------
+
+=== Mapa DE VÍAS (CONEXIONES Y DISTANCIAS) ===
+[Villa Maria] <--- (Sin conexiones) --->
+--------------------------------------------
+[Neuquen] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villalonga] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Pico] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Rosa] <--- (Sin conexiones) --->
+--------------------------------------------
+[Cipolletti] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa del Parque] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Roca] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Regina] <--- (Sin conexiones) --->
+--------------------------------------------
+[Zarate]
+   --- 10.0 km ---> [Campana]
+--------------------------------------------
+[Campana]
+   --- 10.0 km ---> [Zarate]
+   --- 80.0 km ---> [Retiro]
+--------------------------------------------
+[Retiro]
+   --- 80.0 km ---> [Campana]
+--------------------------------------------
+
+=======================================================
+
+
+=======================================================
+ESTADO DEL SISTEMA - POST-CARGA INICIAL (2026-03-11 20:58:43)
+=======================================================
+=== ESTACIONES ===
+Retiro (Alt: 3) | HI: Cipolletti | HD: Villa del Parque
+Cipolletti (Alt: 2) | HI: Campana | HD: Gral Roca
+Campana (Alt: 0) | HI: - | HD: -
+Gral Roca (Alt: 1) | HI: Gral Pico | HD: Neuquen
+Gral Pico (Alt: 0) | HI: - | HD: -
+Neuquen (Alt: 0) | HI: - | HD: -
+Villa del Parque (Alt: 2) | HI: Villa Regina | HD: Zarate
+Villa Regina (Alt: 1) | HI: Villa Maria | HD: Villa Rosa
+Villa Maria (Alt: 0) | HI: - | HD: -
+Villa Rosa (Alt: 0) | HI: - | HD: -
+Zarate (Alt: 1) | HI: Villalonga | HD: -
+Villalonga (Alt: 0) | HI: - | HD: -
+
+=== LÍNEAS DEL SISTEMA ===
+Línea: Mitre
+Recorrido: [Retiro,Campana,Zarate]
+----------------------------------------
+
+=== Mapa DE VÍAS (CONEXIONES Y DISTANCIAS) ===
+[Villa Maria] <--- (Sin conexiones) --->
+--------------------------------------------
+[Neuquen] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villalonga] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Pico] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Rosa] <--- (Sin conexiones) --->
+--------------------------------------------
+[Cipolletti] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa del Parque] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Roca] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Regina] <--- (Sin conexiones) --->
+--------------------------------------------
+[Zarate]
+   --- 10.0 km ---> [Campana]
+--------------------------------------------
+[Campana]
+   --- 10.0 km ---> [Zarate]
+   --- 80.0 km ---> [Retiro]
+--------------------------------------------
+[Retiro]
+   --- 80.0 km ---> [Campana]
+--------------------------------------------
+
+=======================================================
+
+[2026-03-11 20:59:19] OPERACIÓN: Tren con codigo: 937 registrado correctamente.
+[2026-03-11 21:01:22] OPERACIÓN: Tren 937 eliminado correctamente.
+[2026-03-11 21:02:46] OPERACIÓN: Tren actualizado, con codigo: 893, se asigno la linea Mitrecorrectamente
+
+=======================================================
+ESTADO DEL SISTEMA - POST-CARGA INICIAL (2026-03-11 21:11:55)
+=======================================================
+=== ESTACIONES ===
+Retiro (Alt: 3) | HI: Cipolletti | HD: Villa del Parque
+Cipolletti (Alt: 2) | HI: Campana | HD: Gral Roca
+Campana (Alt: 0) | HI: - | HD: -
+Gral Roca (Alt: 1) | HI: Gral Pico | HD: Neuquen
+Gral Pico (Alt: 0) | HI: - | HD: -
+Neuquen (Alt: 0) | HI: - | HD: -
+Villa del Parque (Alt: 2) | HI: Villa Regina | HD: Zarate
+Villa Regina (Alt: 1) | HI: Villa Maria | HD: Villa Rosa
+Villa Maria (Alt: 0) | HI: - | HD: -
+Villa Rosa (Alt: 0) | HI: - | HD: -
+Zarate (Alt: 1) | HI: Villalonga | HD: -
+Villalonga (Alt: 0) | HI: - | HD: -
+
+=== LÍNEAS DEL SISTEMA ===
+Línea: Mitre
+Recorrido: [Retiro,Campana,Zarate]
+----------------------------------------
+
+=== Mapa DE VÍAS (CONEXIONES Y DISTANCIAS) ===
+[Villa Maria] <--- (Sin conexiones) --->
+--------------------------------------------
+[Neuquen] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villalonga] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Pico] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Rosa] <--- (Sin conexiones) --->
+--------------------------------------------
+[Cipolletti] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa del Parque] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Roca] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Regina] <--- (Sin conexiones) --->
+--------------------------------------------
+[Zarate]
+   --- 10.0 km ---> [Campana]
+--------------------------------------------
+[Campana]
+   --- 10.0 km ---> [Zarate]
+   --- 80.0 km ---> [Retiro]
+--------------------------------------------
+[Retiro]
+   --- 80.0 km ---> [Campana]
+--------------------------------------------
+
+=======================================================
+
+[2026-03-11 21:12:06] OPERACIÓN: El tren con codigo 0 no existe!
+[2026-03-11 21:12:41] OPERACIÓN: No se encuentra un tren con codigo: 837
+[2026-03-11 21:29:57] OPERACIÓN: Tren actualizado, con codigo: 893, se asigno la linea Mitre correctamente
+[2026-03-11 21:36:11] OPERACIÓN: Tren con codigo: 123 registrado correctamente.
+[2026-03-11 21:59:49] OPERACIÓN: Tren actualizado, con codigo: 123, se asigno la linea Mitre correctamente
+[2026-03-11 22:02:36] OPERACIÓN: Se creó la línea 'Nueva' con el recorrido:[Zarate,Campana]
+[2026-03-11 22:03:41] OPERACIÓN: Error: Línea 0 no encontrada
+[2026-03-11 22:05:49] OPERACIÓN: Tren con codigo: 111 registrado correctamente.
+[2026-03-11 22:06:12] OPERACIÓN: Tren actualizado, con codigo: 111, se asigno la linea Mitre correctamente
+[2026-03-11 22:07:35] OPERACIÓN: Error Tren: codigo 222duplicado o línea inexistente.
+
+=======================================================
+ESTADO DEL SISTEMA - POST-CARGA INICIAL (2026-03-11 22:08:50)
+=======================================================
+=== ESTACIONES ===
+Retiro (Alt: 3) | HI: Cipolletti | HD: Villa del Parque
+Cipolletti (Alt: 2) | HI: Campana | HD: Gral Roca
+Campana (Alt: 0) | HI: - | HD: -
+Gral Roca (Alt: 1) | HI: Gral Pico | HD: Neuquen
+Gral Pico (Alt: 0) | HI: - | HD: -
+Neuquen (Alt: 0) | HI: - | HD: -
+Villa del Parque (Alt: 2) | HI: Villa Regina | HD: Zarate
+Villa Regina (Alt: 1) | HI: Villa Maria | HD: Villa Rosa
+Villa Maria (Alt: 0) | HI: - | HD: -
+Villa Rosa (Alt: 0) | HI: - | HD: -
+Zarate (Alt: 1) | HI: Villalonga | HD: -
+Villalonga (Alt: 0) | HI: - | HD: -
+
+=== LÍNEAS DEL SISTEMA ===
+Línea: Mitre
+Recorrido: [Retiro,Campana,Zarate]
+----------------------------------------
+
+=== Mapa DE VÍAS (CONEXIONES Y DISTANCIAS) ===
+[Villa Maria] <--- (Sin conexiones) --->
+--------------------------------------------
+[Neuquen] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villalonga] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Pico] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Rosa] <--- (Sin conexiones) --->
+--------------------------------------------
+[Cipolletti] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa del Parque] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Roca] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Regina] <--- (Sin conexiones) --->
+--------------------------------------------
+[Zarate]
+   --- 10.0 km ---> [Campana]
+--------------------------------------------
+[Campana]
+   --- 10.0 km ---> [Zarate]
+   --- 80.0 km ---> [Retiro]
+--------------------------------------------
+[Retiro]
+   --- 80.0 km ---> [Campana]
+--------------------------------------------
+
+=======================================================
+
+[2026-03-11 22:10:39] OPERACIÓN: Error tramo Neuquen <--12 km--> Cipolleti : No se pudo agregar.
+[2026-03-11 22:11:32] OPERACIÓN: Error tramo Neuquen  <--12 km--> Cipolletti : No se pudo agregar.
+[2026-03-11 22:13:23] OPERACIÓN: Tramo Neuquen <--12.0 km--> Cipolletti  agregado con éxito a la red ferroviaria.
+[2026-03-11 22:14:24] OPERACIÓN: Tramo Cipolletti <--10 km--> Villa Regina  agregado con éxito a la red ferroviaria.
+[2026-03-11 22:15:18] OPERACIÓN: Distancia entre Cipolletti <----> Villa Regina actualizada con éxito.
+[2026-03-11 22:16:51] OPERACIÓN: Tramo eliminado Neuquen <----> Cipolletti de la red.
+
+=======================================================
+ESTADO DEL SISTEMA - FIN DE EJECUCIÓN (2026-03-11 22:18:29)
+=======================================================
+=== ESTACIONES ===
+Retiro (Alt: 3) | HI: Cipolletti | HD: Villa del Parque
+Cipolletti (Alt: 2) | HI: Campana | HD: Gral Roca
+Campana (Alt: 0) | HI: - | HD: -
+Gral Roca (Alt: 1) | HI: Gral Pico | HD: Neuquen
+Gral Pico (Alt: 0) | HI: - | HD: -
+Neuquen (Alt: 0) | HI: - | HD: -
+Villa del Parque (Alt: 2) | HI: Villa Regina | HD: Zarate
+Villa Regina (Alt: 1) | HI: Villa Maria | HD: Villa Rosa
+Villa Maria (Alt: 0) | HI: - | HD: -
+Villa Rosa (Alt: 0) | HI: - | HD: -
+Zarate (Alt: 1) | HI: Villalonga | HD: -
+Villalonga (Alt: 0) | HI: - | HD: -
+
+=== LÍNEAS DEL SISTEMA ===
+Línea: Mitre
+Recorrido: [Retiro,Campana,Zarate]
+----------------------------------------
+
+=== Mapa DE VÍAS (CONEXIONES Y DISTANCIAS) ===
+[Villa Maria] <--- (Sin conexiones) --->
+--------------------------------------------
+[Neuquen] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villalonga] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Pico] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Rosa] <--- (Sin conexiones) --->
+--------------------------------------------
+[Cipolletti]
+   --- 24.0 km ---> [Villa Regina]
+--------------------------------------------
+[Villa del Parque] <--- (Sin conexiones) --->
+--------------------------------------------
+[Gral Roca] <--- (Sin conexiones) --->
+--------------------------------------------
+[Villa Regina]
+   --- 24.0 km ---> [Cipolletti]
+--------------------------------------------
+[Zarate]
+   --- 10.0 km ---> [Campana]
+--------------------------------------------
+[Campana]
+   --- 10.0 km ---> [Zarate]
+   --- 80.0 km ---> [Retiro]
+--------------------------------------------
+[Retiro]
+   --- 80.0 km ---> [Campana]
+--------------------------------------------
+
+=======================================================
+
