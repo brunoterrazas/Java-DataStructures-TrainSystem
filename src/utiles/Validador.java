@@ -31,22 +31,42 @@ public class Validador {
         return numero;
     }
 
-    // Método  para leer numeros decimales
-    public static double leerDouble(Scanner sc, String mensaje) {
+    //Método para validar numeros decimales mayores a un minimo 
+    public static double leerDoubleMin(Scanner sc, String mensaje, double minimo) {
         double numero = 0;
         boolean valido = false;
         
         while (!valido) {
             System.out.print(mensaje);
             try {
-                // Reemplaza comas por puntos por si el usuario se equivoca al tipear
                 String entrada = sc.nextLine().trim().replace(",", ".");
                 numero = Double.parseDouble(entrada);
-                valido = true;
+                if (numero > minimo) { 
+                    valido = true;
+                } else {
+                    System.out.println("Error: El valor debe ser mayor a " + minimo + ".");
+                }
             } catch (NumberFormatException e) {
                 System.out.println("Error: Por favor ingrese un número decimal (ej: 15.5).");
             }
         }
         return numero;
+    }
+    //Método para leer Strings
+    public static String leerStringNoVacio(Scanner sc, String mensaje) {
+        String texto = "";
+        boolean valido = false;
+        
+        while (!valido) {
+            System.out.print(mensaje);
+            texto = sc.nextLine().trim(); // Leemos y quitamos espacios principio y final
+            //Verificamos que no este vacio
+            if (texto.isEmpty()) {
+                System.out.println("Error: Este campo no puede quedar vacío. Por favor, ingrese un valor.");
+            } else {
+                valido = true;
+            }
+        }
+        return texto;
     }
 }
