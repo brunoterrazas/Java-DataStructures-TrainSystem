@@ -1,17 +1,77 @@
-E;Retiro;Av. Ramos Mejia;1430;CABA;C1104;9;6
-E;Campana;Rivadavia;100;Campana;2804;2;2
-E;Zarate;General Paz;200;Zarate;2800;2;2
-E;Villa Regina;Calle 1;100;Villa Regina;8336;2;2
-E;Gral Roca;Av. Roca;500;Roca;8332;3;4
-E;Villa del Parque;Cuenca;3000;CABA;1417;2;2
-E;Cipolletti;Fernandez Oro;450;Cipolletti;8324;2;3
-E;Villa Rosa;Ruta 25;10;Pilar;1631;2;1
-E;Gral Pico;Calle 19;200;Pico;6360;2;2
-E;Villalonga;Calle 5;20;Villalonga;8142;1;1
-E;Neuquen;Vias;0;Neuquen;8300;4;3
-E;Villa Maria;Entre Rios;100;Villa Maria;5900;3;2
-R;Retiro;Campana;80
-R;Zarate;Campana;10
-L;Mitre;Retiro;Campana;Zarate
-T;234;diesel;5;6;Mitre
-T;893;gasolina;1;11;libre
+E;Moron;Rivadavia;100;BA;1708;4;2
+E;Caballito;Rivadavia;500;CABA;1400;4;2
+E;San Isidro;Marin;10;BA;1642;2;2
+E;Avellaneda;Irigoyen;200;BA;1870;6;4
+E;Flores;Rivadavia;2000;CABA;1406;4;2
+E;Pilar;Belgrano;50;BA;1629;2;2
+E;Zarate;Mitre;100;BA;2800;4;2
+E;Belgrano C;Juramento;1500;CABA;1428;2;2
+E;Ezeiza;Alem;400;BA;1804;4;2
+E;Retiro;Ramos Mejia;1300;CABA;1104;10;8
+E;Tigre;Cazon;10;BA;1648;4;3
+E;Villa Maria;Yrigoyen;15;CBA;5900;4;2
+E;Lujan;Ruta 192;100;BA;6700;2;2
+E;Once;Pueyrredon;100;CABA;1032;8;6
+E;Quilmes;Alsina;200;BA;1878;4;2
+E;Constitucion;Brasil;1128;CABA;1143;12;10
+E;Lomas;Meeks;50;BA;1832;4;2
+E;Rosario;Peron;100;SFE;2000;6;4
+E;Cordoba;Mitre;200;CBA;5000;8;4
+E;Tucuman;Las Heras;10;TUC;4000;4;2
+R;Retiro;Belgrano C;6.5
+R;Belgrano C;San Isidro;10.2
+R;San Isidro;Tigre;8.5
+R;Retiro;Caballito;7.0
+R;Caballito;Flores;3.2
+R;Flores;Moron;12.5
+R;Once;Caballito;4.0
+R;Moron;Lujan;45.0
+R;Constitucion;Avellaneda;5.0
+R;Avellaneda;Quilmes;11.5
+R;Avellaneda;Lomas;10.0
+R;Retiro;Zarate;85.0
+R;Zarate;Rosario;200.0
+R;Rosario;Cordoba;400.0
+R;Rosario;Villa Maria;250.0
+R;Villa Maria;Cordoba;145.0
+R;Cordoba;Tucuman;550.0
+R;San Isidro;Pilar;35.0
+R;Pilar;Zarate;40.0
+R;Ezeiza;Lomas;20.0
+R;Lujan;Pilar;28.0
+R;Moron;Ezeiza;25.0
+R;Tigre;Zarate;60.0
+R;Tucuman;Rosario;700.0
+R;Once;Flores;7.0
+R;Retiro;Once;3.5
+R;Pilar;Tigre;45.0
+R;Ezeiza;Quilmes;30.0
+R;Lomas;Quilmes;22.0
+R;Avellaneda;Retiro;12.0
+L;Mitre;Retiro;Belgrano C;San Isidro;Tigre
+L;Sarmiento;Once;Caballito;Flores;Moron
+L;Roca;Constitucion;Avellaneda;Lomas
+L;San Martin;Retiro;Zarate;Rosario;Cordoba
+L;Oeste;Once;Caballito;Flores;Moron;Lujan
+L;Norte;Retiro;Belgrano C;San Isidro;Pilar;Zarate
+L;Sur;Constitucion;Avellaneda;Quilmes
+T;50;Electrico;1000;0;Mitre
+T;40;Diesel;500;200;Sarmiento
+T;30;Electrico;800;0;libre
+T;70;Diesel;400;500;Roca
+T;80;Electrico;1200;0;San Martin
+T;90;Vapor;200;100;libre
+T;100;Diesel;600;300;Oeste
+T;95;Electrico;900;0;Norte
+T;98;Electrico;1100;0;libre
+T;10;Diesel;300;800;Sur
+T;20;Electrico;1000;0;Mitre
+T;15;Diesel;450;200;libre
+T;60;Electrico;850;0;Sarmiento
+T;55;Diesel;350;400;Roca
+T;65;Electrico;1050;0;San Martin
+T;85;Electrico;950;0;libre
+T;110;Diesel;550;350;Oeste
+T;105;Electrico;1150;0;Norte
+T;120;Vapor;150;50;libre
+T;5;Diesel;250;900;Sur
