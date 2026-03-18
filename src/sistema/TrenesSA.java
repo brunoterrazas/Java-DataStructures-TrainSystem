@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import lineales.dinamicas.Lista;
 import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  *
@@ -56,12 +57,14 @@ public class TrenesSA {
         String tipo = campos[0];
         switch (tipo) {
             case "E":
+
                 registrarEstacion(campos);
                 break;
             case "L":
                 registrarLinea(campos);
                 break;
             case "R":
+
                 agregarRiel(campos);
                 break;
             case "T":
@@ -69,15 +72,105 @@ public class TrenesSA {
                 break;
         }
     }
+//ABM ESTACIÓN
 
+    public boolean registrarEstacion(String[] valor) {
+        boolean exito = false;//Da de alta la estación
+        if (valor.length >= 8) {
+            // Concatenamos el domicilio: Calle, Nro
+            String ciudad = valor[4];
+            String cp = valor[5];
+            String dom = valor[2] + " " + valor[3] + ", " + ciudad + " (" + cp + ")";
+            int vias = Integer.parseInt(valor[6].trim());
+            int plat = Integer.parseInt(valor[7].trim());
+
+            Estacion est = new Estacion(valor[1].toUpperCase(), dom, ciudad, cp, vias, plat);
+
+            // Insertamos en el Diccionario para búsquedas y Grafo como vértice
+            exito = estaciones.insertar(est.getNombre(), est);
+            if (exito) {
+                mapaVias.insertarVertice(est.getNombre());
+            }
+
+        }
+        return exito;
+    }
+
+    public boolean modificarEstacion(String nombre, String nuevoDom, int nuevasVias, int nuevasPlat) {
+        boolean exito = false;
+
+        //Buscamos si existe
+        Object dato = estaciones.obtenerDato(nombre.toUpperCase());
+
+        if (dato != null) {
+            Estacion est = (Estacion) dato;
+
+            // Validamos cantidades
+            if (nuevasVias >= 0 && nuevasPlat >= 0) {
+                est.setDomicilio(nuevoDom);
+                est.setCantVias(nuevasVias);
+                est.setCantPlataformas(nuevasPlat);
+                exito = true;
+            }
+        }
+        return exito;
+    }
+
+    public boolean darBajaEstacion(String nombre) {
+        boolean exito;
+        // Eliminamos del Diccionario
+        exito = estaciones.eliminar(nombre.toUpperCase());
+        if (exito) {
+
+            // Recorremos todas las líneas y si la estación estaba, la quitamos
+            for (Lista recorrido : lineas.values()) {
+                int pos = recorrido.localizar(nombre.toUpperCase());
+                while (pos != -1) { // Por si está repetida en la lista
+                    recorrido.eliminar(pos);
+                    pos = recorrido.localizar(nombre.toUpperCase());
+                }
+            }
+            // Eliminamos del Grafo (esto borra el vértice y sus arcos/rieles)
+            mapaVias.eliminarVertice(nombre.toUpperCase());
+        }
+        return exito;
+    }
+
+    public String verificarNombreEstacion(Scanner sc, String nombre) {
+
+        while (nombre.isEmpty() || nombre.length() < 3 || estaciones.existeClave(nombre.toUpperCase())) {
+            if (nombre.isEmpty() || nombre.length() < 3) {
+                System.out.println(" Error, nombre no puede ser vacio,min:3 caracteres");
+            } else {
+                System.out.println(" Error, ya existe una estación con ese nombre");
+
+            }
+            System.out.println("Por favor ingrese otro nombre: ");
+            nombre = (sc.nextLine().trim());
+        }
+        return nombre;
+    }
+
+    public String existeEstacion(Scanner sc, String nombre, String campo) {
+        while (!estaciones.existeClave(nombre.toUpperCase())) {
+
+            System.out.println("Error: No existe " + campo + " en el sistema.");
+            System.out.print("Por favor ingrese " + campo + " válido: ");
+            nombre = (sc.nextLine().trim());
+
+        }
+        return nombre;
+    }
+
+    //ABM LINEA
     public boolean registrarLinea(String[] c) {
         // Metodo para registrar linea desde archivo
-        String nombreL = c[1];
+        String nombreL = c[1].toUpperCase();
         Lista listaEst = new Lista();
         boolean exito;
         // Recorremos las estaciones de la línea (desde el índice 2 en adelante)
         for (int i = 2; i < c.length; i++) {
-            listaEst.insertar(c[i], listaEst.getLongitud() + 1);
+            listaEst.insertar(c[i].toUpperCase(), listaEst.getLongitud() + 1);
         }
         lineas.put(nombreL, listaEst);
         exito = true;
@@ -86,9 +179,9 @@ public class TrenesSA {
 
     public String agregarLineaDesdeCamino(String[] datos) {
         //metodo que nos permite agregar un camino a la linea
-        String nombreLinea = datos[0];
-        String origenLinea = datos[1];
-        String destinoLinea = datos[2];
+        String nombreLinea = datos[0].toUpperCase();
+        String origenLinea = datos[1].toUpperCase();
+        String destinoLinea = datos[2].toUpperCase();
         Lista listaEst;
         String msg;
         if (lineas.containsKey(nombreLinea)) {
@@ -105,11 +198,12 @@ public class TrenesSA {
 
         return msg;
     }
-       public String modificarLinea(String[] datos) {
+
+    public String modificarLinea(String[] datos) {
         //metodo que nos permite modificar el camino de la linea 
-        String nombreLinea = datos[0];
-        String origenLinea = datos[1];
-        String destinoLinea = datos[2];
+        String nombreLinea = datos[0].toUpperCase();
+        String origenLinea = datos[1].toUpperCase();
+        String destinoLinea = datos[2].toUpperCase();
         Lista listaEst;
         String msg;
         if (!lineas.containsKey(nombreLinea)) {
@@ -126,8 +220,10 @@ public class TrenesSA {
 
         return msg;
     }
+
     public String refrescarRecorridoLinea(String nombreLinea) {
         String msg;
+        nombreLinea = nombreLinea.toUpperCase();
         Lista recorridoActual = lineas.get(nombreLinea);
 
         if (recorridoActual == null || recorridoActual.esVacia()) {
@@ -152,7 +248,7 @@ public class TrenesSA {
 
     public boolean eliminarLinea(String nombreLinea) {
         boolean exito = false;
-
+        nombreLinea = nombreLinea.toUpperCase();
         //Verificamos si la línea existe en el HashMap de líneas y Diccionario
         if (lineas.get(nombreLinea) != null) {
 
@@ -179,22 +275,24 @@ public class TrenesSA {
 
         return exito;
     }
+    //ABM RIEL
 
     public boolean agregarRiel(String[] valor) {
         // Insertamos el arco en el grafo con su etiqueta de distancia
         double kms = Double.parseDouble(valor[3].trim());
-        return mapaVias.insertarArco(valor[1], valor[2], kms);
+        return mapaVias.insertarArco(valor[1].toUpperCase(), valor[2].toUpperCase(), kms);
     }
 
-    public boolean eliminarRiel(Object origen, Object destino) {
+    public boolean eliminarRiel(String origen, String destino) {
         // Quitamos el arco en el grafo del tramo(origen,destino)
 
-        return mapaVias.eliminarArco(origen, destino);
+        return mapaVias.eliminarArco(origen.toUpperCase(), destino.toUpperCase());
     }
 
     public boolean modificarDistanciaTramo(String origen, String destino, double nuevaDistancia) {
         boolean exito = false;
-
+        origen = origen.toUpperCase();
+        destino = destino.toUpperCase();
         // 1. Verificamos que la conexión exista actualmente en el grafo
         if (mapaVias.existeArco(origen, destino)) {
 
@@ -208,13 +306,14 @@ public class TrenesSA {
         return exito;
     }
 
+    //ABM TREN
     public boolean registrarTren(String[] valor) {
         // Creamos el objeto Tren y lo guardamos en el AVL de trenes
         boolean exito = false;
         int id = Integer.parseInt(valor[1].trim());
         //si el hashmap de lineas incluye la linea o esta como linea Libre No-asignado 
         if (lineas.containsKey(valor[5]) || valor[5].equalsIgnoreCase("libre")) {
-            Tren tren = new Tren(id, valor[2], Integer.parseInt(valor[3]), Integer.parseInt(valor[4]), valor[5]);
+            Tren tren = new Tren(id, valor[2], Integer.parseInt(valor[3]), Integer.parseInt(valor[4]), valor[5].toUpperCase());
             exito = trenes.insertar(id, tren);
         }
 
@@ -223,6 +322,7 @@ public class TrenesSA {
 
     public String asignarLineaTren(int codTren, String nomLinea) {//Este metodo asigna una linea al Tren
         String msg;
+        nomLinea = nomLinea.toUpperCase();
         //Buscamos si esta en el diccionario de trenes
         Tren tren = (Tren) trenes.obtenerDato(codTren);
         //Si el tren esta en el diccionario
@@ -260,6 +360,47 @@ public class TrenesSA {
 
         }
         return msg;
+    }
+
+    public int verificarCodigoTren(Scanner sc, int codigo) {
+
+        while (codigo <= 0 || trenes.existeClave(codigo)) {
+            if (codigo <= 0) {
+                System.out.println(" Error, el código debe ser numero positivo");
+            } else {
+                System.out.println(" Error, ya existe una tren con ese código");
+
+            }
+            codigo = utiles.Validador.leerEntero(sc, "Por favor ingrese otro código disponible: ");
+        }
+        return codigo;
+    }
+
+    public int existeTren(Scanner sc, int codigo) {
+
+        while (!trenes.existeClave(codigo)) {
+
+            System.out.println(" Error, No existe tren a modificar");
+
+            codigo = utiles.Validador.leerEntero(sc, "Por favor ingrese un código valido ");
+
+        }
+        return codigo;
+    }
+
+    public String existeLinea(Scanner sc, String nombre, String campo) {
+        nombre = nombre.trim().toUpperCase();
+
+        while (!nombre.equals("LIBRE") && !lineas.containsKey(nombre)) {
+
+            System.out.println(" Error: No existe " + campo + " en el sistema.");
+            System.out.println(" (Ingrese un nombre de línea válido o la palabra LIBRE)");
+            System.out.print(" Reintente " + campo + ": ");
+
+            nombre = sc.nextLine().trim().toUpperCase();
+        }
+
+        return nombre;
     }
 
     public String debugEstaciones() {
@@ -399,70 +540,9 @@ public class TrenesSA {
         return resultado;
     }
 
-    //ABM ESTACIÓN
-    public boolean registrarEstacion(String[] valor) {
-        boolean exito = false;//Da de alta la estación
-        if (valor.length >= 8) {
-            // Concatenamos el domicilio: Calle, Nro
-            String ciudad = valor[4];
-            String cp = valor[5];
-            String dom = valor[2] + " " + valor[3] + ", " + ciudad + " (" + cp + ")";
-            int vias = Integer.parseInt(valor[6].trim());
-            int plat = Integer.parseInt(valor[7].trim());
-
-            Estacion est = new Estacion(valor[1], dom, ciudad, cp, vias, plat);
-
-            // Insertamos en el Diccionario para búsquedas y Grafo como vértice
-            estaciones.insertar(est.getNombre(), est);
-            mapaVias.insertarVertice(est.getNombre());
-            exito = true;
-        }
-        return exito;
-    }
-
-    public boolean modificarEstacion(String nombre, String nuevoDom, int nuevasVias, int nuevasPlat) {
-        boolean exito = false;
-
-        //Buscamos si existe
-        Object dato = estaciones.obtenerDato(nombre);
-
-        if (dato != null) {
-            Estacion est = (Estacion) dato;
-
-            // Validamos cantidades
-            if (nuevasVias >= 0 && nuevasPlat >= 0) {
-                est.setDomicilio(nuevoDom);
-                est.setCantVias(nuevasVias);
-                est.setCantPlataformas(nuevasPlat);
-                exito = true;
-            }
-        }
-        return exito;
-    }
-
-    public boolean darBajaEstacion(String nombre) {
-        boolean exito;
-        // Eliminamos del Diccionario
-        exito = estaciones.eliminar(nombre);
-        if (exito) {
-
-            // Recorremos todas las líneas y si la estación estaba, la quitamos
-            for (Lista recorrido : lineas.values()) {
-                int pos = recorrido.localizar(nombre);
-                while (pos != -1) { // Por si está repetida en la lista
-                    recorrido.eliminar(pos);
-                    pos = recorrido.localizar(nombre);
-                }
-            }
-            // Eliminamos del Grafo (esto borra el vértice y sus arcos/rieles)
-            mapaVias.eliminarVertice(nombre);
-        }
-        return exito;
-    }
-
     public Lista obtenerEstacionesPorPrefijo(String prefijo) {
         // Definimos el rango: desde el prefijo hasta el prefijo + "ZZZZ"
-        String inicio = prefijo;//subcadena
+        String inicio = prefijo.toUpperCase();//subcadena
         String fin = prefijo + "ZZZZ";
 
         // Llamamos al método listarRango del AVL de estaciones

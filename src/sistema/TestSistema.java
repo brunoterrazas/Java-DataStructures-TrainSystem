@@ -85,17 +85,14 @@ public class TestSistema {
         switch (subOpcion) {
             case 1: // ALTA
                 String[] campos = new String[8];
+
+                String nombre = utiles.Validador.leerStringNoVacio(sc, "Nombre de la estación: ");
                 campos[0] = "E";
-                System.out.print("Nombre: ");
-                campos[1] = sc.nextLine();
-                System.out.print("Calle: ");
-                campos[2] = sc.nextLine();
-                System.out.print("Número: ");
-                campos[3] = sc.nextLine();
-                System.out.print("Ciudad: ");
-                campos[4] = sc.nextLine();
-                System.out.print("CP: ");
-                campos[5] = sc.nextLine();
+                campos[1] = sistema.verificarNombreEstacion(sc, nombre);//Validamos nombre disponible antes de cargar los demas datos bucando diccionario
+                campos[2] = utiles.Validador.leerStringNoVacio(sc, "Calle: ");
+                campos[3] = utiles.Validador.leerStringNoVacio(sc, "Número: ");
+                campos[4] = utiles.Validador.leerStringNoVacio(sc, "Ciudad: ");
+                campos[5] = utiles.Validador.leerStringNoVacio(sc, "CP: ");
                 System.out.print("Cantidad de Vías: ");
                 campos[6] = sc.nextLine();
                 System.out.print("Cantidad de Plataformas: ");
@@ -114,8 +111,8 @@ public class TestSistema {
                 break;
 
             case 2: // BAJA
-                System.out.print("Nombre de la estación a eliminar: ");
-                String nombreEliminar = sc.nextLine();
+                String nombreEliminar = utiles.Validador.leerStringNoVacio(sc, "Nombre de la estación a eliminar: ");
+                nombreEliminar = sistema.existeEstacion(sc, nombreEliminar, "Nombre de estación");//Validamos si la estación existe
                 String msgBaja;
                 if (sistema.darBajaEstacion(nombreEliminar)) {
                     msgBaja = "Estación " + nombreEliminar + " eliminada del sistema y del mapa.";
@@ -130,6 +127,7 @@ public class TestSistema {
 
             case 3: // MODIFICACIÓN
                 String nombreMod = utiles.Validador.leerStringNoVacio(sc, "Nombre de la estación a modificar: ");
+                nombreMod = sistema.existeEstacion(sc, nombreMod, "Nombre de estación");//Validamos si la estación existe
                 String calle = utiles.Validador.leerStringNoVacio(sc, "Calle: ");
                 String numero = utiles.Validador.leerStringNoVacio(sc, "Número: ");
                 String ciudad = utiles.Validador.leerStringNoVacio(sc, "Ciudad: ");
@@ -161,7 +159,8 @@ public class TestSistema {
         int op = utiles.Validador.leerEntero(sc, "Opción: ");
         switch (op) {
             case 1:
-                String nombre = utiles.Validador.leerStringNoVacio(sc, "Nombre de la estación: ");
+                String nombre = utiles.Validador.leerStringNoVacio(sc, "Nombre de la estación: ").toUpperCase();
+                nombre = sistema.existeEstacion(sc, nombre, "Estacion");
                 System.out.println(sistema.obtenerInfoEstacion(nombre));
                 break;
 
@@ -194,7 +193,9 @@ public class TestSistema {
         System.out.println("3. Obtener  todos los caminos sin pasar por una estacion especifica");
         System.out.println("4. Verificar camino que recorra una cantidad maxima de km");
         String origen = utiles.Validador.leerStringNoVacio(sc, "Origen: ");
+        origen = sistema.existeEstacion(sc, origen, "Origen");
         String destino = utiles.Validador.leerStringNoVacio(sc, "Destino: ");
+        destino = sistema.existeEstacion(sc, destino, "Destino");
         System.out.println();
 
         int op = utiles.Validador.leerEntero(sc, "Opción: ");
@@ -210,6 +211,7 @@ public class TestSistema {
 
             case 3:
                 String estacionC = utiles.Validador.leerStringNoVacio(sc, "Ingrese estación por donde no debe pasar: ");
+                estacionC = sistema.existeEstacion(sc, estacionC, "Estacion donde no pasar");
                 System.out.println(sistema.mostrarCaminosQueNoPasanPorUnaEstacion(origen, destino, estacionC));
                 break;
             case 4:
@@ -232,12 +234,14 @@ public class TestSistema {
         switch (subOp) {
             case 1:
                 String[] valor = new String[6];
+                String linea = utiles.Validador.leerStringNoVacio(sc, "Línea (o 'Libre'): ");
+                int cod = utiles.Validador.leerEntero(sc, "Codigo: ");
                 valor[0] = "T";
-                valor[1] = String.valueOf(utiles.Validador.leerEntero(sc, "Codigo: "));
+                valor[1] = String.valueOf(sistema.verificarCodigoTren(sc, cod));
                 valor[2] = utiles.Validador.leerStringNoVacio(sc, "Propulsión: ");
                 valor[3] = String.valueOf(utiles.Validador.leerEntero(sc, "Capacidad Pasajeros: "));
                 valor[4] = String.valueOf(utiles.Validador.leerEntero(sc, "Capacidad Carga: "));
-                valor[5] = utiles.Validador.leerStringNoVacio(sc, "Línea (o 'Libre'): ");
+                valor[5] = sistema.existeLinea(sc, linea, "Linea");
                 String msgAlta;
                 if (sistema.registrarTren(valor)) {
                     msgAlta = "Tren con codigo: " + valor[1] + " registrado correctamente.";
@@ -251,14 +255,16 @@ public class TestSistema {
             case 2:
                 String msgBaja;
                 int codBaja = utiles.Validador.leerEntero(sc, "Codigo del tren a eliminar: ");
+                codBaja = sistema.verificarCodigoTren(sc, codBaja);
                 msgBaja = sistema.eliminarTren(codBaja);
                 System.out.println(msgBaja);
                 utiles.GestorLog.registrarOperacion(msgBaja);
                 break;
             case 3:
-                int idMod = utiles.Validador.leerEntero(sc, "Codigo del tren: ");
+                int codMod = utiles.Validador.leerEntero(sc, "Codigo del tren: ");
+                codMod = sistema.verificarCodigoTren(sc, codMod);
                 String nL = utiles.Validador.leerStringNoVacio(sc, "Nombre de nueva Línea (o dejar como 'Libre'): ");
-                String msgModificacion = sistema.asignarLineaTren(idMod, nL);
+                String msgModificacion = sistema.asignarLineaTren(codMod, nL);
                 System.out.println(msgModificacion);
                 utiles.GestorLog.registrarOperacion(msgModificacion);
                 break;
@@ -270,13 +276,11 @@ public class TestSistema {
         System.out.println("1. Alta de Línea");
         System.out.println("2. Baja de Línea");
         System.out.println("3. Modificación de Línea");
-        System.out.print("Opción: ");
-        int subOp = sc.nextInt();
-        sc.nextLine();
+        int subOp = utiles.Validador.leerEntero(sc, "Opción: ");
 
         switch (subOp) {
             case 1: // ALTA
-                String[] campos = new String[3]; // Tamaño 3, como bien hiciste
+                String[] campos = new String[3];
                 campos[0] = utiles.Validador.leerStringNoVacio(sc, "Nombre de la Línea: ");
                 campos[1] = utiles.Validador.leerStringNoVacio(sc, "Estacion Origen: ");
                 campos[2] = utiles.Validador.leerStringNoVacio(sc, "Estacion Destino: ");
@@ -311,20 +315,22 @@ public class TestSistema {
                 System.out.print("Opción: ");
                 int accionMod = utiles.Validador.leerEntero(sc, "Opción: ");
 
-                if (accionMod == 1) {
-                    valor[1] = utiles.Validador.leerStringNoVacio(sc, "Nueva Estacion Origen: ");
-                    valor[2] = utiles.Validador.leerStringNoVacio(sc, "Nueva Estacion Destino: ");
-                    String msgModificacion = sistema.modificarLinea(valor);
-                    System.out.println(msgModificacion);
-                    utiles.GestorLog.registrarOperacion(msgModificacion);
-
-                } else if (accionMod == 2) {
-                    String msgRefr = sistema.refrescarRecorridoLinea(valor[0]);
-                    System.out.println(msgRefr);
-                    utiles.GestorLog.registrarOperacion(msgRefr);
-
-                } else {
-                    System.out.println("Opción no válida.");
+                switch (accionMod) {
+                    case 1:
+                        valor[1] = utiles.Validador.leerStringNoVacio(sc, "Nueva Estacion Origen: ");
+                        valor[2] = utiles.Validador.leerStringNoVacio(sc, "Nueva Estacion Destino: ");
+                        String msgModificacion = sistema.modificarLinea(valor);
+                        System.out.println(msgModificacion);
+                        utiles.GestorLog.registrarOperacion(msgModificacion);
+                        break;
+                    case 2:
+                        String msgRefr = sistema.refrescarRecorridoLinea(valor[0]);
+                        System.out.println(msgRefr);
+                        utiles.GestorLog.registrarOperacion(msgRefr);
+                        break;
+                    default:
+                        System.out.println("Opción no válida.");
+                        break;
                 }
                 break;
             default:
@@ -337,17 +343,19 @@ public class TestSistema {
         System.out.println("1. Alta de Tramo (Conectar dos estaciones)");
         System.out.println("2. Baja de Tramo (Desconectar estaciones)");
         System.out.println("3. Modificación de Tramo (Cambiar distancia)");
-        System.out.print("Opción: ");
-        int subOp = sc.nextInt();
-        sc.nextLine();
+        int subOp = utiles.Validador.leerEntero(sc, "Opción: ");
 
         switch (subOp) {
             case 1: // ALTA (Insertar Arco)
 
                 String[] campos = new String[4];
+                String ori,
+                 des;
+                ori = utiles.Validador.leerStringNoVacio(sc, "Estación Origen: ");
+                des = utiles.Validador.leerStringNoVacio(sc, "Estación Destino: ");
                 campos[0] = "R";
-                campos[1] = utiles.Validador.leerStringNoVacio(sc, "Estación Origen: ");
-                campos[2] = utiles.Validador.leerStringNoVacio(sc, "Estación Destino: ");
+                campos[1] = sistema.existeEstacion(sc, ori, "Estacion Origen");
+                campos[2] = sistema.existeEstacion(sc, des, "Estacion Destino");
 
                 // Usamos doubleMin para que no pongan kilómetros negativos
                 double distAlta = utiles.Validador.leerDoubleMin(sc, "Distancia (en KM): ", 0);
@@ -367,6 +375,8 @@ public class TestSistema {
             case 2: // BAJA (Eliminar Arco)
                 String origenBaja = utiles.Validador.leerStringNoVacio(sc, "Estación Origen: ");
                 String destinoBaja = utiles.Validador.leerStringNoVacio(sc, "Estación Destino: ");
+                origenBaja = sistema.existeEstacion(sc, origenBaja, "Estación Origen");
+                destinoBaja = sistema.existeEstacion(sc, destinoBaja, "Estación Destino");
                 String msgBaja;
                 if (sistema.eliminarRiel(origenBaja, destinoBaja)) {
                     msgBaja = "Tramo eliminado " + origenBaja + " <----> " + destinoBaja + " de la red.";
@@ -382,6 +392,8 @@ public class TestSistema {
             case 3: // MODIFICACIÓN (Actualizar Etiqueta del Arco)
                 String origenMod = utiles.Validador.leerStringNoVacio(sc, "Estación Origen: ");
                 String destinoMod = utiles.Validador.leerStringNoVacio(sc, "Estación Destino: ");
+                origenMod = sistema.existeEstacion(sc, origenMod, "Estacion Origen");
+                destinoMod = sistema.existeEstacion(sc, destinoMod, "Estacion Destino");
                 double kmMod = utiles.Validador.leerDoubleMin(sc, "Nueva Distancia (en KM): ", 0);
                 String msgModificacion;
                 if (sistema.modificarDistanciaTramo(origenMod, destinoMod, kmMod)) {
