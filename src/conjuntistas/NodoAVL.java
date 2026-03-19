@@ -18,34 +18,34 @@ public class NodoAVL {
 
     public NodoAVL(Comparable elemento) {
         elem = elemento;
-        altura = alturaAux(this);
+        altura = 0;
         HI = null;
         HD = null;
     }
 
     public void recalcularAltura() {
-        altura = alturaAux(this);
-    }
+         int altIzq = -1, altDer = -1;
+
+        if (this.getHI() != null) {
+            altIzq = this.getHI().getAltura();
+        }
+
+        if (this.getHD() != null) {
+            altDer = this.getHD().getAltura();
+        }
+        //Verificamos altura maxima
+        if (altIzq > altDer) {
+            this.altura = altIzq+1;
+        } else {
+           this.altura = altDer+1;
+        }
+}
 
     public int getAltura() {
         return altura;
     }
 
-    private int alturaAux(NodoAVL n) {
-        int altMaxima = -1;
-        if (n != null) {
-            int altDer, altIzq;
-            altIzq = alturaAux(n.getHI());
-            altDer = alturaAux(n.getHD());
-            if (altDer > altIzq) {
-                altMaxima = altDer + 1;
-            } else {
-                altMaxima = altIzq + 1;
-            }
-        }
-
-        return altMaxima;
-    }
+   
 
     public Comparable getElem() {
         return elem;

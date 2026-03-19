@@ -3,16 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/laragon/www/Java-DataStructures-TrainSystem/src/grafos/NodoVert.java</file>
             <file>file:/C:/laragon/www/Java-DataStructures-TrainSystem/src/tests/TestGrafo.java</file>
-            <file>file:/C:/laragon/www/Java-DataStructures-TrainSystem/src/sistema/TestSistema.java</file>
             <file>file:/C:/laragon/www/Java-DataStructures-TrainSystem/src/dominio/Tren.java</file>
             <file>file:/C:/laragon/www/Java-DataStructures-TrainSystem/src/tests/TestCola.java</file>
             <file>file:/C:/laragon/www/Java-DataStructures-TrainSystem/src/grafos/Grafo.java</file>
-            <file>file:/C:/laragon/www/Java-DataStructures-TrainSystem/src/grafos/NodoAdy.java</file>
             <file>file:/C:/laragon/www/Java-DataStructures-TrainSystem/src/conjuntistas/ArbolAVL.java</file>
-            <file>file:/C:/laragon/www/Java-DataStructures-TrainSystem/src/tests/TestingLista.java</file>
+            <file>file:/C:/laragon/www/Java-DataStructures-TrainSystem/src/especiales/Diccionario.java</file>
+            <file>file:/C:/laragon/www/Java-DataStructures-TrainSystem/src/especiales/NodoAVLDicc.java</file>
+            <file>file:/C:/laragon/www/Java-DataStructures-TrainSystem/src/dominio/Estacion.java</file>
+            <file>file:/C:/laragon/www/Java-DataStructures-TrainSystem/src/utiles/GestorLog.java</file>
+            <file>file:/C:/laragon/www/Java-DataStructures-TrainSystem/src/tests/TestAVL.java</file>
             <file>file:/C:/laragon/www/Java-DataStructures-TrainSystem/src/sistema/TrenesSA.java</file>
+            <file>file:/C:/laragon/www/Java-DataStructures-TrainSystem/src/grafos/NodoVert.java</file>
+            <file>file:/C:/laragon/www/Java-DataStructures-TrainSystem/src/sistema/TestSistema.java</file>
+            <file>file:/C:/laragon/www/Java-DataStructures-TrainSystem/src/conjuntistas/NodoAVL.java</file>
+            <file>file:/C:/laragon/www/Java-DataStructures-TrainSystem/src/grafos/NodoAdy.java</file>
             <file>file:/C:/laragon/www/Java-DataStructures-TrainSystem/src/utiles/Validador.java</file>
         </group>
     </open-files>

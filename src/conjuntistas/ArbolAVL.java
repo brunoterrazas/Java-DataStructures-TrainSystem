@@ -172,47 +172,59 @@ public class ArbolAVL {
     public boolean eliminar(Comparable elem) {
         boolean exito = pertenece(elem);
         if (exito) {
-            // Si el arbol no esta vacio
-            this.raiz = eliminarAux(elem, this.raiz, null);
+            //Si el elemento existe en el árbol.
+            this.raiz = eliminarAux(elem, this.raiz);
         }
         return exito;
     }
 
-    private NodoAVL eliminarAux(Comparable elem, NodoAVL n, NodoAVL padre) {
+   private NodoAVL eliminarAux(Comparable elem, NodoAVL n) {
         NodoAVL salida = n;
 
-        if (n != null) { // si encontramos al elemento
+        if (n != null) { 
             if (elem.compareTo(n.getElem()) == 0) {
-
+           
                 if (n.getHI() == null && n.getHD() == null) {
-                    // Caso 1: Hoja
-                    eliminarCaso1(n, padre);
+                    // CASO 1: hoja                   
+                    // El padre va a recibir este null 
                     salida = null;
+
                 } else if (n.getHI() != null && n.getHD() != null) {
-                    // Caso 3: Dos hijos
-                    eliminarCaso3Min(n);
-                    salida = n;
+                    // CASO 3: dos hijos
+                                     
+                    // Buscamos el candidato (el menor del subárbol derecho)
+                    Comparable candidato = minimoElemAux(n.getHD());
+                    
+                    //Cambiamos el valor del nodo actual con el del candidato
+                    n.setElem(candidato);
+                    
+                    //Mandamos a borrar el nodo original del candidato
+                    n.setHD(eliminarAux(candidato, n.getHD()));
+                    
+                    salida = n; // La salida sigue siendo el nodo actual, pero con el valor nuevo
+
                 } else {
-                    // Caso 2: Un solo hijo
-                    eliminarCaso2(n, padre);
-                    // Forma tradicional sin usar "?"
+                    // CASO 2: un solo hijo
+                   // // Devolvemos el único hijo para que el padre se enganche directo a él, salteando el nodo actual.
                     if (n.getHI() != null) {
                         salida = n.getHI();
                     } else {
                         salida = n.getHD();
                     }
                 }
-            } else {
 
-                if (elem.compareTo(n.getElem()) < 0) {//avanzamos por subarbol izquierdo
-                    n.setHI(eliminarAux(elem, n.getHI(), n));
-                } else {//avanzamos por subarbol derecho
-                    n.setHD(eliminarAux(elem, n.getHD(), n));
+            } else {
+                //bajamos por los subarboles
+                 if (elem.compareTo(n.getElem()) < 0) {
+                    // avanzamos por subarbol izquierdo y reenganchamos a la vuelta
+                    n.setHI(eliminarAux(elem, n.getHI()));
+                } else {
+                    // avanzamos por subarbol derecho y reenganchamos a la vuelta
+                    n.setHD(eliminarAux(elem, n.getHD()));
                 }
                 salida = n;
             }
-
-            // recalculamos y balanceamos si es necesario al volver de la recursion
+            // Recalculamos si el nodo no es nulo
             if (salida != null) {
                 salida.recalcularAltura();
                 salida = balancear(salida);
@@ -220,103 +232,7 @@ public class ArbolAVL {
         }
         return salida;
     }
-
-    private boolean eliminarCaso1(NodoAVL n, NodoAVL padre) {
-        // Metodo para eliminar un nodo que es hoja
-        boolean res = true;
-
-        // Si el padre no es nulo
-        if (padre != null) {
-            // Si n es menor que el padre, n es su hijo izquierdo
-            if (n.getElem().compareTo(padre.getElem()) < 0) {
-                // Seteo el hijo izquierdo del nodo padre como null
-                padre.setHI(null);
-            } else {
-                // Seteo el hijo derecho del nodo padre como null
-                padre.setHD(null);
-            }
-        } else {
-            // Sino n es la raiz y le asigno null
-            this.raiz = null;
-        }
-        return res;
-    }
-
-    private boolean eliminarCaso2(NodoAVL n, NodoAVL padre) {
-        // Metodo para eliminar al nodo n que tiene al menos un hijo
-        boolean res = true;
-
-        // Si el padre no es null
-        if (padre != null) {
-            // Si n (nodo actual) es hijo derecho (verificamos si el padre es menor que n)
-            if (padre.getElem().compareTo(n.getElem()) < 0) {
-
-                if (n.getHI() != null) {
-                    // Engancha el HI del nodo n que vamos a eliminar, como HD del nodo padre
-                    padre.setHD(n.getHI());
-                } else {
-                    // Engancha el HD del nodo n que vamos a eliminar, como HD del nodo padre
-                    padre.setHD(n.getHD());
-                }
-
-            } else {
-                // Sino n es hijo izquierdo del padre
-
-                if (n.getHI() != null) {
-                    // Le asigno el HI del nodo n que vamos a eliminar, como HI del nodo padre
-                    padre.setHI(n.getHI());
-                } else {
-                    // Le asigno el HD del nodo n que vamos a eliminar, como HI del nodo padre  
-                    padre.setHI(n.getHD());
-                }
-            }
-        } else {
-            // Sino el nodo n es la raiz
-            // Verifico si n tiene hijo izquierdo o derecho y seteo la raiz con el hijo correspondiente
-            if (n.getHI() != null) {
-                this.raiz = n.getHI();
-            } else {
-                this.raiz = n.getHD();
-            }
-        }
-        return res;
-    }
-
-    private boolean eliminarCaso3Min(NodoAVL n) {
-        // Metodo privado del caso 3, cuando el nodo a eliminar tiene dos hijos
-        boolean res = true;
-        NodoAVL padreAux, aux;
-
-        // Busco como candidato al hijo mas chico del subarbol derecho 
-        aux = n.getHD();
-        padreAux = n;
-
-        if (aux.getHI() == null) {
-            // Si el mismo hijo derecho es el candidato (no tiene HI)
-            n.setElem(aux.getElem());
-            n.setHD(aux.getHD());
-
-        } else {
-            // Busco el candidato bajando por la izquierda hasta encontrar null
-            while (aux.getHI() != null) {
-                padreAux = aux;
-                aux = aux.getHI();
-            }
-
-            // Si encuentro el candidato, le asigno ese valor a n (reemplazo valor)
-            n.setElem(aux.getElem());
-
-            // Elimino el nodo candidato (que ahora esta duplicado)
-            if (aux.getHI() == null && aux.getHD() == null) {
-                // Si no tiene hijos es hoja
-                eliminarCaso1(aux, padreAux);
-            } else {
-                // Sino tiene al menos un hijo (solo puede ser derecho en este caso)
-                eliminarCaso2(aux, padreAux);
-            }
-        }
-        return res;
-    }
+    
 
     public Lista listar() {
         Lista lis = new Lista();
@@ -348,13 +264,13 @@ public class ArbolAVL {
         String cadena = "";
 
         if (n != null) {
-
+          int altura = n.getAltura();
             if (n.getHI() == null && n.getHD() == null) {
                 // Caso especial: Es una HOJA 
-                cadena += "Hoja: " + n.getElem() + "\n";
+                cadena += "Hoja: " + n.getElem()+ " [Alt:" + altura + "]" + "\n";
             } else {
                 // Caso normal: Es un PADRE (mostramos sus enlaces)
-                cadena += "Nodo: " + n.getElem();
+                cadena += "Nodo: " + n.getElem()+ " [Alt:" + altura + "]";
 
                 if (n.getHI() != null) {
                     cadena += " -> HI: " + n.getHI().getElem();

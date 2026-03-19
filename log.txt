@@ -1,0 +1,1078 @@
+
+=======================================================
+ESTADO DEL SISTEMA - POST-CARGA INICIAL (2026-03-16 10:32:16)
+=======================================================
+=== ESTACIONES ===
+Moron (Alt: 4) | HI: Caballito | HD: San Isidro
+Caballito (Alt: 3) | HI: Avellaneda | HD: Flores
+Avellaneda (Alt: 1) | HI: - | HD: Belgrano C
+Belgrano C (Alt: 0) | HI: - | HD: -
+Flores (Alt: 2) | HI: Cordoba | HD: Lujan
+Cordoba (Alt: 1) | HI: Constitucion | HD: Ezeiza
+Constitucion (Alt: 0) | HI: - | HD: -
+Ezeiza (Alt: 0) | HI: - | HD: -
+Lujan (Alt: 1) | HI: Lomas | HD: -
+Lomas (Alt: 0) | HI: - | HD: -
+San Isidro (Alt: 3) | HI: Pilar | HD: Villa Maria
+Pilar (Alt: 2) | HI: Once | HD: Retiro
+Once (Alt: 0) | HI: - | HD: -
+Retiro (Alt: 1) | HI: Quilmes | HD: Rosario
+Quilmes (Alt: 0) | HI: - | HD: -
+Rosario (Alt: 0) | HI: - | HD: -
+Villa Maria (Alt: 2) | HI: Tigre | HD: Zarate
+Tigre (Alt: 1) | HI: - | HD: Tucuman
+Tucuman (Alt: 0) | HI: - | HD: -
+Zarate (Alt: 0) | HI: - | HD: -
+
+=== LÍNEAS DEL SISTEMA ===
+Línea: Sur
+Recorrido: [Constitucion,Avellaneda,Quilmes]
+----------------------------------------
+Línea: San Martin
+Recorrido: [Retiro,Zarate,Rosario,Cordoba]
+----------------------------------------
+Línea: Mitre
+Recorrido: [Retiro,Belgrano C,San Isidro,Tigre]
+----------------------------------------
+Línea: Oeste
+Recorrido: [Once,Caballito,Flores,Moron,Lujan]
+----------------------------------------
+Línea: Sarmiento
+Recorrido: [Once,Caballito,Flores,Moron]
+----------------------------------------
+Línea: Roca
+Recorrido: [Constitucion,Avellaneda,Lomas]
+----------------------------------------
+Línea: Norte
+Recorrido: [Retiro,Belgrano C,San Isidro,Pilar,Zarate]
+----------------------------------------
+
+=== Mapa DE VÍAS (CONEXIONES Y DISTANCIAS) ===
+[Tucuman]
+   --- 700.0 km ---> [Rosario]
+   --- 550.0 km ---> [Cordoba]
+--------------------------------------------
+[Cordoba]
+   --- 550.0 km ---> [Tucuman]
+   --- 145.0 km ---> [Villa Maria]
+   --- 400.0 km ---> [Rosario]
+--------------------------------------------
+[Rosario]
+   --- 700.0 km ---> [Tucuman]
+   --- 250.0 km ---> [Villa Maria]
+   --- 400.0 km ---> [Cordoba]
+   --- 200.0 km ---> [Zarate]
+--------------------------------------------
+[Lomas]
+   --- 22.0 km ---> [Quilmes]
+   --- 20.0 km ---> [Ezeiza]
+   --- 10.0 km ---> [Avellaneda]
+--------------------------------------------
+[Constitucion]
+   --- 5.0 km ---> [Avellaneda]
+--------------------------------------------
+[Quilmes]
+   --- 22.0 km ---> [Lomas]
+   --- 30.0 km ---> [Ezeiza]
+   --- 11.5 km ---> [Avellaneda]
+--------------------------------------------
+[Once]
+   --- 3.5 km ---> [Retiro]
+   --- 7.0 km ---> [Flores]
+   --- 4.0 km ---> [Caballito]
+--------------------------------------------
+[Lujan]
+   --- 28.0 km ---> [Pilar]
+   --- 45.0 km ---> [Moron]
+--------------------------------------------
+[Villa Maria]
+   --- 145.0 km ---> [Cordoba]
+   --- 250.0 km ---> [Rosario]
+--------------------------------------------
+[Tigre]
+   --- 45.0 km ---> [Pilar]
+   --- 60.0 km ---> [Zarate]
+   --- 8.5 km ---> [San Isidro]
+--------------------------------------------
+[Retiro]
+   --- 12.0 km ---> [Avellaneda]
+   --- 3.5 km ---> [Once]
+   --- 85.0 km ---> [Zarate]
+   --- 7.0 km ---> [Caballito]
+   --- 6.5 km ---> [Belgrano C]
+--------------------------------------------
+[Ezeiza]
+   --- 30.0 km ---> [Quilmes]
+   --- 25.0 km ---> [Moron]
+   --- 20.0 km ---> [Lomas]
+--------------------------------------------
+[Belgrano C]
+   --- 10.2 km ---> [San Isidro]
+   --- 6.5 km ---> [Retiro]
+--------------------------------------------
+[Zarate]
+   --- 60.0 km ---> [Tigre]
+   --- 40.0 km ---> [Pilar]
+   --- 200.0 km ---> [Rosario]
+   --- 85.0 km ---> [Retiro]
+--------------------------------------------
+[Pilar]
+   --- 45.0 km ---> [Tigre]
+   --- 28.0 km ---> [Lujan]
+   --- 40.0 km ---> [Zarate]
+   --- 35.0 km ---> [San Isidro]
+--------------------------------------------
+[Flores]
+   --- 7.0 km ---> [Once]
+   --- 12.5 km ---> [Moron]
+   --- 3.2 km ---> [Caballito]
+--------------------------------------------
+[Avellaneda]
+   --- 12.0 km ---> [Retiro]
+   --- 10.0 km ---> [Lomas]
+   --- 11.5 km ---> [Quilmes]
+   --- 5.0 km ---> [Constitucion]
+--------------------------------------------
+[San Isidro]
+   --- 35.0 km ---> [Pilar]
+   --- 8.5 km ---> [Tigre]
+   --- 10.2 km ---> [Belgrano C]
+--------------------------------------------
+[Caballito]
+   --- 4.0 km ---> [Once]
+   --- 3.2 km ---> [Flores]
+   --- 7.0 km ---> [Retiro]
+--------------------------------------------
+[Moron]
+   --- 25.0 km ---> [Ezeiza]
+   --- 45.0 km ---> [Lujan]
+   --- 12.5 km ---> [Flores]
+--------------------------------------------
+
+=======================================================
+
+[2026-03-16 11:06:48] OPERACIÓN: Estación Moron eliminada del sistema y del mapa.
+
+=======================================================
+ESTADO DEL SISTEMA - POST-CARGA INICIAL (2026-03-16 11:22:31)
+=======================================================
+=== ESTACIONES ===
+Moron (Alt: 4) | HI: Caballito | HD: San Isidro
+Caballito (Alt: 3) | HI: Avellaneda | HD: Flores
+Avellaneda (Alt: 1) | HI: - | HD: Belgrano C
+Belgrano C (Alt: 0) | HI: - | HD: -
+Flores (Alt: 2) | HI: Cordoba | HD: Lujan
+Cordoba (Alt: 1) | HI: Constitucion | HD: Ezeiza
+Constitucion (Alt: 0) | HI: - | HD: -
+Ezeiza (Alt: 0) | HI: - | HD: -
+Lujan (Alt: 1) | HI: Lomas | HD: -
+Lomas (Alt: 0) | HI: - | HD: -
+San Isidro (Alt: 3) | HI: Pilar | HD: Villa Maria
+Pilar (Alt: 2) | HI: Once | HD: Retiro
+Once (Alt: 0) | HI: - | HD: -
+Retiro (Alt: 1) | HI: Quilmes | HD: Rosario
+Quilmes (Alt: 0) | HI: - | HD: -
+Rosario (Alt: 0) | HI: - | HD: -
+Villa Maria (Alt: 2) | HI: Tigre | HD: Zarate
+Tigre (Alt: 1) | HI: - | HD: Tucuman
+Tucuman (Alt: 0) | HI: - | HD: -
+Zarate (Alt: 0) | HI: - | HD: -
+
+=== LÍNEAS DEL SISTEMA ===
+Línea: Sur
+Recorrido: [Constitucion,Avellaneda,Quilmes]
+----------------------------------------
+Línea: San Martin
+Recorrido: [Retiro,Zarate,Rosario,Cordoba]
+----------------------------------------
+Línea: Mitre
+Recorrido: [Retiro,Belgrano C,San Isidro,Tigre]
+----------------------------------------
+Línea: Oeste
+Recorrido: [Once,Caballito,Flores,Moron,Lujan]
+----------------------------------------
+Línea: Sarmiento
+Recorrido: [Once,Caballito,Flores,Moron]
+----------------------------------------
+Línea: Roca
+Recorrido: [Constitucion,Avellaneda,Lomas]
+----------------------------------------
+Línea: Norte
+Recorrido: [Retiro,Belgrano C,San Isidro,Pilar,Zarate]
+----------------------------------------
+
+=== Mapa DE VÍAS (CONEXIONES Y DISTANCIAS) ===
+[Tucuman]
+   --- 700.0 km ---> [Rosario]
+   --- 550.0 km ---> [Cordoba]
+--------------------------------------------
+[Cordoba]
+   --- 550.0 km ---> [Tucuman]
+   --- 145.0 km ---> [Villa Maria]
+   --- 400.0 km ---> [Rosario]
+--------------------------------------------
+[Rosario]
+   --- 700.0 km ---> [Tucuman]
+   --- 250.0 km ---> [Villa Maria]
+   --- 400.0 km ---> [Cordoba]
+   --- 200.0 km ---> [Zarate]
+--------------------------------------------
+[Lomas]
+   --- 22.0 km ---> [Quilmes]
+   --- 20.0 km ---> [Ezeiza]
+   --- 10.0 km ---> [Avellaneda]
+--------------------------------------------
+[Constitucion]
+   --- 5.0 km ---> [Avellaneda]
+--------------------------------------------
+[Quilmes]
+   --- 22.0 km ---> [Lomas]
+   --- 30.0 km ---> [Ezeiza]
+   --- 11.5 km ---> [Avellaneda]
+--------------------------------------------
+[Once]
+   --- 3.5 km ---> [Retiro]
+   --- 7.0 km ---> [Flores]
+   --- 4.0 km ---> [Caballito]
+--------------------------------------------
+[Lujan]
+   --- 28.0 km ---> [Pilar]
+   --- 45.0 km ---> [Moron]
+--------------------------------------------
+[Villa Maria]
+   --- 145.0 km ---> [Cordoba]
+   --- 250.0 km ---> [Rosario]
+--------------------------------------------
+[Tigre]
+   --- 45.0 km ---> [Pilar]
+   --- 60.0 km ---> [Zarate]
+   --- 8.5 km ---> [San Isidro]
+--------------------------------------------
+[Retiro]
+   --- 12.0 km ---> [Avellaneda]
+   --- 3.5 km ---> [Once]
+   --- 85.0 km ---> [Zarate]
+   --- 7.0 km ---> [Caballito]
+   --- 6.5 km ---> [Belgrano C]
+--------------------------------------------
+[Ezeiza]
+   --- 30.0 km ---> [Quilmes]
+   --- 25.0 km ---> [Moron]
+   --- 20.0 km ---> [Lomas]
+--------------------------------------------
+[Belgrano C]
+   --- 10.2 km ---> [San Isidro]
+   --- 6.5 km ---> [Retiro]
+--------------------------------------------
+[Zarate]
+   --- 60.0 km ---> [Tigre]
+   --- 40.0 km ---> [Pilar]
+   --- 200.0 km ---> [Rosario]
+   --- 85.0 km ---> [Retiro]
+--------------------------------------------
+[Pilar]
+   --- 45.0 km ---> [Tigre]
+   --- 28.0 km ---> [Lujan]
+   --- 40.0 km ---> [Zarate]
+   --- 35.0 km ---> [San Isidro]
+--------------------------------------------
+[Flores]
+   --- 7.0 km ---> [Once]
+   --- 12.5 km ---> [Moron]
+   --- 3.2 km ---> [Caballito]
+--------------------------------------------
+[Avellaneda]
+   --- 12.0 km ---> [Retiro]
+   --- 10.0 km ---> [Lomas]
+   --- 11.5 km ---> [Quilmes]
+   --- 5.0 km ---> [Constitucion]
+--------------------------------------------
+[San Isidro]
+   --- 35.0 km ---> [Pilar]
+   --- 8.5 km ---> [Tigre]
+   --- 10.2 km ---> [Belgrano C]
+--------------------------------------------
+[Caballito]
+   --- 4.0 km ---> [Once]
+   --- 3.2 km ---> [Flores]
+   --- 7.0 km ---> [Retiro]
+--------------------------------------------
+[Moron]
+   --- 25.0 km ---> [Ezeiza]
+   --- 45.0 km ---> [Lujan]
+   --- 12.5 km ---> [Flores]
+--------------------------------------------
+
+=======================================================
+
+
+=======================================================
+ESTADO DEL SISTEMA - POST-CARGA INICIAL (2026-03-17 09:32:55)
+=======================================================
+=== ESTACIONES ===
+Moron (Alt: 4) | HI: Caballito | HD: San Isidro
+Caballito (Alt: 3) | HI: Avellaneda | HD: Flores
+Avellaneda (Alt: 1) | HI: - | HD: Belgrano C
+Belgrano C (Alt: 0) | HI: - | HD: -
+Flores (Alt: 2) | HI: Cordoba | HD: Lujan
+Cordoba (Alt: 1) | HI: Constitucion | HD: Ezeiza
+Constitucion (Alt: 0) | HI: - | HD: -
+Ezeiza (Alt: 0) | HI: - | HD: -
+Lujan (Alt: 1) | HI: Lomas | HD: -
+Lomas (Alt: 0) | HI: - | HD: -
+San Isidro (Alt: 3) | HI: Pilar | HD: Villa Maria
+Pilar (Alt: 2) | HI: Once | HD: Retiro
+Once (Alt: 0) | HI: - | HD: -
+Retiro (Alt: 1) | HI: Quilmes | HD: Rosario
+Quilmes (Alt: 0) | HI: - | HD: -
+Rosario (Alt: 0) | HI: - | HD: -
+Villa Maria (Alt: 2) | HI: Tigre | HD: Zarate
+Tigre (Alt: 1) | HI: - | HD: Tucuman
+Tucuman (Alt: 0) | HI: - | HD: -
+Zarate (Alt: 0) | HI: - | HD: -
+
+=== LÍNEAS DEL SISTEMA ===
+Línea: Sur
+Recorrido: [Constitucion,Avellaneda,Quilmes]
+----------------------------------------
+Línea: San Martin
+Recorrido: [Retiro,Zarate,Rosario,Cordoba]
+----------------------------------------
+Línea: Mitre
+Recorrido: [Retiro,Belgrano C,San Isidro,Tigre]
+----------------------------------------
+Línea: Oeste
+Recorrido: [Once,Caballito,Flores,Moron,Lujan]
+----------------------------------------
+Línea: Sarmiento
+Recorrido: [Once,Caballito,Flores,Moron]
+----------------------------------------
+Línea: Roca
+Recorrido: [Constitucion,Avellaneda,Lomas]
+----------------------------------------
+Línea: Norte
+Recorrido: [Retiro,Belgrano C,San Isidro,Pilar,Zarate]
+----------------------------------------
+
+=== Mapa DE VÍAS (CONEXIONES Y DISTANCIAS) ===
+[Tucuman]
+   --- 700.0 km ---> [Rosario]
+   --- 550.0 km ---> [Cordoba]
+--------------------------------------------
+[Cordoba]
+   --- 550.0 km ---> [Tucuman]
+   --- 145.0 km ---> [Villa Maria]
+   --- 400.0 km ---> [Rosario]
+--------------------------------------------
+[Rosario]
+   --- 700.0 km ---> [Tucuman]
+   --- 250.0 km ---> [Villa Maria]
+   --- 400.0 km ---> [Cordoba]
+   --- 200.0 km ---> [Zarate]
+--------------------------------------------
+[Lomas]
+   --- 22.0 km ---> [Quilmes]
+   --- 20.0 km ---> [Ezeiza]
+   --- 10.0 km ---> [Avellaneda]
+--------------------------------------------
+[Constitucion]
+   --- 5.0 km ---> [Avellaneda]
+--------------------------------------------
+[Quilmes]
+   --- 22.0 km ---> [Lomas]
+   --- 30.0 km ---> [Ezeiza]
+   --- 11.5 km ---> [Avellaneda]
+--------------------------------------------
+[Once]
+   --- 3.5 km ---> [Retiro]
+   --- 7.0 km ---> [Flores]
+   --- 4.0 km ---> [Caballito]
+--------------------------------------------
+[Lujan]
+   --- 28.0 km ---> [Pilar]
+   --- 45.0 km ---> [Moron]
+--------------------------------------------
+[Villa Maria]
+   --- 145.0 km ---> [Cordoba]
+   --- 250.0 km ---> [Rosario]
+--------------------------------------------
+[Tigre]
+   --- 45.0 km ---> [Pilar]
+   --- 60.0 km ---> [Zarate]
+   --- 8.5 km ---> [San Isidro]
+--------------------------------------------
+[Retiro]
+   --- 12.0 km ---> [Avellaneda]
+   --- 3.5 km ---> [Once]
+   --- 85.0 km ---> [Zarate]
+   --- 7.0 km ---> [Caballito]
+   --- 6.5 km ---> [Belgrano C]
+--------------------------------------------
+[Ezeiza]
+   --- 30.0 km ---> [Quilmes]
+   --- 25.0 km ---> [Moron]
+   --- 20.0 km ---> [Lomas]
+--------------------------------------------
+[Belgrano C]
+   --- 10.2 km ---> [San Isidro]
+   --- 6.5 km ---> [Retiro]
+--------------------------------------------
+[Zarate]
+   --- 60.0 km ---> [Tigre]
+   --- 40.0 km ---> [Pilar]
+   --- 200.0 km ---> [Rosario]
+   --- 85.0 km ---> [Retiro]
+--------------------------------------------
+[Pilar]
+   --- 45.0 km ---> [Tigre]
+   --- 28.0 km ---> [Lujan]
+   --- 40.0 km ---> [Zarate]
+   --- 35.0 km ---> [San Isidro]
+--------------------------------------------
+[Flores]
+   --- 7.0 km ---> [Once]
+   --- 12.5 km ---> [Moron]
+   --- 3.2 km ---> [Caballito]
+--------------------------------------------
+[Avellaneda]
+   --- 12.0 km ---> [Retiro]
+   --- 10.0 km ---> [Lomas]
+   --- 11.5 km ---> [Quilmes]
+   --- 5.0 km ---> [Constitucion]
+--------------------------------------------
+[San Isidro]
+   --- 35.0 km ---> [Pilar]
+   --- 8.5 km ---> [Tigre]
+   --- 10.2 km ---> [Belgrano C]
+--------------------------------------------
+[Caballito]
+   --- 4.0 km ---> [Once]
+   --- 3.2 km ---> [Flores]
+   --- 7.0 km ---> [Retiro]
+--------------------------------------------
+[Moron]
+   --- 25.0 km ---> [Ezeiza]
+   --- 45.0 km ---> [Lujan]
+   --- 12.5 km ---> [Flores]
+--------------------------------------------
+
+=======================================================
+
+
+=======================================================
+ESTADO DEL SISTEMA - POST-CARGA INICIAL (2026-03-17 09:36:31)
+=======================================================
+=== ESTACIONES ===
+Moron (Alt: 4) | HI: Caballito | HD: San Isidro
+Caballito (Alt: 3) | HI: Avellaneda | HD: Flores
+Avellaneda (Alt: 1) | HI: - | HD: Belgrano C
+Belgrano C (Alt: 0) | HI: - | HD: -
+Flores (Alt: 2) | HI: Cordoba | HD: Lujan
+Cordoba (Alt: 1) | HI: Constitucion | HD: Ezeiza
+Constitucion (Alt: 0) | HI: - | HD: -
+Ezeiza (Alt: 0) | HI: - | HD: -
+Lujan (Alt: 1) | HI: Lomas | HD: -
+Lomas (Alt: 0) | HI: - | HD: -
+San Isidro (Alt: 3) | HI: Pilar | HD: Villa Maria
+Pilar (Alt: 2) | HI: Once | HD: Retiro
+Once (Alt: 0) | HI: - | HD: -
+Retiro (Alt: 1) | HI: Quilmes | HD: Rosario
+Quilmes (Alt: 0) | HI: - | HD: -
+Rosario (Alt: 0) | HI: - | HD: -
+Villa Maria (Alt: 2) | HI: Tigre | HD: Zarate
+Tigre (Alt: 1) | HI: - | HD: Tucuman
+Tucuman (Alt: 0) | HI: - | HD: -
+Zarate (Alt: 0) | HI: - | HD: -
+
+=== LÍNEAS DEL SISTEMA ===
+Línea: Sur
+Recorrido: [Constitucion,Avellaneda,Quilmes]
+----------------------------------------
+Línea: San Martin
+Recorrido: [Retiro,Zarate,Rosario,Cordoba]
+----------------------------------------
+Línea: Mitre
+Recorrido: [Retiro,Belgrano C,San Isidro,Tigre]
+----------------------------------------
+Línea: Oeste
+Recorrido: [Once,Caballito,Flores,Moron,Lujan]
+----------------------------------------
+Línea: Sarmiento
+Recorrido: [Once,Caballito,Flores,Moron]
+----------------------------------------
+Línea: Roca
+Recorrido: [Constitucion,Avellaneda,Lomas]
+----------------------------------------
+Línea: Norte
+Recorrido: [Retiro,Belgrano C,San Isidro,Pilar,Zarate]
+----------------------------------------
+
+=== Mapa DE VÍAS (CONEXIONES Y DISTANCIAS) ===
+[Tucuman]
+   --- 700.0 km ---> [Rosario]
+   --- 550.0 km ---> [Cordoba]
+--------------------------------------------
+[Cordoba]
+   --- 550.0 km ---> [Tucuman]
+   --- 145.0 km ---> [Villa Maria]
+   --- 400.0 km ---> [Rosario]
+--------------------------------------------
+[Rosario]
+   --- 700.0 km ---> [Tucuman]
+   --- 250.0 km ---> [Villa Maria]
+   --- 400.0 km ---> [Cordoba]
+   --- 200.0 km ---> [Zarate]
+--------------------------------------------
+[Lomas]
+   --- 22.0 km ---> [Quilmes]
+   --- 20.0 km ---> [Ezeiza]
+   --- 10.0 km ---> [Avellaneda]
+--------------------------------------------
+[Constitucion]
+   --- 5.0 km ---> [Avellaneda]
+--------------------------------------------
+[Quilmes]
+   --- 22.0 km ---> [Lomas]
+   --- 30.0 km ---> [Ezeiza]
+   --- 11.5 km ---> [Avellaneda]
+--------------------------------------------
+[Once]
+   --- 3.5 km ---> [Retiro]
+   --- 7.0 km ---> [Flores]
+   --- 4.0 km ---> [Caballito]
+--------------------------------------------
+[Lujan]
+   --- 28.0 km ---> [Pilar]
+   --- 45.0 km ---> [Moron]
+--------------------------------------------
+[Villa Maria]
+   --- 145.0 km ---> [Cordoba]
+   --- 250.0 km ---> [Rosario]
+--------------------------------------------
+[Tigre]
+   --- 45.0 km ---> [Pilar]
+   --- 60.0 km ---> [Zarate]
+   --- 8.5 km ---> [San Isidro]
+--------------------------------------------
+[Retiro]
+   --- 12.0 km ---> [Avellaneda]
+   --- 3.5 km ---> [Once]
+   --- 85.0 km ---> [Zarate]
+   --- 7.0 km ---> [Caballito]
+   --- 6.5 km ---> [Belgrano C]
+--------------------------------------------
+[Ezeiza]
+   --- 30.0 km ---> [Quilmes]
+   --- 25.0 km ---> [Moron]
+   --- 20.0 km ---> [Lomas]
+--------------------------------------------
+[Belgrano C]
+   --- 10.2 km ---> [San Isidro]
+   --- 6.5 km ---> [Retiro]
+--------------------------------------------
+[Zarate]
+   --- 60.0 km ---> [Tigre]
+   --- 40.0 km ---> [Pilar]
+   --- 200.0 km ---> [Rosario]
+   --- 85.0 km ---> [Retiro]
+--------------------------------------------
+[Pilar]
+   --- 45.0 km ---> [Tigre]
+   --- 28.0 km ---> [Lujan]
+   --- 40.0 km ---> [Zarate]
+   --- 35.0 km ---> [San Isidro]
+--------------------------------------------
+[Flores]
+   --- 7.0 km ---> [Once]
+   --- 12.5 km ---> [Moron]
+   --- 3.2 km ---> [Caballito]
+--------------------------------------------
+[Avellaneda]
+   --- 12.0 km ---> [Retiro]
+   --- 10.0 km ---> [Lomas]
+   --- 11.5 km ---> [Quilmes]
+   --- 5.0 km ---> [Constitucion]
+--------------------------------------------
+[San Isidro]
+   --- 35.0 km ---> [Pilar]
+   --- 8.5 km ---> [Tigre]
+   --- 10.2 km ---> [Belgrano C]
+--------------------------------------------
+[Caballito]
+   --- 4.0 km ---> [Once]
+   --- 3.2 km ---> [Flores]
+   --- 7.0 km ---> [Retiro]
+--------------------------------------------
+[Moron]
+   --- 25.0 km ---> [Ezeiza]
+   --- 45.0 km ---> [Lujan]
+   --- 12.5 km ---> [Flores]
+--------------------------------------------
+
+=======================================================
+
+
+=======================================================
+ESTADO DEL SISTEMA - POST-CARGA INICIAL (2026-03-17 09:38:38)
+=======================================================
+=== ESTACIONES ===
+Moron (Alt: 4) | HI: Caballito | HD: San Isidro
+Caballito (Alt: 3) | HI: Avellaneda | HD: Flores
+Avellaneda (Alt: 1) | HI: - | HD: Belgrano C
+Belgrano C (Alt: 0) | HI: - | HD: -
+Flores (Alt: 2) | HI: Cordoba | HD: Lujan
+Cordoba (Alt: 1) | HI: Constitucion | HD: Ezeiza
+Constitucion (Alt: 0) | HI: - | HD: -
+Ezeiza (Alt: 0) | HI: - | HD: -
+Lujan (Alt: 1) | HI: Lomas | HD: -
+Lomas (Alt: 0) | HI: - | HD: -
+San Isidro (Alt: 3) | HI: Pilar | HD: Villa Maria
+Pilar (Alt: 2) | HI: Once | HD: Retiro
+Once (Alt: 0) | HI: - | HD: -
+Retiro (Alt: 1) | HI: Quilmes | HD: Rosario
+Quilmes (Alt: 0) | HI: - | HD: -
+Rosario (Alt: 0) | HI: - | HD: -
+Villa Maria (Alt: 2) | HI: Tigre | HD: Zarate
+Tigre (Alt: 1) | HI: - | HD: Tucuman
+Tucuman (Alt: 0) | HI: - | HD: -
+Zarate (Alt: 0) | HI: - | HD: -
+
+=== LÍNEAS DEL SISTEMA ===
+Línea: Sur
+Recorrido: [Constitucion,Avellaneda,Quilmes]
+----------------------------------------
+Línea: San Martin
+Recorrido: [Retiro,Zarate,Rosario,Cordoba]
+----------------------------------------
+Línea: Mitre
+Recorrido: [Retiro,Belgrano C,San Isidro,Tigre]
+----------------------------------------
+Línea: Oeste
+Recorrido: [Once,Caballito,Flores,Moron,Lujan]
+----------------------------------------
+Línea: Sarmiento
+Recorrido: [Once,Caballito,Flores,Moron]
+----------------------------------------
+Línea: Roca
+Recorrido: [Constitucion,Avellaneda,Lomas]
+----------------------------------------
+Línea: Norte
+Recorrido: [Retiro,Belgrano C,San Isidro,Pilar,Zarate]
+----------------------------------------
+
+=== Mapa DE VÍAS (CONEXIONES Y DISTANCIAS) ===
+[Tucuman]
+   --- 700.0 km ---> [Rosario]
+   --- 550.0 km ---> [Cordoba]
+--------------------------------------------
+[Cordoba]
+   --- 550.0 km ---> [Tucuman]
+   --- 145.0 km ---> [Villa Maria]
+   --- 400.0 km ---> [Rosario]
+--------------------------------------------
+[Rosario]
+   --- 700.0 km ---> [Tucuman]
+   --- 250.0 km ---> [Villa Maria]
+   --- 400.0 km ---> [Cordoba]
+   --- 200.0 km ---> [Zarate]
+--------------------------------------------
+[Lomas]
+   --- 22.0 km ---> [Quilmes]
+   --- 20.0 km ---> [Ezeiza]
+   --- 10.0 km ---> [Avellaneda]
+--------------------------------------------
+[Constitucion]
+   --- 5.0 km ---> [Avellaneda]
+--------------------------------------------
+[Quilmes]
+   --- 22.0 km ---> [Lomas]
+   --- 30.0 km ---> [Ezeiza]
+   --- 11.5 km ---> [Avellaneda]
+--------------------------------------------
+[Once]
+   --- 3.5 km ---> [Retiro]
+   --- 7.0 km ---> [Flores]
+   --- 4.0 km ---> [Caballito]
+--------------------------------------------
+[Lujan]
+   --- 28.0 km ---> [Pilar]
+   --- 45.0 km ---> [Moron]
+--------------------------------------------
+[Villa Maria]
+   --- 145.0 km ---> [Cordoba]
+   --- 250.0 km ---> [Rosario]
+--------------------------------------------
+[Tigre]
+   --- 45.0 km ---> [Pilar]
+   --- 60.0 km ---> [Zarate]
+   --- 8.5 km ---> [San Isidro]
+--------------------------------------------
+[Retiro]
+   --- 12.0 km ---> [Avellaneda]
+   --- 3.5 km ---> [Once]
+   --- 85.0 km ---> [Zarate]
+   --- 7.0 km ---> [Caballito]
+   --- 6.5 km ---> [Belgrano C]
+--------------------------------------------
+[Ezeiza]
+   --- 30.0 km ---> [Quilmes]
+   --- 25.0 km ---> [Moron]
+   --- 20.0 km ---> [Lomas]
+--------------------------------------------
+[Belgrano C]
+   --- 10.2 km ---> [San Isidro]
+   --- 6.5 km ---> [Retiro]
+--------------------------------------------
+[Zarate]
+   --- 60.0 km ---> [Tigre]
+   --- 40.0 km ---> [Pilar]
+   --- 200.0 km ---> [Rosario]
+   --- 85.0 km ---> [Retiro]
+--------------------------------------------
+[Pilar]
+   --- 45.0 km ---> [Tigre]
+   --- 28.0 km ---> [Lujan]
+   --- 40.0 km ---> [Zarate]
+   --- 35.0 km ---> [San Isidro]
+--------------------------------------------
+[Flores]
+   --- 7.0 km ---> [Once]
+   --- 12.5 km ---> [Moron]
+   --- 3.2 km ---> [Caballito]
+--------------------------------------------
+[Avellaneda]
+   --- 12.0 km ---> [Retiro]
+   --- 10.0 km ---> [Lomas]
+   --- 11.5 km ---> [Quilmes]
+   --- 5.0 km ---> [Constitucion]
+--------------------------------------------
+[San Isidro]
+   --- 35.0 km ---> [Pilar]
+   --- 8.5 km ---> [Tigre]
+   --- 10.2 km ---> [Belgrano C]
+--------------------------------------------
+[Caballito]
+   --- 4.0 km ---> [Once]
+   --- 3.2 km ---> [Flores]
+   --- 7.0 km ---> [Retiro]
+--------------------------------------------
+[Moron]
+   --- 25.0 km ---> [Ezeiza]
+   --- 45.0 km ---> [Lujan]
+   --- 12.5 km ---> [Flores]
+--------------------------------------------
+
+=======================================================
+
+[2026-03-17 09:39:00] OPERACIÓN: Estación Yi fue dada de alta con éxito.
+
+=======================================================
+ESTADO DEL SISTEMA - POST-CARGA INICIAL (2026-03-17 10:24:46)
+=======================================================
+=== ESTACIONES ===
+Moron (Alt: 4) | HI: Caballito | HD: San Isidro
+Caballito (Alt: 3) | HI: Avellaneda | HD: Flores
+Avellaneda (Alt: 1) | HI: - | HD: Belgrano C
+Belgrano C (Alt: 0) | HI: - | HD: -
+Flores (Alt: 2) | HI: Cordoba | HD: Lujan
+Cordoba (Alt: 1) | HI: Constitucion | HD: Ezeiza
+Constitucion (Alt: 0) | HI: - | HD: -
+Ezeiza (Alt: 0) | HI: - | HD: -
+Lujan (Alt: 1) | HI: Lomas | HD: -
+Lomas (Alt: 0) | HI: - | HD: -
+San Isidro (Alt: 3) | HI: Pilar | HD: Villa Maria
+Pilar (Alt: 2) | HI: Once | HD: Retiro
+Once (Alt: 0) | HI: - | HD: -
+Retiro (Alt: 1) | HI: Quilmes | HD: Rosario
+Quilmes (Alt: 0) | HI: - | HD: -
+Rosario (Alt: 0) | HI: - | HD: -
+Villa Maria (Alt: 2) | HI: Tigre | HD: Zarate
+Tigre (Alt: 1) | HI: - | HD: Tucuman
+Tucuman (Alt: 0) | HI: - | HD: -
+Zarate (Alt: 0) | HI: - | HD: -
+
+=== LÍNEAS DEL SISTEMA ===
+Línea: Sur
+Recorrido: [Constitucion,Avellaneda,Quilmes]
+----------------------------------------
+Línea: San Martin
+Recorrido: [Retiro,Zarate,Rosario,Cordoba]
+----------------------------------------
+Línea: Mitre
+Recorrido: [Retiro,Belgrano C,San Isidro,Tigre]
+----------------------------------------
+Línea: Oeste
+Recorrido: [Once,Caballito,Flores,Moron,Lujan]
+----------------------------------------
+Línea: Sarmiento
+Recorrido: [Once,Caballito,Flores,Moron]
+----------------------------------------
+Línea: Roca
+Recorrido: [Constitucion,Avellaneda,Lomas]
+----------------------------------------
+Línea: Norte
+Recorrido: [Retiro,Belgrano C,San Isidro,Pilar,Zarate]
+----------------------------------------
+
+=== Mapa DE VÍAS (CONEXIONES Y DISTANCIAS) ===
+[Tucuman]
+   --- 700.0 km ---> [Rosario]
+   --- 550.0 km ---> [Cordoba]
+--------------------------------------------
+[Cordoba]
+   --- 550.0 km ---> [Tucuman]
+   --- 145.0 km ---> [Villa Maria]
+   --- 400.0 km ---> [Rosario]
+--------------------------------------------
+[Rosario]
+   --- 700.0 km ---> [Tucuman]
+   --- 250.0 km ---> [Villa Maria]
+   --- 400.0 km ---> [Cordoba]
+   --- 200.0 km ---> [Zarate]
+--------------------------------------------
+[Lomas]
+   --- 22.0 km ---> [Quilmes]
+   --- 20.0 km ---> [Ezeiza]
+   --- 10.0 km ---> [Avellaneda]
+--------------------------------------------
+[Constitucion]
+   --- 5.0 km ---> [Avellaneda]
+--------------------------------------------
+[Quilmes]
+   --- 22.0 km ---> [Lomas]
+   --- 30.0 km ---> [Ezeiza]
+   --- 11.5 km ---> [Avellaneda]
+--------------------------------------------
+[Once]
+   --- 3.5 km ---> [Retiro]
+   --- 7.0 km ---> [Flores]
+   --- 4.0 km ---> [Caballito]
+--------------------------------------------
+[Lujan]
+   --- 28.0 km ---> [Pilar]
+   --- 45.0 km ---> [Moron]
+--------------------------------------------
+[Villa Maria]
+   --- 145.0 km ---> [Cordoba]
+   --- 250.0 km ---> [Rosario]
+--------------------------------------------
+[Tigre]
+   --- 45.0 km ---> [Pilar]
+   --- 60.0 km ---> [Zarate]
+   --- 8.5 km ---> [San Isidro]
+--------------------------------------------
+[Retiro]
+   --- 12.0 km ---> [Avellaneda]
+   --- 3.5 km ---> [Once]
+   --- 85.0 km ---> [Zarate]
+   --- 7.0 km ---> [Caballito]
+   --- 6.5 km ---> [Belgrano C]
+--------------------------------------------
+[Ezeiza]
+   --- 30.0 km ---> [Quilmes]
+   --- 25.0 km ---> [Moron]
+   --- 20.0 km ---> [Lomas]
+--------------------------------------------
+[Belgrano C]
+   --- 10.2 km ---> [San Isidro]
+   --- 6.5 km ---> [Retiro]
+--------------------------------------------
+[Zarate]
+   --- 60.0 km ---> [Tigre]
+   --- 40.0 km ---> [Pilar]
+   --- 200.0 km ---> [Rosario]
+   --- 85.0 km ---> [Retiro]
+--------------------------------------------
+[Pilar]
+   --- 45.0 km ---> [Tigre]
+   --- 28.0 km ---> [Lujan]
+   --- 40.0 km ---> [Zarate]
+   --- 35.0 km ---> [San Isidro]
+--------------------------------------------
+[Flores]
+   --- 7.0 km ---> [Once]
+   --- 12.5 km ---> [Moron]
+   --- 3.2 km ---> [Caballito]
+--------------------------------------------
+[Avellaneda]
+   --- 12.0 km ---> [Retiro]
+   --- 10.0 km ---> [Lomas]
+   --- 11.5 km ---> [Quilmes]
+   --- 5.0 km ---> [Constitucion]
+--------------------------------------------
+[San Isidro]
+   --- 35.0 km ---> [Pilar]
+   --- 8.5 km ---> [Tigre]
+   --- 10.2 km ---> [Belgrano C]
+--------------------------------------------
+[Caballito]
+   --- 4.0 km ---> [Once]
+   --- 3.2 km ---> [Flores]
+   --- 7.0 km ---> [Retiro]
+--------------------------------------------
+[Moron]
+   --- 25.0 km ---> [Ezeiza]
+   --- 45.0 km ---> [Lujan]
+   --- 12.5 km ---> [Flores]
+--------------------------------------------
+
+=======================================================
+
+[2026-03-17 10:25:30] OPERACIÓN: Estación Mitre fue dada de alta con éxito.
+
+=======================================================
+ESTADO DEL SISTEMA - POST-CARGA INICIAL (2026-03-17 22:33:08)
+=======================================================
+=== ESTACIONES ===
+MORON (Alt: 4) | HI: CABALLITO | HD: SAN ISIDRO
+CABALLITO (Alt: 3) | HI: AVELLANEDA | HD: FLORES
+AVELLANEDA (Alt: 1) | HI: - | HD: BELGRANO C
+BELGRANO C (Alt: 0) | HI: - | HD: -
+FLORES (Alt: 2) | HI: CORDOBA | HD: LUJAN
+CORDOBA (Alt: 1) | HI: CONSTITUCION | HD: EZEIZA
+CONSTITUCION (Alt: 0) | HI: - | HD: -
+EZEIZA (Alt: 0) | HI: - | HD: -
+LUJAN (Alt: 1) | HI: LOMAS | HD: -
+LOMAS (Alt: 0) | HI: - | HD: -
+SAN ISIDRO (Alt: 3) | HI: PILAR | HD: VILLA MARIA
+PILAR (Alt: 2) | HI: ONCE | HD: RETIRO
+ONCE (Alt: 0) | HI: - | HD: -
+RETIRO (Alt: 1) | HI: QUILMES | HD: ROSARIO
+QUILMES (Alt: 0) | HI: - | HD: -
+ROSARIO (Alt: 0) | HI: - | HD: -
+VILLA MARIA (Alt: 2) | HI: TIGRE | HD: ZARATE
+TIGRE (Alt: 1) | HI: - | HD: TUCUMAN
+TUCUMAN (Alt: 0) | HI: - | HD: -
+ZARATE (Alt: 0) | HI: - | HD: -
+
+=== LÍNEAS DEL SISTEMA ===
+Línea: SARMIENTO
+Recorrido: [ONCE,CABALLITO,FLORES,MORON]
+----------------------------------------
+Línea: SUR
+Recorrido: [CONSTITUCION,AVELLANEDA,QUILMES]
+----------------------------------------
+Línea: NORTE
+Recorrido: [RETIRO,BELGRANO C,SAN ISIDRO,PILAR,ZARATE]
+----------------------------------------
+Línea: MITRE
+Recorrido: [RETIRO,BELGRANO C,SAN ISIDRO,TIGRE]
+----------------------------------------
+Línea: OESTE
+Recorrido: [ONCE,CABALLITO,FLORES,MORON,LUJAN]
+----------------------------------------
+Línea: SAN MARTIN
+Recorrido: [RETIRO,ZARATE,ROSARIO,CORDOBA]
+----------------------------------------
+Línea: ROCA
+Recorrido: [CONSTITUCION,AVELLANEDA,LOMAS]
+----------------------------------------
+
+=== Mapa DE VÍAS (CONEXIONES Y DISTANCIAS) ===
+[TUCUMAN]
+   --- 700.0 km ---> [ROSARIO]
+   --- 550.0 km ---> [CORDOBA]
+--------------------------------------------
+[CORDOBA]
+   --- 550.0 km ---> [TUCUMAN]
+   --- 145.0 km ---> [VILLA MARIA]
+   --- 400.0 km ---> [ROSARIO]
+--------------------------------------------
+[ROSARIO]
+   --- 700.0 km ---> [TUCUMAN]
+   --- 250.0 km ---> [VILLA MARIA]
+   --- 400.0 km ---> [CORDOBA]
+   --- 200.0 km ---> [ZARATE]
+--------------------------------------------
+[LOMAS]
+   --- 22.0 km ---> [QUILMES]
+   --- 20.0 km ---> [EZEIZA]
+   --- 10.0 km ---> [AVELLANEDA]
+--------------------------------------------
+[CONSTITUCION]
+   --- 5.0 km ---> [AVELLANEDA]
+--------------------------------------------
+[QUILMES]
+   --- 22.0 km ---> [LOMAS]
+   --- 30.0 km ---> [EZEIZA]
+   --- 11.5 km ---> [AVELLANEDA]
+--------------------------------------------
+[ONCE]
+   --- 3.5 km ---> [RETIRO]
+   --- 7.0 km ---> [FLORES]
+   --- 4.0 km ---> [CABALLITO]
+--------------------------------------------
+[LUJAN]
+   --- 28.0 km ---> [PILAR]
+   --- 45.0 km ---> [MORON]
+--------------------------------------------
+[VILLA MARIA]
+   --- 145.0 km ---> [CORDOBA]
+   --- 250.0 km ---> [ROSARIO]
+--------------------------------------------
+[TIGRE]
+   --- 45.0 km ---> [PILAR]
+   --- 60.0 km ---> [ZARATE]
+   --- 8.5 km ---> [SAN ISIDRO]
+--------------------------------------------
+[RETIRO]
+   --- 12.0 km ---> [AVELLANEDA]
+   --- 3.5 km ---> [ONCE]
+   --- 85.0 km ---> [ZARATE]
+   --- 7.0 km ---> [CABALLITO]
+   --- 6.5 km ---> [BELGRANO C]
+--------------------------------------------
+[EZEIZA]
+   --- 30.0 km ---> [QUILMES]
+   --- 25.0 km ---> [MORON]
+   --- 20.0 km ---> [LOMAS]
+--------------------------------------------
+[BELGRANO C]
+   --- 10.2 km ---> [SAN ISIDRO]
+   --- 6.5 km ---> [RETIRO]
+--------------------------------------------
+[ZARATE]
+   --- 60.0 km ---> [TIGRE]
+   --- 40.0 km ---> [PILAR]
+   --- 200.0 km ---> [ROSARIO]
+   --- 85.0 km ---> [RETIRO]
+--------------------------------------------
+[PILAR]
+   --- 45.0 km ---> [TIGRE]
+   --- 28.0 km ---> [LUJAN]
+   --- 40.0 km ---> [ZARATE]
+   --- 35.0 km ---> [SAN ISIDRO]
+--------------------------------------------
+[FLORES]
+   --- 7.0 km ---> [ONCE]
+   --- 12.5 km ---> [MORON]
+   --- 3.2 km ---> [CABALLITO]
+--------------------------------------------
+[AVELLANEDA]
+   --- 12.0 km ---> [RETIRO]
+   --- 10.0 km ---> [LOMAS]
+   --- 11.5 km ---> [QUILMES]
+   --- 5.0 km ---> [CONSTITUCION]
+--------------------------------------------
+[SAN ISIDRO]
+   --- 35.0 km ---> [PILAR]
+   --- 8.5 km ---> [TIGRE]
+   --- 10.2 km ---> [BELGRANO C]
+--------------------------------------------
+[CABALLITO]
+   --- 4.0 km ---> [ONCE]
+   --- 3.2 km ---> [FLORES]
+   --- 7.0 km ---> [RETIRO]
+--------------------------------------------
+[MORON]
+   --- 25.0 km ---> [EZEIZA]
+   --- 45.0 km ---> [LUJAN]
+   --- 12.5 km ---> [FLORES]
+--------------------------------------------
+
+=======================================================
+
+[2026-03-17 22:33:55] OPERACIÓN: Estación Caballere fue dada de alta con éxito.
+[2026-03-17 22:34:47] OPERACIÓN: Tramo Caballere <--23.0 km--> Belgrano c  agregado con éxito a la red ferroviaria.
+[2026-03-17 22:35:46] OPERACIÓN: Error Baja estación: No existe estación caba
+[2026-03-17 22:36:21] OPERACIÓN: Estación Caballere eliminada del sistema y del mapa.
