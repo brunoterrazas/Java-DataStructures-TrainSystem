@@ -96,7 +96,7 @@ public class ArbolAVL {
                 nodo = rotacionIzquierda(n);
             }
         }
-        //Caso 2: caido a la izquierda
+        else{  //Caso 2: caido a la izquierda
         if (balance > 1) {
             // Si el hijo izquierdo tiene balance negativo
             if (bal(n.getHI()) < 0) {
@@ -104,8 +104,8 @@ public class ArbolAVL {
             } else {
                 nodo = rotacionDerecha(n);
             }
+         }
         }
-
         return nodo;
     }
 
