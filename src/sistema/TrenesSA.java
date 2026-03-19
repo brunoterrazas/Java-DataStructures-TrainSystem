@@ -159,7 +159,7 @@ public class TrenesSA {
             nombre = (sc.nextLine().trim());
 
         }
-        return nombre;
+        return nombre.toUpperCase();
     }
 
     //ABM LINEA
@@ -543,7 +543,7 @@ public class TrenesSA {
     public Lista obtenerEstacionesPorPrefijo(String prefijo) {
         // Definimos el rango: desde el prefijo hasta el prefijo + "ZZZZ"
         String inicio = prefijo.toUpperCase();//subcadena
-        String fin = prefijo + "ZZZZ";
+        String fin = prefijo.toUpperCase() + "ZZZZ";
 
         // Llamamos al método listarRango del AVL de estaciones
         return estaciones.listarRango(inicio, fin);
@@ -565,6 +565,7 @@ public class TrenesSA {
         return str;
     }
 
+    
     public String mostrarCaminosQueNoPasanPorUnaEstacion(Object origen, Object destino, Object estacionC) {
         String str = "\n--- Todos los caminos de " + origen + " -> " + destino + " ---\n";
         Lista rutaEstaciones = mapaVias.listarCaminosQueNoPasanPorUnaEstacion(origen, destino, estacionC);
