@@ -114,45 +114,45 @@ public class Grafo {
         return exito;
     }
 
-  public boolean eliminarVertice(Object buscado) {
+public boolean eliminarVertice(Object buscado) {
         boolean exito = false;
-        //buscamos al vertice a eliminar
-        NodoVert vertBuscado = ubicarVertice(buscado);
 
-        if (vertBuscado != null) {
-            NodoAdy auxAdy = vertBuscado.getPrimerAdy();
-            //Como es grafo no dirigido, Eliminamos el vertice buscado usando la referencia de cada vertice de la lista de sus adyacentes  
-            //aprovechando que estan conectados desde ambos vertices
-            while (auxAdy != null) {
-                //borramos usando la referencia del vertice del lado invertido  
-                eliminarAdyacente(auxAdy.getVertice(), vertBuscado);
-                auxAdy = auxAdy.getSigAdyacente();
-            }
+        NodoVert anterior, aux;
+        anterior = null;
+        aux = this.inicio;
+        while (aux != null && !exito) {
+             
+            if (aux.getElem().equals(buscado)) {//Cuando encontramos al vertice
+                //Como es grafo no dirigido,
+                //Eliminamos el vertice buscado usando la referencia de cada vertice de la lista de sus adyacentes  
+                //aprovechando que estan conectados desde ambos vertices
 
-            //Eliminamos de la lista de vertices
-            NodoVert anterior, aux;
-            anterior = null;
-            aux = this.inicio;
-            while (aux != null & !exito) {
-                if (aux.equals(vertBuscado)) {
-                    //caso 1 primer nodo Buscado
-                    if (aux == this.inicio) {
-                        this.inicio = this.inicio.getSigVertice();
+                NodoAdy auxAdy = aux.getPrimerAdy();
+                //Eliminamos el vertice en sus adyacentes
 
-                    } else {
+                while (auxAdy != null) {
+                    //borramos usando la referencia del vertice del lado invertido  
+                    eliminarAdyacente(auxAdy.getVertice(), aux);
+                    auxAdy = auxAdy.getSigAdyacente();
+                }
+                //Eliminamos de la lista de vertices
+                //caso 1 primer nodo Buscado
+                if (aux == this.inicio) {
+                    this.inicio = this.inicio.getSigVertice();
 
-                        //engancho el nodo anterior con el siguiente del nodo buscado
-                        if (anterior != null) {
-                            anterior.setSigVertice(aux.getSigVertice());
-                        }
-
-                    }
-                    exito = true;
                 } else {
-                    anterior = aux;
-                    aux = aux.getSigVertice();
+
+                    //engancho el nodo anterior con el siguiente del nodo buscado
+                    if (anterior != null) {
+                        anterior.setSigVertice(aux.getSigVertice());
+                    }
 
                 }
+                exito = true;
+            } else {
+                anterior = aux;
+                aux = aux.getSigVertice();
+
             }
         }
 
@@ -310,16 +310,12 @@ public class Grafo {
     private Lista caminoMasCortoAux(NodoVert n, NodoVert destino, Lista actual, Lista res) {
         if (n != null) {
             actual.insertar(n.getElem(), actual.getLongitud() + 1);
-            System.out.println("Actual:"+actual.toString());
             if (n.equals(destino)) {
-                //  Si llegamos a destino, verificamos si hay un camino O si el camino actual es menor al camino guardado
-                if (res.esVacia() || actual.getLongitud() < res.getLongitud()) {
-                    res = actual.clone();//Guardamos una copia del camino actual
-                     System.out.println("Encontrado: "+actual.toString());
-                }
+                 res = actual.clone();//Guardamos una copia del camino actual
+                
             } else {
                 //  Seguimos buscando si no hay un camino O si el camino actual es menor al camino guardado
-                if (res.esVacia() || actual.getLongitud() < res.getLongitud()) {
+                if (res.esVacia() || (actual.getLongitud()+1) < res.getLongitud()) {
                     //seguimos buscando un mejor camino
                     NodoAdy ady = n.getPrimerAdy();
                     while (ady != null) {
@@ -357,11 +353,10 @@ public class Grafo {
 
             actual.insertar(n.getElem(), actual.getLongitud() + 1);
             if (n.equals(destino)) {
-                //Si llegamos a destino, verificamos si el km acumulado es el menor al kmMin guardado
-                if (acum < kmMin[0]) {
+               
                     kmMin[0] = acum;//Asignamos el km acumulado del camino actual como km min 
                     res = actual.clone();//Guardamos una copia del camino actual encontrado
-                }
+               
             } else {
                
                     NodoAdy ady = n.getPrimerAdy();
